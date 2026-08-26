@@ -1,7 +1,7 @@
 # Multi-Agent Finance Demos
 
 Small, runnable demonstrations of multi-agent patterns for financial
-applications from [Agentive Finance Lab](https://github.com/agentive-finance-lab).
+applications from Agentive Finance Lab.
 
 The first demo answers one concrete question: how did a security behave against
 a benchmark over a selected period? It uses two deliberately narrow agents and
