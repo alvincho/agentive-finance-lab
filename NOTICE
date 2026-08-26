@@ -4,3 +4,11 @@ Copyright 2026 Agentive Finance Lab
 This product includes independently implemented lite concepts inspired by the
 Prompits and Phemacast architecture vocabulary. It does not include or expose
 the original FinMAS product implementation, configuration, datasets, or secrets.
+
+This product depends on the third-party yfinance Python package to request
+historical data made available through Yahoo Finance. yfinance is not affiliated
+with, endorsed by, or vetted by Yahoo, Inc. This repository contains no Yahoo
+Finance dataset and grants no rights to provider data. Yahoo and Yahoo Finance
+are trademarks of Yahoo, Inc. Use of provider data is subject to applicable
+terms; the yfinance project states that the data is intended for personal use
+only.

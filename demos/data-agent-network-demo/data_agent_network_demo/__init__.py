@@ -1,4 +1,4 @@
-"""First Agentive Finance Lab demonstration."""
+"""Live yfinance-backed Data Agent Network demonstration."""
 
 from .app import app, create_app
 from .workflow import build_network, run_demo

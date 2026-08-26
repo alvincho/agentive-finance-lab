@@ -5,208 +5,319 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A runnable, offline demonstration of PIT, Plaza, Pulser, and Persona collaboration for financial-data questions."
+      content="A live, inspectable Data User and Data Consultant multi-agent demo backed only by yfinance."
     />
     <title>Data Agent Network · Agentive Finance Lab</title>
     <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
     <link rel="stylesheet" href="/static/styles.css" />
+    <style>
+      /* This small, self-contained guard must work when the file is opened directly. */
+      .protocol-blocker[hidden] { display: none; }
+      .protocol-blocker {
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        display: grid;
+        place-items: center;
+        padding: 24px;
+        color: #eef2eb;
+        background: #0b1110;
+        font: 15px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      }
+      .protocol-blocker__panel { width: min(680px, 100%); border-top: 4px solid #b8ed5f; padding-top: 24px; }
+      .protocol-blocker__panel h1 { margin: 0 0 12px; font: 600 clamp(30px, 7vw, 54px)/1.02 sans-serif; letter-spacing: -.04em; }
+      .protocol-blocker__panel p { color: #acb6af; }
+      .protocol-blocker__panel code { display: block; margin: 18px 0 8px; padding: 14px; overflow-wrap: anywhere; color: #b8ed5f; background: #151e1b; border: 1px solid #39433e; }
+      .protocol-blocker__panel a { color: #0b1110; background: #b8ed5f; display: inline-block; margin-top: 14px; padding: 11px 15px; font-weight: 700; text-decoration: none; }
+    </style>
+    <script>
+      if (window.location.protocol === "file:") {
+        window.addEventListener("DOMContentLoaded", function () {
+          document.querySelector("#protocol-blocker").hidden = false;
+        });
+      }
+    </script>
     <script src="/static/app.js" defer></script>
   </head>
   <body>
-    <div class="ambient-grid" aria-hidden="true"></div>
-    <header class="masthead">
-      <a class="wordmark" href="https://github.com/agentive-finance-lab" aria-label="Agentive Finance Lab on GitHub">
-        <span class="wordmark-mark">AFL</span>
-        <span>
-          <strong>Agentive Finance Lab</strong>
-          <small>Open systems, visible reasoning</small>
-        </span>
-      </a>
-      <div class="runtime-stamp" aria-label="Runtime status">
-        <span class="signal" aria-hidden="true"></span>
-        <span>local · deterministic · v0.1</span>
+    <a class="skip-link" href="#demo-workspace">Skip to demo</a>
+
+    <div id="protocol-blocker" class="protocol-blocker" role="alertdialog" aria-modal="true" aria-labelledby="protocol-title" hidden>
+      <div class="protocol-blocker__panel">
+        <p>FILE MODE BLOCKED · THIS DEMO NEEDS ITS PYTHON RUNTIME</p>
+        <h1 id="protocol-title">The agents cannot run from a local HTML file.</h1>
+        <p>Open a terminal at the repository root and start the demo server:</p>
+        <code>python demos/data-agent-network-demo/run.py</code>
+        <p>Then use the served address. The browser UI calls the local API, which lets the Data Consultant retrieve live data through yfinance.</p>
+        <a href="http://127.0.0.1:8000">Open http://127.0.0.1:8000</a>
       </div>
+    </div>
+
+    <div class="page-grid" aria-hidden="true"></div>
+
+    <header class="topbar">
+      <a class="brand" href="/" aria-label="Agentive Finance Lab Data Agent Network home">
+        <span class="brand-mark">AFL</span>
+        <span class="brand-name">Data Agent Network</span>
+        <span class="demo-index">/ 001</span>
+      </a>
+      <div class="runtime" id="runtime-status" role="status">
+        <span class="runtime-light" aria-hidden="true"></span>
+        <span id="runtime-label">checking local runtime</span>
+      </div>
+      <a class="repo-link" href="https://github.com/agentive-finance-lab/multi-agent-finance-demos">
+        Repository <span aria-hidden="true">↗</span>
+      </a>
     </header>
 
-    <main>
-      <section class="brief" aria-labelledby="page-title">
-        <div class="brief-copy reveal reveal-1">
-          <p class="eyebrow">Demo 001 / Data Agent Network</p>
-          <h1 id="page-title">A financial question,<br /><em>handled in public.</em></h1>
-          <p class="lede">
-            Watch a Data User preserve intent, discover a specialist through Plaza, and inspect the
-            Data Consultant’s evidence before presenting an answer.
-          </p>
-          <div class="repo-line">
-            <span>Repository shape</span>
-            <code>demo → phemacast-lite → prompits-lite</code>
+    <nav class="agent-route" aria-label="Data request route">
+      <span class="route-label">LIVE ROUTE</span>
+      <ol>
+        <li data-hop="user"><strong>Data User</strong><small>frames request</small></li>
+        <li class="route-arrow" aria-hidden="true">→</li>
+        <li data-hop="plaza"><strong>Plaza</strong><small>discovers</small></li>
+        <li class="route-arrow" aria-hidden="true">→</li>
+        <li data-hop="consultant"><strong>Data Consultant</strong><small>retrieves + analyzes</small></li>
+        <li class="route-arrow" aria-hidden="true">→</li>
+        <li data-hop="yfinance"><strong>yfinance</strong><small>only data source</small></li>
+        <li class="route-arrow route-return" aria-hidden="true">↩</li>
+        <li data-hop="result"><strong>Data User</strong><small>checks + presents</small></li>
+      </ol>
+    </nav>
+
+    <main id="demo-workspace" class="workspace">
+      <aside class="request-rail" aria-labelledby="request-title">
+        <div class="rail-heading">
+          <p class="kicker">REQUEST CONTRACT</p>
+          <h1 id="request-title">Compare a security with its benchmark.</h1>
+          <p>The Data User validates the contract. The consultant owns retrieval, alignment, and descriptive calculations.</p>
+        </div>
+
+        <form id="demo-form" novalidate>
+          <div class="symbol-pair">
+            <label for="primary-symbol">
+              <span>Primary</span>
+              <input
+                id="primary-symbol"
+                name="primary_symbol"
+                value="AAPL"
+                maxlength="20"
+                spellcheck="false"
+                autocomplete="off"
+                aria-describedby="symbol-help"
+                required
+              />
+            </label>
+            <span class="versus" aria-hidden="true">vs</span>
+            <label for="benchmark-symbol">
+              <span>Benchmark</span>
+              <input
+                id="benchmark-symbol"
+                name="benchmark_symbol"
+                value="SPY"
+                maxlength="20"
+                spellcheck="false"
+                autocomplete="off"
+                aria-describedby="symbol-help"
+                required
+              />
+            </label>
           </div>
-        </div>
+          <p id="symbol-help" class="field-help">Yahoo Finance ticker syntax · symbols must differ</p>
 
-      </section>
+          <label class="period-field" for="period">
+            <span>Comparison window</span>
+            <select id="period" name="period">
+              <option value="1mo">1 month</option>
+              <option value="3mo">3 months</option>
+              <option value="6mo">6 months</option>
+              <option value="1y" selected>1 year</option>
+              <option value="2y">2 years</option>
+              <option value="5y">5 years</option>
+            </select>
+          </label>
 
-      <section class="workbench reveal reveal-3" aria-labelledby="workbench-title">
-        <div class="section-label workbench-label">
-          <span>01</span>
-          <h2 id="workbench-title">Run the handoff</h2>
-          <p>Fictional catalog metadata only. No API key, LLM, or live price feed.</p>
-        </div>
+          <div class="fixed-contract" aria-label="Fixed data contract">
+            <span>interval <strong>1d</strong></span>
+            <span>price <strong>adjusted</strong></span>
+            <span>source <strong>yfinance</strong></span>
+          </div>
 
-        <div class="workbench-grid">
-          <form id="demo-form" class="request-console">
-            <label for="prompt">Financial-data question</label>
-            <textarea
-              id="prompt"
-              name="prompt"
-              minlength="8"
-              maxlength="1200"
-              rows="7"
-              required
-            >Compare ACME's five-day return with the latest policy-rate move and explain the data caveats.</textarea>
+          <p id="form-error" class="form-error" role="alert" hidden></p>
+          <button id="run-button" class="run-button" type="submit">
+            <span class="run-copy">Run live comparison</span>
+            <span class="run-glyph" aria-hidden="true">→</span>
+          </button>
 
-            <div class="action-row">
-              <label class="failure-toggle" for="simulate-offline">
-                <input id="simulate-offline" type="checkbox" />
-                <span class="toggle-track" aria-hidden="true"><span></span></span>
-                <span>
-                  <strong>Consultant outage</strong>
-                  <small>Test degraded path</small>
-                </span>
-              </label>
-
-              <button id="run-button" class="run-button" type="submit">
-                <span>Run agent network</span>
-                <span aria-hidden="true">↗</span>
-              </button>
-            </div>
-
-            <div class="examples" aria-label="Example questions">
-              <span>Load an example</span>
-              <div id="example-buttons" class="example-buttons"></div>
-            </div>
-          </form>
-
-          <div class="result-console" id="result-console" aria-live="polite">
-            <div class="empty-state" id="empty-state">
-              <span class="empty-index">READY</span>
-              <p>The structured request, source advice, and complete correlation trace will appear here.</p>
-            </div>
-
-            <div id="result-content" class="result-content" hidden>
-              <div class="result-heading">
-                <div>
-                  <span id="result-status" class="status-pill">Complete</span>
-                  <h3 id="result-headline"></h3>
-                </div>
-                <code id="correlation-id"></code>
-              </div>
-              <p id="result-summary" class="result-summary"></p>
-
-              <div class="requirements-strip" id="requirements-strip"></div>
-
-              <div class="result-split">
-                <section aria-labelledby="recommendations-title">
-                  <h4 id="recommendations-title">Consultant evidence</h4>
-                  <div id="recommendations" class="recommendations"></div>
-                </section>
-                <section aria-labelledby="benefits-title">
-                  <h4 id="benefits-title">What the network proves</h4>
-                  <dl id="benefits" class="benefits"></dl>
-                </section>
-              </div>
-
-              <p id="result-caveat" class="caveat"></p>
+          <div class="presets" aria-labelledby="preset-label">
+            <span id="preset-label">Quick contracts</span>
+            <div id="preset-buttons" class="preset-buttons">
+              <button type="button" data-primary="MSFT" data-benchmark="QQQ" data-period="1y">MSFT / QQQ</button>
+              <button type="button" data-primary="NVDA" data-benchmark="SPY" data-period="6mo">NVDA / SPY</button>
+              <button type="button" data-primary="BTC-USD" data-benchmark="SPY" data-period="1y">BTC-USD / SPY</button>
             </div>
           </div>
-        </div>
-      </section>
+        </form>
 
-      <aside class="concept-index reveal reveal-2" aria-labelledby="concept-title">
-        <div class="section-label">
-          <span>02</span>
-          <h2 id="concept-title">Vocabulary retained</h2>
+        <div class="role-boundary">
+          <p class="kicker">WHY TWO AGENTS?</p>
+          <dl>
+            <div><dt>Data User</dt><dd>intent, delegation, acceptance</dd></div>
+            <div><dt>Consultant</dt><dd>provider, evidence, limitations</dd></div>
+          </dl>
         </div>
-        <dl id="concept-list" class="concept-list">
-          <div><dt>Pit</dt><dd>Addressable identity</dd></div>
-          <div><dt>Plaza</dt><dd>Registry + router</dd></div>
-          <div><dt>Pulser</dt><dd>Typed capability host</dd></div>
-          <div><dt>Persona</dt><dd>Role-aware Pulser</dd></div>
-        </dl>
       </aside>
 
-      <section class="network-section reveal reveal-4" aria-labelledby="network-title">
-        <div class="section-label">
-          <span>03</span>
-          <h2 id="network-title">Live registry</h2>
-        </div>
-        <div class="network-map" id="network-map" aria-label="Data Agent Network topology">
-          <article class="agent-node node-user">
-            <span class="node-kicker">Persona / PIT</span>
-            <h3>Data User</h3>
-            <p>Intent · delegation · acceptance</p>
-            <span class="pulse-chip">data_request</span>
-          </article>
-
-          <div class="route route-in" aria-hidden="true">
-            <span></span><small>discover</small>
+      <section class="result-desk" aria-labelledby="result-title">
+        <div id="idle-state" class="idle-state">
+          <div class="idle-plot" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span>
+            <i class="idle-line line-one"></i><i class="idle-line line-two"></i>
           </div>
-
-          <article class="plaza-node">
-            <span class="plaza-orbit orbit-a"></span>
-            <span class="plaza-orbit orbit-b"></span>
-            <span class="node-kicker">Prompits Lite</span>
-            <h3>Plaza</h3>
-            <p>PIT directory</p>
-          </article>
-
-          <div class="route route-out" aria-hidden="true">
-            <span></span><small>invoke</small>
-          </div>
-
-          <article class="agent-node node-consultant" id="consultant-node">
-            <span class="node-kicker">Persona / PIT</span>
-            <h3>Data Consultant</h3>
-            <p>Coverage · cost · evidence</p>
-            <span class="pulse-chip">data_advice</span>
-          </article>
-        </div>
-        <p class="network-status" id="network-status" aria-live="polite">Reading the in-memory Plaza directory…</p>
-      </section>
-
-      <section class="trace-section reveal reveal-5" aria-labelledby="trace-title">
-        <div class="section-label trace-label">
-          <span>04</span>
           <div>
-            <h2 id="trace-title">Correlation trace</h2>
-            <p>Every hop shares one id; payload summaries stay inspectable.</p>
+            <p class="kicker">DESK READY</p>
+            <h2 id="result-title">One request. Two specialist roles. Inspectable evidence.</h2>
+            <p>Run the default contract to retrieve live adjusted daily history. Nothing is generated when yfinance is unavailable—the failure stays visible.</p>
           </div>
         </div>
-        <ol id="trace-list" class="trace-list">
-          <li class="trace-placeholder">Run the demo to stream the handoff sequence.</li>
-        </ol>
-      </section>
 
-      <section class="boundary-section" aria-labelledby="boundary-title">
-        <div class="section-label">
-          <span>05</span>
-          <h2 id="boundary-title">Deliberate boundary</h2>
+        <div id="loading-state" class="loading-state" role="status" hidden>
+          <div class="loading-rule" aria-hidden="true"><span></span></div>
+          <p id="loading-label">Data User is framing the request…</p>
+          <small>Retrieval depends on Yahoo Finance availability through yfinance.</small>
         </div>
-        <div class="boundary-copy">
-          <p>
-            This repository makes the architecture legible, not production-complete. Authentication,
-            durable state, billing, distributed transport, real provider connectors, and investment
-            decisions remain outside the lite contract.
-          </p>
-          <a href="https://github.com/agentive-finance-lab/multi-agent-finance-demos">
-            Browse the public repository <span aria-hidden="true">→</span>
-          </a>
+
+        <div id="failure-state" class="failure-state" role="alert" hidden>
+          <div class="failure-mark" aria-hidden="true">!</div>
+          <div>
+            <p class="kicker">NO FALLBACK DATA</p>
+            <h2 id="failure-title">The live comparison could not be completed.</h2>
+            <p id="failure-message"></p>
+            <ul id="failure-list"></ul>
+            <button id="retry-button" type="button">Retry the same contract</button>
+            <details class="failure-evidence">
+              <summary>Inspect the failed agent route</summary>
+              <p id="failure-correlation"></p>
+              <ol id="failure-trace-list"></ol>
+            </details>
+          </div>
         </div>
+
+        <article id="result-content" class="result-content" aria-live="polite" hidden>
+          <header class="result-header">
+            <div>
+              <div class="result-meta">
+                <span id="result-status" class="status-chip">COMPLETE</span>
+                <span id="coverage-label">—</span>
+                <span id="observation-label">—</span>
+              </div>
+              <h2 id="result-headline">Comparison complete.</h2>
+              <p id="result-summary"></p>
+            </div>
+            <div class="source-stamp">
+              <span>PROVIDER</span>
+              <strong>yfinance</strong>
+              <small id="provider-version">version —</small>
+            </div>
+          </header>
+
+          <section class="market-overview" aria-labelledby="chart-heading">
+            <div class="chart-heading-row">
+              <div>
+                <p class="section-kicker">NORMALIZED PERFORMANCE</p>
+                <h3 id="chart-heading">Growth of 100</h3>
+              </div>
+              <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
+            </div>
+            <div id="chart-frame" class="chart-frame">
+              <svg id="performance-chart" viewBox="0 0 960 300" role="img" aria-labelledby="chart-heading chart-description"></svg>
+              <p id="chart-description" class="sr-only"></p>
+            </div>
+            <div id="relative-metrics" class="relative-metrics"></div>
+          </section>
+
+          <section class="metric-ledger" aria-labelledby="metric-title">
+            <div class="section-heading">
+              <div><p class="section-kicker">DESCRIPTIVE STATISTICS</p><h3 id="metric-title">Metric ledger</h3></div>
+              <p>Calculated from aligned adjusted closes; not investment advice.</p>
+            </div>
+            <div class="table-scroll">
+              <table>
+                <caption class="sr-only">Comparison metrics for the primary security and benchmark</caption>
+                <thead id="metric-head"></thead>
+                <tbody id="metric-body"></tbody>
+              </table>
+            </div>
+          </section>
+
+          <div class="evidence-grid">
+            <section class="quality-panel" aria-labelledby="quality-title">
+              <div class="section-heading compact">
+                <div><p class="section-kicker">ACCEPTANCE</p><h3 id="quality-title">Quality checks</h3></div>
+                <span id="quality-count"></span>
+              </div>
+              <ul id="quality-list" class="quality-list"></ul>
+              <div id="warning-box" class="warning-box" hidden>
+                <strong>Review notes</strong>
+                <ul id="warning-list"></ul>
+              </div>
+            </section>
+
+            <section class="observations-panel" aria-labelledby="observations-title">
+              <div class="section-heading compact">
+                <div><p class="section-kicker">RAW EVIDENCE</p><h3 id="observations-title">Latest aligned closes</h3></div>
+              </div>
+              <div class="table-scroll latest-scroll">
+                <table>
+                  <caption class="sr-only">Latest aligned adjusted daily closing prices</caption>
+                  <thead id="observation-head"></thead>
+                  <tbody id="observation-body"></tbody>
+                </table>
+              </div>
+            </section>
+          </div>
+
+          <details class="inspector" open>
+            <summary>
+              <span><b>Provenance</b> · exact source calls and row handling</span>
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div id="provenance-list" class="provenance-list"></div>
+            <p id="usage-notice" class="usage-notice">yfinance is used for research and educational purposes. Yahoo Finance data is intended for personal use.</p>
+          </details>
+
+          <details class="inspector">
+            <summary>
+              <span><b>Agent trace</b> · one correlation id across every hop</span>
+              <span aria-hidden="true">+</span>
+            </summary>
+            <div class="trace-header">
+              <span>CORRELATION</span><code id="correlation-id">—</code>
+            </div>
+            <ol id="trace-list" class="trace-list"></ol>
+          </details>
+
+          <details class="inspector architecture-inspector">
+            <summary>
+              <span><b>Lite architecture</b> · what each retained concept does</span>
+              <span aria-hidden="true">+</span>
+            </summary>
+            <dl class="concept-ledger">
+              <div><dt>Pit</dt><dd>Addressable identity for each participant.</dd></div>
+              <div><dt>Plaza</dt><dd>Registry that discovers and routes to the consultant.</dd></div>
+              <div><dt>Pulser</dt><dd>Named, validated capability contract.</dd></div>
+              <div><dt>Persona</dt><dd>Role-aware Pulser with a bounded responsibility.</dd></div>
+            </dl>
+          </details>
+
+          <p id="result-caveat" class="result-caveat"></p>
+        </article>
       </section>
     </main>
 
     <footer>
-      <span>Agentive Finance Lab</span>
-      <span>Educational demonstration · Apache-2.0</span>
+      <p>Agentive Finance Lab · workable multi-agent systems for finance</p>
+      <p>Live external financial data: yfinance only · educational demo · Apache-2.0</p>
     </footer>
   </body>
 </html>
