@@ -24,11 +24,29 @@
         background: #0b1110;
         font: 15px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
       }
-      .protocol-blocker__panel { width: min(680px, 100%); border-top: 4px solid #b8ed5f; padding-top: 24px; }
-      .protocol-blocker__panel h1 { margin: 0 0 12px; font: 600 clamp(30px, 7vw, 54px)/1.02 sans-serif; letter-spacing: -.04em; }
-      .protocol-blocker__panel p { color: #acb6af; }
-      .protocol-blocker__panel code { display: block; margin: 18px 0 8px; padding: 14px; overflow-wrap: anywhere; color: #b8ed5f; background: #151e1b; border: 1px solid #39433e; }
-      .protocol-blocker__panel a { color: #0b1110; background: #b8ed5f; display: inline-block; margin-top: 14px; padding: 11px 15px; font-weight: 700; text-decoration: none; }
+      .protocol-blocker__panel { width: min(980px, 100%); max-height: calc(100vh - 48px); overflow: auto; border-top: 4px solid #b8ed5f; padding: 24px 0 2px; }
+      .protocol-blocker__eyebrow { margin: 0 0 8px; color: #b8ed5f !important; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
+      .protocol-blocker__panel h1 { max-width: 820px; margin: 0 0 12px; font: 600 clamp(30px, 6vw, 58px)/1 sans-serif; letter-spacing: -.045em; }
+      .protocol-blocker__panel h2 { margin: 0 0 9px; color: #eef2eb; font: 700 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
+      .protocol-blocker__panel p { margin: 0; color: #acb6af; }
+      .protocol-blocker__lede { max-width: 780px; font-size: 16px; }
+      .protocol-blocker__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 24px; border: 1px solid #39433e; background: #39433e; }
+      .protocol-blocker__section { padding: 18px; background: #101815; }
+      .protocol-blocker__flow { margin-top: 15px; padding: 10px 12px; color: #b8ed5f; background: #151e1b; font-size: 12px; }
+      .protocol-blocker__concepts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; margin: 0; }
+      .protocol-blocker__concepts div { border-left: 2px solid #61cbbb; padding-left: 10px; }
+      .protocol-blocker__concepts dt { color: #eef2eb; font-weight: 700; }
+      .protocol-blocker__concepts dd { margin: 2px 0 0; color: #acb6af; font-size: 12px; }
+      .protocol-blocker__launch { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; margin-top: 1px; padding: 18px; background: #151e1b; }
+      .protocol-blocker__panel code { display: block; margin-top: 12px; padding: 13px; overflow-wrap: anywhere; color: #b8ed5f; background: #0b1110; border: 1px solid #39433e; white-space: pre-wrap; }
+      .protocol-blocker__panel a { color: #0b1110; background: #b8ed5f; display: inline-block; padding: 12px 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
+      @media (max-width: 720px) {
+        .protocol-blocker { place-items: start center; padding: 16px; }
+        .protocol-blocker__panel { max-height: calc(100vh - 32px); }
+        .protocol-blocker__grid, .protocol-blocker__launch { grid-template-columns: 1fr; }
+        .protocol-blocker__concepts { grid-template-columns: 1fr; }
+        .protocol-blocker__panel a { text-align: center; white-space: normal; }
+      }
     </style>
     <script>
       if (window.location.protocol === "file:") {
@@ -42,16 +60,42 @@
   <body>
     <a class="skip-link" href="#demo-workspace">Skip to demo</a>
 
-    <div id="protocol-blocker" class="protocol-blocker" role="alertdialog" aria-modal="true" aria-labelledby="protocol-title" hidden>
+    <section id="protocol-blocker" class="protocol-blocker" aria-labelledby="protocol-title" hidden>
       <div class="protocol-blocker__panel">
-        <p>FILE MODE BLOCKED · THIS DEMO NEEDS ITS PYTHON RUNTIME</p>
-        <h1 id="protocol-title">The agents cannot run from a local HTML file.</h1>
-        <p>Open a terminal at the repository root and start the demo server:</p>
-        <code>python demos/data-agent-network-demo/run.py</code>
-        <p>Then use the served address. The browser UI calls the local API, which lets the Data Consultant retrieve live data through yfinance.</p>
-        <a href="http://127.0.0.1:8000">Open http://127.0.0.1:8000</a>
+        <p class="protocol-blocker__eyebrow">Agentive Finance Lab · Demo 001 · Launch brief</p>
+        <h1 id="protocol-title">See a financial data request become an inspectable agent handoff.</h1>
+        <p class="protocol-blocker__lede">This standalone open-source lab reduces the original framework ideas to one workable task: a Data User delegates a security-versus-benchmark comparison to a Data Consultant, which retrieves evidence only through yfinance.</p>
+
+        <div class="protocol-blocker__grid">
+          <section class="protocol-blocker__section" aria-labelledby="file-background-title">
+            <h2 id="file-background-title">Project background</h2>
+            <p>The point is not better arithmetic. The demo makes ownership, capability discovery, acceptance checks, provider failure, and one end-to-end trace visible without exposing the original FinMAS implementation.</p>
+            <div class="protocol-blocker__flow">Data User → Plaza → Data Consultant → yfinance → Data User</div>
+          </section>
+          <section class="protocol-blocker__section" aria-labelledby="file-framework-title">
+            <h2 id="file-framework-title">Framework primer</h2>
+            <dl class="protocol-blocker__concepts">
+              <div><dt>Pit</dt><dd>Addressable participant identity.</dd></div>
+              <div><dt>Plaza</dt><dd>Capability discovery and routing.</dd></div>
+              <div><dt>Pulser</dt><dd>Named, validated work contract.</dd></div>
+              <div><dt>Persona</dt><dd>Role-aware Pulser with bounded responsibility.</dd></div>
+            </dl>
+          </section>
+        </div>
+
+        <section class="protocol-blocker__launch" aria-labelledby="file-run-title">
+          <div>
+            <h2 id="file-run-title">Run the live demo</h2>
+            <p>A local HTML file cannot start FastAPI or call yfinance. From the repository root, create the environment once and launch the server:</p>
+            <code>python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e '.[test]'
+python demos/data-agent-network-demo/run.py</code>
+          </div>
+          <a href="http://127.0.0.1:8000">Open the running demo →</a>
+        </section>
       </div>
-    </div>
+    </section>
 
     <div class="page-grid" aria-hidden="true"></div>
 
@@ -87,7 +131,7 @@
       <aside class="request-rail" aria-labelledby="request-title">
         <div class="rail-heading">
           <p class="kicker">REQUEST CONTRACT</p>
-          <h1 id="request-title">Compare a security with its benchmark.</h1>
+          <h2 id="request-title">Compare a security with its benchmark.</h2>
           <p>The Data User validates the contract. The consultant owns retrieval, alignment, and descriptive calculations.</p>
         </div>
 
@@ -166,17 +210,72 @@
         </div>
       </aside>
 
-      <section class="result-desk" aria-labelledby="result-title">
+      <section class="result-desk" aria-label="Data Agent Network evidence desk">
         <div id="idle-state" class="idle-state">
-          <div class="idle-plot" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span>
-            <i class="idle-line line-one"></i><i class="idle-line line-two"></i>
-          </div>
-          <div>
-            <p class="kicker">DESK READY</p>
-            <h2 id="result-title">One request. Two specialist roles. Inspectable evidence.</h2>
-            <p>Run the default contract to retrieve live adjusted daily history. Nothing is generated when yfinance is unavailable—the failure stays visible.</p>
-          </div>
+          <header class="project-brief">
+            <div>
+              <p class="kicker">PROJECT BACKGROUND · AGENTIVE FINANCE LAB</p>
+              <h1 id="result-title">Make the handoff—not just the answer—visible.</h1>
+            </div>
+            <div class="project-brief__copy">
+              <p>This standalone open-source demo reduces two frameworks to the smallest contracts needed to expose delegation, discovery, typed handoff, acceptance, and traceability.</p>
+              <p>The agents do not improve the arithmetic. The Data User owns intent and acceptance; the Data Consultant owns yfinance retrieval and analysis; Plaza connects them by capability.</p>
+              <ul class="brief-tags" aria-label="Project boundaries">
+                <li>standalone repository</li>
+                <li>not FinMAS</li>
+                <li>yfinance only</li>
+                <li>no synthetic fallback</li>
+                <li>not investment advice</li>
+              </ul>
+            </div>
+          </header>
+
+          <section class="framework-primer" aria-labelledby="framework-title">
+            <div class="brief-section-heading">
+              <p class="kicker">FRAMEWORK IN 60 SECONDS</p>
+              <h3 id="framework-title">Three layers, four retained concepts</h3>
+            </div>
+            <div class="framework-stack">
+              <article class="framework-layer framework-layer--demo">
+                <span class="layer-index">03</span>
+                <div><strong>Data Agent Network Demo</strong><p>Data User + Data Consultant apply the contracts to one finance task.</p></div>
+              </article>
+              <article class="framework-layer framework-layer--phema">
+                <span class="layer-index">02</span>
+                <div>
+                  <strong>Phemacast Lite</strong>
+                  <p><b>Persona</b> bounds the role; <b>Pulser</b> binds named, typed Pulse handlers and validates their contracts.</p>
+                  <span class="layer-use">Use · define Pulse → bind handler → assign Persona responsibility</span>
+                </div>
+              </article>
+              <article class="framework-layer framework-layer--prompt">
+                <span class="layer-index">01</span>
+                <div>
+                  <strong>Prompits Lite</strong>
+                  <p><b>Pit</b> supplies addressable identity; <b>Plaza</b> registers, discovers, and invokes capabilities with one trace.</p>
+                  <span class="layer-use">Use · create Pit → register → search → invoke through Plaza</span>
+                </div>
+              </article>
+            </div>
+            <p class="dependency-note">Dependency direction · demo → phemacast-lite → prompits-lite</p>
+          </section>
+
+          <section class="demo-guide" aria-labelledby="guide-title">
+            <div class="brief-section-heading">
+              <p class="kicker">RUN THE DEMO</p>
+              <h3 id="guide-title">Follow the evidence through the network</h3>
+            </div>
+            <ol class="demo-steps">
+              <li><span>01</span><div><strong>Set the contract</strong><p>Choose a primary symbol, benchmark, and period.</p></div></li>
+              <li><span>02</span><div><strong>Route the work</strong><p>Plaza discovers the consultant by role and analysis capability.</p></div></li>
+              <li><span>03</span><div><strong>Inspect the result</strong><p>The consultant returns evidence; the Data User checks and presents it.</p></div></li>
+            </ol>
+            <div class="onboarding-actions">
+              <button id="intro-run-button" class="intro-run-button" type="button">Run AAPL / SPY now <span aria-hidden="true">→</span></button>
+              <a href="#primary-symbol">Edit the request first</a>
+            </div>
+            <p class="demo-guide__note">Live adjusted daily history · yfinance 1.6.0 · no generated substitute data</p>
+          </section>
         </div>
 
         <div id="loading-state" class="loading-state" role="status" hidden>
@@ -189,7 +288,7 @@
           <div class="failure-mark" aria-hidden="true">!</div>
           <div>
             <p class="kicker">NO FALLBACK DATA</p>
-            <h2 id="failure-title">The live comparison could not be completed.</h2>
+            <h2 id="failure-title" tabindex="-1">The live comparison could not be completed.</h2>
             <p id="failure-message"></p>
             <ul id="failure-list"></ul>
             <button id="retry-button" type="button">Retry the same contract</button>
@@ -209,7 +308,7 @@
                 <span id="coverage-label">—</span>
                 <span id="observation-label">—</span>
               </div>
-              <h2 id="result-headline">Comparison complete.</h2>
+              <h2 id="result-headline" tabindex="-1">Comparison complete.</h2>
               <p id="result-summary"></p>
             </div>
             <div class="source-stamp">

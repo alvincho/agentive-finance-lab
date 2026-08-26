@@ -289,7 +289,8 @@ body.is-running .agent-route li[data-hop="result"]::after { animation-delay: 720
   text-transform: uppercase;
 }
 
-.rail-heading h1 {
+.rail-heading h1,
+.rail-heading h2 {
   max-width: 290px;
   margin-bottom: 12px;
   font-family: var(--display);
@@ -494,78 +495,259 @@ input[aria-invalid="true"] {
 
 .idle-state {
   display: grid;
-  grid-template-columns: minmax(280px, 0.9fr) minmax(300px, 1fr);
-  gap: clamp(32px, 6vw, 94px);
-  align-items: center;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.92fr);
+  grid-template-areas:
+    "intro intro"
+    "framework guide";
+  gap: 20px 24px;
+  align-content: center;
   min-height: calc(100vh - 110px);
-  padding: clamp(30px, 5vw, 74px);
+  padding: clamp(28px, 4vw, 58px);
 }
 
-.idle-state h2,
+.project-brief {
+  display: grid;
+  grid-area: intro;
+  grid-template-columns: minmax(280px, 1.08fr) minmax(290px, 0.92fr);
+  gap: 24px;
+  align-items: end;
+  padding-bottom: 21px;
+  border-bottom: 1px solid var(--line-bright);
+}
+
+.project-brief h1,
 .failure-state h2 {
   max-width: 620px;
-  margin-bottom: 16px;
+  margin-bottom: 0;
   font-family: var(--display);
-  font-size: clamp(34px, 4.6vw, 68px);
+  font-size: clamp(34px, 4vw, 56px);
   font-weight: 500;
-  letter-spacing: -0.045em;
-  line-height: 0.96;
+  letter-spacing: -0.04em;
+  line-height: 0.94;
   text-transform: uppercase;
 }
 
-.idle-state > div:last-child > p:last-child,
+.project-brief__copy > p {
+  margin-bottom: 7px;
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.brief-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin: 13px 0 0;
+  padding: 0;
+  list-style: none;
+}
+
+.brief-tags li {
+  padding: 4px 6px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font: 9px var(--mono);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.framework-primer,
+.demo-guide {
+  min-width: 0;
+  height: 100%;
+  padding: 18px;
+  border: 1px solid var(--line-bright);
+  background: rgba(15, 22, 20, 0.74);
+}
+
+.framework-primer {
+  grid-area: framework;
+}
+
+.demo-guide {
+  grid-area: guide;
+}
+
+.brief-section-heading {
+  display: flex;
+  gap: 14px;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.brief-section-heading .kicker {
+  flex: 0 0 auto;
+  margin-bottom: 0;
+}
+
+.brief-section-heading h3 {
+  margin-bottom: 0;
+  font-family: var(--display);
+  font-size: 17px;
+  font-weight: 600;
+  line-height: 1.05;
+  text-align: right;
+  text-transform: uppercase;
+}
+
+.framework-stack {
+  display: grid;
+  gap: 5px;
+}
+
+.framework-layer {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+  padding: 9px 10px;
+  border-left: 2px solid var(--muted-dark);
+  background: var(--panel-raised);
+}
+
+.framework-layer--demo {
+  border-left-color: var(--acid);
+}
+
+.framework-layer--phema {
+  border-left-color: var(--aqua);
+}
+
+.framework-layer--prompt {
+  border-left-color: var(--gold);
+}
+
+.layer-index {
+  color: var(--muted-dark);
+  font: 9px var(--mono);
+}
+
+.framework-layer strong {
+  display: block;
+  margin-bottom: 2px;
+  font-family: var(--display);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.framework-layer p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.framework-layer b {
+  color: var(--ink-soft);
+  font-weight: 600;
+}
+
+.layer-use {
+  display: block;
+  margin-top: 5px;
+  color: var(--muted-dark);
+  font: 9px/1.4 var(--mono);
+}
+
+.dependency-note {
+  margin: 9px 0 0;
+  color: var(--muted-dark);
+  font: 9px var(--mono);
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.demo-steps {
+  display: grid;
+  gap: 9px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.demo-steps li {
+  display: grid;
+  grid-template-columns: 26px minmax(0, 1fr);
+  gap: 10px;
+}
+
+.demo-steps li > span {
+  padding-top: 2px;
+  border-top: 1px solid var(--acid);
+  color: var(--acid);
+  font: 9px var(--mono);
+}
+
+.demo-steps strong {
+  display: block;
+  font-family: var(--display);
+  font-size: 13px;
+  text-transform: uppercase;
+}
+
+.demo-steps p {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 11px;
+}
+
+.onboarding-actions {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin-top: 15px;
+}
+
+.intro-run-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 39px;
+  padding: 9px 11px;
+  border: 1px solid var(--acid);
+  border-radius: 0;
+  color: var(--bg);
+  background: var(--acid);
+  font: 700 9px var(--mono);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  transition: color 140ms ease, background 140ms ease, transform 140ms ease;
+}
+
+.intro-run-button:hover,
+.intro-run-button:focus-visible {
+  color: var(--acid);
+  background: transparent;
+  transform: translateY(-1px);
+}
+
+.onboarding-actions a {
+  color: var(--muted);
+  font: 9px var(--mono);
+  text-underline-offset: 3px;
+}
+
+.onboarding-actions a:hover,
+.onboarding-actions a:focus-visible {
+  color: var(--aqua);
+}
+
+.demo-guide__note {
+  margin: 11px 0 0;
+  color: var(--muted-dark);
+  font: 9px/1.5 var(--mono);
+  text-transform: uppercase;
+}
+
 .failure-state > div:last-child > p {
   max-width: 530px;
   color: var(--muted);
 }
 
-.idle-plot {
-  position: relative;
-  aspect-ratio: 1.24;
-  overflow: hidden;
-  border: 1px solid var(--line-bright);
-  background:
-    repeating-linear-gradient(to bottom, transparent 0 calc(25% - 1px), var(--line) calc(25% - 1px) 25%),
-    repeating-linear-gradient(to right, transparent 0 calc(20% - 1px), rgba(41, 51, 47, 0.7) calc(20% - 1px) 20%),
-    var(--panel);
-}
-
-.idle-plot::before {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  z-index: 2;
-  content: "LIVE DATA / AWAITING CONTRACT";
-  color: var(--muted);
-  font: 7px var(--mono);
-  letter-spacing: 0.1em;
-}
-
-.idle-plot span {
-  position: absolute;
-  right: 0;
-  bottom: calc(var(--row, 0) * 25%);
-  left: 0;
-  height: 1px;
-}
-
-.idle-line {
-  position: absolute;
-  top: 52%;
-  left: -8%;
-  width: 118%;
-  height: 26%;
-  border-top: 2px solid var(--acid);
-  border-radius: 50%;
-  transform: rotate(-10deg);
-  opacity: 0.6;
-}
-
-.idle-line.line-two {
-  top: 38%;
-  border-color: var(--aqua);
-  transform: rotate(7deg);
-  opacity: 0.42;
+#result-headline:focus,
+#failure-title:focus {
+  outline: 1px solid var(--acid);
+  outline-offset: 6px;
 }
 
 .loading-state,
@@ -1372,8 +1554,17 @@ footer p {
   }
 
   .idle-state {
-    grid-template-columns: minmax(230px, 0.8fr) minmax(300px, 1fr);
-    gap: 35px;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "framework"
+      "guide";
+  }
+
+  .project-brief {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    align-items: start;
   }
 
   .result-header,
@@ -1425,7 +1616,8 @@ footer p {
     display: none;
   }
 
-  .rail-heading h1 {
+  .rail-heading h1,
+  .rail-heading h2 {
     max-width: 370px;
   }
 
@@ -1441,7 +1633,12 @@ footer p {
   }
 
   .idle-state {
+    grid-template-columns: minmax(0, 1fr) minmax(300px, 0.82fr);
     padding: 42px 24px;
+  }
+
+  .project-brief {
+    grid-template-columns: minmax(280px, 1fr) minmax(270px, 0.9fr);
   }
 }
 
@@ -1480,20 +1677,40 @@ footer p {
   }
 
   .idle-state {
-    display: flex;
-    min-height: 520px;
-    flex-direction: column-reverse;
-    justify-content: center;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "intro"
+      "framework"
+      "guide";
+    min-height: 0;
     padding: 34px 17px;
   }
 
-  .idle-plot {
-    width: min(100%, 420px);
+  .project-brief {
+    grid-template-columns: 1fr;
+    gap: 17px;
+    align-items: start;
   }
 
-  .idle-state h2,
+  .project-brief h1,
   .failure-state h2 {
     font-size: 36px;
+  }
+
+  .brief-section-heading {
+    display: block;
+  }
+
+  .brief-section-heading .kicker {
+    margin-bottom: 6px;
+  }
+
+  .brief-section-heading h3 {
+    text-align: left;
+  }
+
+  .onboarding-actions {
+    grid-template-columns: 1fr;
   }
 
   .failure-state {

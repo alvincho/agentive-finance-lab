@@ -10,6 +10,7 @@ const periodField = document.querySelector("#period");
 const formError = document.querySelector("#form-error");
 const runButton = document.querySelector("#run-button");
 const runCopy = runButton.querySelector(".run-copy");
+const introRunButton = document.querySelector("#intro-run-button");
 const retryButton = document.querySelector("#retry-button");
 const presetButtons = document.querySelector("#preset-buttons");
 
@@ -610,6 +611,7 @@ function renderFailureResponse(data, fallbackMessage) {
   const id = data && data.correlation_id ? String(data.correlation_id) : "not available";
   failureCorrelation.textContent = `Correlation · ${id}`;
   renderTrace(data && data.trace, failureTraceList, true);
+  failureTitle.focus();
 }
 
 function renderRequestError(error) {
@@ -659,6 +661,7 @@ function renderResult(data) {
   correlationId.textContent = data.correlation_id || "—";
   correlationId.title = data.correlation_id || "";
   renderTrace(data.trace || []);
+  resultHeadline.focus();
 }
 
 async function runContract() {
@@ -685,6 +688,7 @@ demoForm.addEventListener("submit", (event) => {
 });
 
 retryButton.addEventListener("click", () => demoForm.requestSubmit());
+introRunButton.addEventListener("click", () => demoForm.requestSubmit());
 
 presetButtons.addEventListener("click", (event) => {
   const button = event.target.closest("button[data-primary]");

@@ -118,6 +118,11 @@ def test_root_serves_the_demo_ui(client: TestClient) -> None:
     assert response.text.count('maxlength="20"') == 2
     assert 'id="protocol-blocker"' in response.text
     assert 'window.location.protocol === "file:"' in response.text
+    assert "Project background" in response.text
+    assert "Prompits Lite" in response.text
+    assert "Phemacast Lite" in response.text
+    assert all(concept in response.text for concept in ("Pit", "Plaza", "Pulser", "Persona"))
+    assert 'id="intro-run-button"' in response.text
     assert "python demos/data-agent-network-demo/run.py" in response.text
 
 
