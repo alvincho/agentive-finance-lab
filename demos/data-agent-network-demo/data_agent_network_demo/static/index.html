@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="A runnable, offline demonstration of PIT, Plaza, Pulser, and Persona collaboration for financial-data questions."
+    />
+    <title>Data Agent Network · Agentive Finance Lab</title>
+    <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
+    <link rel="stylesheet" href="/static/styles.css" />
+    <script src="/static/app.js" defer></script>
+  </head>
+  <body>
+    <div class="ambient-grid" aria-hidden="true"></div>
+    <header class="masthead">
+      <a class="wordmark" href="https://github.com/agentive-finance-lab" aria-label="Agentive Finance Lab on GitHub">
+        <span class="wordmark-mark">AFL</span>
+        <span>
+          <strong>Agentive Finance Lab</strong>
+          <small>Open systems, visible reasoning</small>
+        </span>
+      </a>
+      <div class="runtime-stamp" aria-label="Runtime status">
+        <span class="signal" aria-hidden="true"></span>
+        <span>local · deterministic · v0.1</span>
+      </div>
+    </header>
+
+    <main>
+      <section class="brief" aria-labelledby="page-title">
+        <div class="brief-copy reveal reveal-1">
+          <p class="eyebrow">Demo 001 / Data Agent Network</p>
+          <h1 id="page-title">A financial question,<br /><em>handled in public.</em></h1>
+          <p class="lede">
+            Watch a Data User preserve intent, discover a specialist through Plaza, and inspect the
+            Data Consultant’s evidence before presenting an answer.
+          </p>
+          <div class="repo-line">
+            <span>Repository shape</span>
+            <code>demo → phemacast-lite → prompits-lite</code>
+          </div>
+        </div>
+
+      </section>
+
+      <section class="workbench reveal reveal-3" aria-labelledby="workbench-title">
+        <div class="section-label workbench-label">
+          <span>01</span>
+          <h2 id="workbench-title">Run the handoff</h2>
+          <p>Fictional catalog metadata only. No API key, LLM, or live price feed.</p>
+        </div>
+
+        <div class="workbench-grid">
+          <form id="demo-form" class="request-console">
+            <label for="prompt">Financial-data question</label>
+            <textarea
+              id="prompt"
+              name="prompt"
+              minlength="8"
+              maxlength="1200"
+              rows="7"
+              required
+            >Compare ACME's five-day return with the latest policy-rate move and explain the data caveats.</textarea>
+
+            <div class="action-row">
+              <label class="failure-toggle" for="simulate-offline">
+                <input id="simulate-offline" type="checkbox" />
+                <span class="toggle-track" aria-hidden="true"><span></span></span>
+                <span>
+                  <strong>Consultant outage</strong>
+                  <small>Test degraded path</small>
+                </span>
+              </label>
+
+              <button id="run-button" class="run-button" type="submit">
+                <span>Run agent network</span>
+                <span aria-hidden="true">↗</span>
+              </button>
+            </div>
+
+            <div class="examples" aria-label="Example questions">
+              <span>Load an example</span>
+              <div id="example-buttons" class="example-buttons"></div>
+            </div>
+          </form>
+
+          <div class="result-console" id="result-console" aria-live="polite">
+            <div class="empty-state" id="empty-state">
+              <span class="empty-index">READY</span>
+              <p>The structured request, source advice, and complete correlation trace will appear here.</p>
+            </div>
+
+            <div id="result-content" class="result-content" hidden>
+              <div class="result-heading">
+                <div>
+                  <span id="result-status" class="status-pill">Complete</span>
+                  <h3 id="result-headline"></h3>
+                </div>
+                <code id="correlation-id"></code>
+              </div>
+              <p id="result-summary" class="result-summary"></p>
+
+              <div class="requirements-strip" id="requirements-strip"></div>
+
+              <div class="result-split">
+                <section aria-labelledby="recommendations-title">
+                  <h4 id="recommendations-title">Consultant evidence</h4>
+                  <div id="recommendations" class="recommendations"></div>
+                </section>
+                <section aria-labelledby="benefits-title">
+                  <h4 id="benefits-title">What the network proves</h4>
+                  <dl id="benefits" class="benefits"></dl>
+                </section>
+              </div>
+
+              <p id="result-caveat" class="caveat"></p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <aside class="concept-index reveal reveal-2" aria-labelledby="concept-title">
+        <div class="section-label">
+          <span>02</span>
+          <h2 id="concept-title">Vocabulary retained</h2>
+        </div>
+        <dl id="concept-list" class="concept-list">
+          <div><dt>Pit</dt><dd>Addressable identity</dd></div>
+          <div><dt>Plaza</dt><dd>Registry + router</dd></div>
+          <div><dt>Pulser</dt><dd>Typed capability host</dd></div>
+          <div><dt>Persona</dt><dd>Role-aware Pulser</dd></div>
+        </dl>
+      </aside>
+
+      <section class="network-section reveal reveal-4" aria-labelledby="network-title">
+        <div class="section-label">
+          <span>03</span>
+          <h2 id="network-title">Live registry</h2>
+        </div>
+        <div class="network-map" id="network-map" aria-label="Data Agent Network topology">
+          <article class="agent-node node-user">
+            <span class="node-kicker">Persona / PIT</span>
+            <h3>Data User</h3>
+            <p>Intent · delegation · acceptance</p>
+            <span class="pulse-chip">data_request</span>
+          </article>
+
+          <div class="route route-in" aria-hidden="true">
+            <span></span><small>discover</small>
+          </div>
+
+          <article class="plaza-node">
+            <span class="plaza-orbit orbit-a"></span>
+            <span class="plaza-orbit orbit-b"></span>
+            <span class="node-kicker">Prompits Lite</span>
+            <h3>Plaza</h3>
+            <p>PIT directory</p>
+          </article>
+
+          <div class="route route-out" aria-hidden="true">
+            <span></span><small>invoke</small>
+          </div>
+
+          <article class="agent-node node-consultant" id="consultant-node">
+            <span class="node-kicker">Persona / PIT</span>
+            <h3>Data Consultant</h3>
+            <p>Coverage · cost · evidence</p>
+            <span class="pulse-chip">data_advice</span>
+          </article>
+        </div>
+        <p class="network-status" id="network-status" aria-live="polite">Reading the in-memory Plaza directory…</p>
+      </section>
+
+      <section class="trace-section reveal reveal-5" aria-labelledby="trace-title">
+        <div class="section-label trace-label">
+          <span>04</span>
+          <div>
+            <h2 id="trace-title">Correlation trace</h2>
+            <p>Every hop shares one id; payload summaries stay inspectable.</p>
+          </div>
+        </div>
+        <ol id="trace-list" class="trace-list">
+          <li class="trace-placeholder">Run the demo to stream the handoff sequence.</li>
+        </ol>
+      </section>
+
+      <section class="boundary-section" aria-labelledby="boundary-title">
+        <div class="section-label">
+          <span>05</span>
+          <h2 id="boundary-title">Deliberate boundary</h2>
+        </div>
+        <div class="boundary-copy">
+          <p>
+            This repository makes the architecture legible, not production-complete. Authentication,
+            durable state, billing, distributed transport, real provider connectors, and investment
+            decisions remain outside the lite contract.
+          </p>
+          <a href="https://github.com/agentive-finance-lab/multi-agent-finance-demos">
+            Browse the public repository <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <span>Agentive Finance Lab</span>
+      <span>Educational demonstration · Apache-2.0</span>
+    </footer>
+  </body>
+</html>

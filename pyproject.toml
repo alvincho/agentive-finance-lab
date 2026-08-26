@@ -1,0 +1,45 @@
+[build-system]
+requires = ["setuptools>=77.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-agent-finance-demos"
+version = "0.1.0"
+description = "Small, runnable demonstrations of multi-agent patterns for financial applications."
+readme = "README.md"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+license-files = ["LICENSE", "NOTICE"]
+authors = [
+  { name = "Agentive Finance Lab", email = "afl@agentivefinancelab.com" }
+]
+dependencies = [
+  "fastapi>=0.110,<1",
+  "pydantic>=2.7,<3",
+  "uvicorn>=0.29,<1",
+]
+
+[project.urls]
+Homepage = "https://github.com/agentive-finance-lab"
+Repository = "https://github.com/agentive-finance-lab/multi-agent-finance-demos"
+Issues = "https://github.com/agentive-finance-lab/multi-agent-finance-demos/issues"
+
+[project.optional-dependencies]
+test = [
+  "httpx>=0.27,<1",
+  "pytest>=7,<9",
+]
+
+[project.scripts]
+data-agent-network-demo = "data_agent_network_demo.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["prompits-lite", "phemacast-lite", "demos/data-agent-network-demo"]
+include = ["prompits_lite*", "phemacast_lite*", "data_agent_network_demo*"]
+
+[tool.setuptools.package-data]
+data_agent_network_demo = ["static/*"]
+
+[tool.pytest.ini_options]
+addopts = "-q"
+testpaths = ["tests"]
