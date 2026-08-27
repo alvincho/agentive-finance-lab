@@ -60,14 +60,14 @@ Use the same five-part structure so readers know what to expect:
 ## Weekly editorial and distribution rhythm
 
 - **Saturday, 20:00 (T−3):** Prepare the full Substack draft, Medium adaptation,
-  channel-specific copy, diagram, and short demo clip. Mark the article and its
-  social launch pack `review`; nothing is public at this stage.
+  channel-specific copy, diagram, and short demo clip. Mark the release bundle
+  `review`; nothing is public at this stage.
 - **Monday, 20:00 (T−1):** Check the article, links, figures, runnable commands,
-  social copy, and media. Public release remains blocked until both the article
-  and social launch pack are explicitly marked `approved` and committed.
+  social copy, and media. Public release remains blocked until the complete
+  bundle is explicitly marked `approved_for_release`, hashed, and committed.
 - **Tuesday, 20:00:** Publish the approved full Substack episode and repository
   CTA. The Substack URL is the canonical link for every downstream post.
-- **Wednesday, 12:30:** Share one diagram and a channel-specific takeaway on
+- **Tuesday, 21:00:** Share one diagram and a channel-specific takeaway on
   LinkedIn, X, Threads, Facebook, and Instagram.
 - **Wednesday, 20:00:** Submit the approved adaptation to the Medium publication
   *Agentive Futures*, identifying the Substack episode as the original source.
@@ -78,11 +78,15 @@ Use the same five-part structure so readers know what to expect:
   Threads, LinkedIn, and Facebook, and use the matching visual as an Instagram
   Story when the prepared asset is available.
 
-Each episode stores reviewable channel copy in `docs/social/NN-launch-pack.md`.
-Automated publication records each successful destination and remote URL in
-`docs/social/NN-receipts.json`; a destination with a receipt must never be
-published a second time by a retry. Failure on one channel must not be hidden by
-success on another channel.
+Each episode stores its Medium source in `docs/medium/`, reviewable channel copy
+in `docs/social/NN-launch-pack.md`, and the approved body and asset hashes in
+`docs/releases/NN-release.json`. Any post-approval content or asset change
+invalidates the bundle until it is reviewed and hashed again. Automated
+publication records each attempt, successful destination, remote ID, and URL in
+`docs/social/NN-receipts.json`; a destination with a successful receipt must
+never be published a second time by a retry. An interrupted `attempting` record
+must be reconciled against the remote platform before retrying. Failure on one
+channel must not be hidden by success on another channel.
 
 Keep a single canonical link to the Substack post in social messages. Every
 episode should also link directly to the relevant repository section or demo,
