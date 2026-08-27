@@ -1,8 +1,9 @@
 ---
 series: Build a Multi-Agent Finance Lab
 episode: 1 of 10
-status: draft
-publish_at: 2026-09-01 20:00 Asia/Taipei
+status: published
+published_at: 2026-08-27 21:52 Asia/Taipei
+publication_url: "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in"
 title: "MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution"
 subtitle: A runnable demonstration of replacing an overloaded tool catalog with specialist data agents, centralized discovery, explicit ownership, and traceable handoffs.
 preview: MCP standardizes tool access, but financial applications still need a scalable way to manage catalog overload, specialist knowledge, routing, provenance, and provider failure.

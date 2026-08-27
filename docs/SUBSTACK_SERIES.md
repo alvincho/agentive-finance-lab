@@ -13,7 +13,8 @@ demo must preserve.
 technical product builders who understand APIs but may be new to multi-agent
 systems.
 
-**Cadence:** Every Tuesday at 20:00 Asia/Taipei, beginning 1 September 2026.
+**Cadence:** Episode 1 launched on 27 August 2026. Weekly Tuesday publication
+begins with Episode 2 on 8 September 2026 at 20:00 Asia/Taipei.
 
 Each episode should contain one concrete idea, one repository artifact, one
 runnable action, and one honest boundary or limitation. Aim for a 6–8 minute
@@ -30,7 +31,7 @@ key (BYOK) on first use.
 
 | Episode | Publish date | Working title | Reader outcome | Runnable action and primary CTA | Lead visual |
 | --- | --- | --- | --- | --- | --- |
-| 1 | 2026-09-01 | [**MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution**](substack/01-what-multi-agent-finance-should-prove.md) | See where a flat model-facing tool catalog reaches scale, selection, ownership, and finance-policy limits—and how coordinated specialist agents address them without claiming better predictions or returns. Meet Data User, Data Consultant, and Data Source as separate responsibilities. | Open the landing page, subscribe to the series, and star or bookmark the repository. | Responsibility map: User → Consultant → Source, coordinated by Plaza. |
+| 1 | 2026-08-27 | [**MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution**](https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in) | See where a flat model-facing tool catalog reaches scale, selection, ownership, and finance-policy limits—and how coordinated specialist agents address them without claiming better predictions or returns. Meet Data User, Data Consultant, and Data Source as separate responsibilities. | Open the landing page, subscribe to the series, and star or bookmark the repository. | Responsibility map: User → Consultant → Source, coordinated by Plaza. |
 | 2 | 2026-09-08 | **Clone the Lab and Meet the Network** | Install the project in a virtual environment, start the local UI, verify health, and locate all three demos before learning framework vocabulary. | Clone, run `python demos/data-agent-network-demo/run.py --open`, and verify `/health`. | Short screen recording from terminal clone to the running UI. |
 | 3 | 2026-09-15 | **Lite Is a Boundary, Not a Rewrite** | Understand the dependency direction `demos → phemacast-lite → prompits-lite`, why this repository is a reduced extraction separate from FinMAS—the original full financial multi-agent application—and which production services were deliberately removed. | Match the three repository layers to `docs/SCOPE.md` and `docs/ARCHITECTURE.md`. | Layer diagram showing allowed dependency direction and removed production services. |
 | 4 | 2026-09-22 | **Prompits Lite: Identity, Practice, and Plaza** | Learn Pit identity, cards, discovery, the local invocation boundary called `UsePractice`, and centralized Plaza coordination. Use a short sidebar to contrast this ownership model with MCP, skills, and a loose A2A mesh. | Inspect `prompits-lite/`, then follow one Data User request through Plaza resolution. | Pit cards entering one Plaza; keep the MCP/skills/A2A comparison to a compact sidebar. |
