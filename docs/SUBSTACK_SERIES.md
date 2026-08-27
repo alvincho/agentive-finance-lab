@@ -79,8 +79,11 @@ Use the same five-part structure so readers know what to expect:
   the original source.
 - **Wednesday or Saturday, 19:00 (T+1):** Publish the approved standalone
   Simplified Chinese article through the designated WeChat Official Account.
-  Use a follower-facing broadcast when the account permits it; a draft or
-  non-broadcast publication is not recorded as a successful broadcast.
+  Use the official server-side API when the account and environment are
+  configured; otherwise deliver a ready-to-paste HTML and media package for
+  manual confirmation in the Official Account dashboard. Use a follower-facing
+  broadcast when the account permits it; a draft or non-broadcast publication
+  is not recorded as a successful broadcast.
 - **Wednesday or Saturday, 20:00 (T+1):** Publish the approved short code or UI
   clip on TikTok, Instagram Reels, and Facebook Reels, with compact variants for
   X, Threads, and LinkedIn. Facebook captions and subtitles use Traditional
@@ -114,7 +117,10 @@ vary. It includes the complete argument, native cover and inline images, concise
 code excerpts, the educational disclaimer, and only links or QR destinations
 verified during preparation. WeChat credentials remain server-side; no AppID,
 secret, access token, or login cookie belongs in the repository or browser
-storage.
+storage. API publishing is enabled only after the account type, verification,
+API permission, delivery mode, and allowlisted account identity are confirmed.
+When API publishing is unavailable, the scheduled job prepares and validates
+the complete package but reports a manual handoff instead of claiming success.
 
 Keep the Substack post as the canonical source. Link to it directly from social
 messages and also link to the relevant repository section or demo, not only the
