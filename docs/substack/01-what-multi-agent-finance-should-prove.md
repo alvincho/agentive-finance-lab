@@ -3,20 +3,28 @@ series: Build a Multi-Agent Finance Lab
 episode: 1 of 10
 status: draft
 publish_at: 2026-09-01 20:00 Asia/Taipei
-title: What Multi-Agent Finance Should Actually Prove
+title: Why MCP and Skills Are Not Enough for Multi-Agent Finance
 subtitle: A public, runnable lab for explicit ownership, discovery, and handoffs—without promising better predictions or returns.
 preview: One agent can call many tools. That does not, by itself, make a multi-agent system.
 repository_url: "https://github.com/alvincho/agentive-finance-lab"
 subscribe_url: "https://agentivefinancelab.substack.com/subscribe"
 ---
 
-# What Multi-Agent Finance Should Actually Prove
+# Why MCP and Skills Are Not Enough for Multi-Agent Finance
 
 *A public, runnable lab for explicit ownership, discovery, and handoffs—without
 promising better predictions or returns.*
 
 One agent can call many tools. That does not, by itself, make a multi-agent
 system.
+
+That is the central claim of this episode: **MCP and skills are useful, but
+they are not a multi-agent system.** MCP standardizes access to tools and
+resources. Skills package reusable instructions. Neither, by itself, assigns a
+role, establishes decision or execution ownership, discovers a specialist
+participant, or defines an end-to-end handoff. Those are the responsibilities
+this lab moves into Data User, Data Consultant, Data Source, Plaza, and named
+Pulses.
 
 This distinction matters in finance because even an apparently simple request
 crosses several responsibilities. Consider: “Give me one month of daily AAPL
