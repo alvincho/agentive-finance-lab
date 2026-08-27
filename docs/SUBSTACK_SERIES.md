@@ -13,8 +13,9 @@ demo must preserve.
 technical product builders who understand APIs but may be new to multi-agent
 systems.
 
-**Cadence:** Episode 1 launched on 27 August 2026. Weekly Tuesday publication
-begins with Episode 2 on 8 September 2026 at 20:00 Asia/Taipei.
+**Cadence:** Episode 1 launched on 27 August 2026. Twice-weekly Tuesday and
+Friday publication begins with Episode 2 on 8 September 2026 at 20:00
+Asia/Taipei.
 
 Each episode should contain one concrete idea, one repository artifact, one
 runnable action, and one honest boundary or limitation. Aim for a 6–8 minute
@@ -33,14 +34,14 @@ key (BYOK) on first use.
 | --- | --- | --- | --- | --- | --- |
 | 1 | 2026-08-27 | [**MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution**](https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in) | See where a flat model-facing tool catalog reaches scale, selection, ownership, and finance-policy limits—and how coordinated specialist agents address them without claiming better predictions or returns. Meet Data User, Data Consultant, and Data Source as separate responsibilities. | Open the landing page, subscribe to the series, and star or bookmark the repository. | Responsibility map: User → Consultant → Source, coordinated by Plaza. |
 | 2 | 2026-09-08 | **Clone the Lab and Meet the Network** | Install the project in a virtual environment, start the local UI, verify health, and locate all three demos before learning framework vocabulary. | Clone, run `python demos/data-agent-network-demo/run.py --open`, and verify `/health`. | Short screen recording from terminal clone to the running UI. |
-| 3 | 2026-09-15 | **Lite Is a Boundary, Not a Rewrite** | Understand the dependency direction `demos → phemacast-lite → prompits-lite`, why this repository is a reduced extraction separate from FinMAS—the original full financial multi-agent application—and which production services were deliberately removed. | Match the three repository layers to `docs/SCOPE.md` and `docs/ARCHITECTURE.md`. | Layer diagram showing allowed dependency direction and removed production services. |
-| 4 | 2026-09-22 | **Prompits Lite: Identity, Practice, and Plaza** | Learn Pit identity, cards, discovery, the local invocation boundary called `UsePractice`, and centralized Plaza coordination. Use a short sidebar to contrast this ownership model with MCP, skills, and a loose A2A mesh. | Inspect `prompits-lite/`, then follow one Data User request through Plaza resolution. | Pit cards entering one Plaza; keep the MCP/skills/A2A comparison to a compact sidebar. |
-| 5 | 2026-09-29 | **Phemacast Lite: Pulses, Pulsers, and Personas** | Learn one distinction: a Pulse defines the structured interaction, a Pulser exposes it, and a Persona adds a role and behavior. Data Sources are Pulsers; Data User and Consultant are Personas. | Trace one supported Pulse from definition to handler in `phemacast-lite/`. | Responsibility map: Pit → Pulser → Persona, with Pulse beside the call boundary. |
-| 6 | 2026-10-06 | **Demo 1: Advice Without Fetching Data** | Trace source registration, `data_availability`, Consultant catalog synchronization, and deterministic documentation retrieval under the retained `catalog_rag` policy label. Establish that the lite path has no LLM generation step and makes no provider call. | Run the three Single Source questions and inspect the returned endpoint evidence. | Single Source advisory sequence with the provider boundary visibly unopened. |
-| 7 | 2026-10-13 | **Demo 1: The User Calls YFinance Directly** | Separate advisory and execution planes: Consultant recommends and resolves; Data User invokes `data_spec` or `data_fetch` directly on YFinance. | Execute one YFinance history request and trace `data_source_status → data_fetch`. | Direct-source sequence diagram and one real result screenshot. |
-| 8 | 2026-10-20 | **Demo 2: Three Sources, the Same Workflow** | See YFinance, Alpha Vantage, and FRED register compatible source cards without rewriting Data User or Consultant. Keep the UI catalog/specification-only. | Compare equity and CPI endpoint specifications without making an upstream provider call. | Multiple Sources topology with three separate source-owned catalogs. |
-| 9 | 2026-10-27 | **Demo 3: A Missing Key Is an Honest Result** | Run the keyless baseline: with Yahoo Finance reachable, YFinance returns live AAPL history while Alpha Vantage returns `authentication_required`. Learn why visible failure is better than a fixture, proxy, or fallback. | Launch `?sample=no-key`, inspect both separate result cards, and confirm no provider response passed through the Consultant. | Split-screen capture of YFinance rows and the Alpha Vantage key boundary. |
-| 10 | 2026-11-03 | **Bring Your Own Keys, FRED, and the Extension Contract** | Focus on one idea: credentials belong to source agents. Show the Alpha Vantage and FRED server-side paths, then close with a one-page checklist for preserving the same boundary in future demos. | Copy `.env.example` to the gitignored `.env`, choose either the Alpha Vantage or FRED guided track to run after restart, then use the source-card checklist to propose one bounded extension in a discussion or pull request. | `.env` → source-agent boundary; offer the extension contract as a downloadable closing checklist. |
+| 3 | 2026-09-11 | **Lite Is a Boundary, Not a Rewrite** | Understand the dependency direction `demos → phemacast-lite → prompits-lite`, why this repository is a reduced extraction separate from FinMAS—the original full financial multi-agent application—and which production services were deliberately removed. | Match the three repository layers to `docs/SCOPE.md` and `docs/ARCHITECTURE.md`. | Layer diagram showing allowed dependency direction and removed production services. |
+| 4 | 2026-09-15 | **Prompits Lite: Identity, Practice, and Plaza** | Learn Pit identity, cards, discovery, the local invocation boundary called `UsePractice`, and centralized Plaza coordination. Use a short sidebar to contrast this ownership model with MCP, skills, and a loose A2A mesh. | Inspect `prompits-lite/`, then follow one Data User request through Plaza resolution. | Pit cards entering one Plaza; keep the MCP/skills/A2A comparison to a compact sidebar. |
+| 5 | 2026-09-18 | **Phemacast Lite: Pulses, Pulsers, and Personas** | Learn one distinction: a Pulse defines the structured interaction, a Pulser exposes it, and a Persona adds a role and behavior. Data Sources are Pulsers; Data User and Consultant are Personas. | Trace one supported Pulse from definition to handler in `phemacast-lite/`. | Responsibility map: Pit → Pulser → Persona, with Pulse beside the call boundary. |
+| 6 | 2026-09-22 | **Demo 1: Advice Without Fetching Data** | Trace source registration, `data_availability`, Consultant catalog synchronization, and deterministic documentation retrieval under the retained `catalog_rag` policy label. Establish that the lite path has no LLM generation step and makes no provider call. | Run the three Single Source questions and inspect the returned endpoint evidence. | Single Source advisory sequence with the provider boundary visibly unopened. |
+| 7 | 2026-09-25 | **Demo 1: The User Calls YFinance Directly** | Separate advisory and execution planes: Consultant recommends and resolves; Data User invokes `data_spec` or `data_fetch` directly on YFinance. | Execute one YFinance history request and trace `data_source_status → data_fetch`. | Direct-source sequence diagram and one real result screenshot. |
+| 8 | 2026-09-29 | **Demo 2: Three Sources, the Same Workflow** | See YFinance, Alpha Vantage, and FRED register compatible source cards without rewriting Data User or Consultant. Keep the UI catalog/specification-only. | Compare equity and CPI endpoint specifications without making an upstream provider call. | Multiple Sources topology with three separate source-owned catalogs. |
+| 9 | 2026-10-02 | **Demo 3: A Missing Key Is an Honest Result** | Run the keyless baseline: with Yahoo Finance reachable, YFinance returns live AAPL history while Alpha Vantage returns `authentication_required`. Learn why visible failure is better than a fixture, proxy, or fallback. | Launch `?sample=no-key`, inspect both separate result cards, and confirm no provider response passed through the Consultant. | Split-screen capture of YFinance rows and the Alpha Vantage key boundary. |
+| 10 | 2026-10-06 | **Bring Your Own Keys, FRED, and the Extension Contract** | Focus on one idea: credentials belong to source agents. Show the Alpha Vantage and FRED server-side paths, then close with a one-page checklist for preserving the same boundary in future demos. | Copy `.env.example` to the gitignored `.env`, choose either the Alpha Vantage or FRED guided track to run after restart, then use the source-card checklist to propose one bounded extension in a discussion or pull request. | `.env` → source-agent boundary; offer the extension contract as a downloadable closing checklist. |
 
 Episode 2 deliberately gives readers a working result before vocabulary.
 Episode 3 then establishes scope and dependency boundaries before Episodes 4–5
@@ -57,26 +58,32 @@ Use the same five-part structure so readers know what to expect:
 5. **Boundary and next step:** what the demo intentionally does not prove, then
    a teaser for the next episode.
 
-## Weekly editorial and distribution rhythm
+## Twice-weekly editorial and distribution rhythm
 
-- **Saturday, 20:00 (T−3):** Prepare the full Substack draft, Medium adaptation,
-  channel-specific copy, diagram, and short demo clip. Mark the release bundle
-  `review`; nothing is public at this stage.
-- **Monday, 20:00 (T−1):** Check the article, links, figures, runnable commands,
-  social copy, and media. Public release remains blocked until the complete
-  bundle is explicitly marked `approved_for_release`, hashed, and committed.
-- **Tuesday, 20:00:** Publish the approved full Substack episode and repository
-  CTA. The Substack URL is the canonical link for every downstream post.
-- **Tuesday, 21:00:** Share one diagram and a channel-specific takeaway on
-  LinkedIn, X, Threads, Facebook, and Instagram.
-- **Wednesday, 20:00:** Submit the approved adaptation to the Medium publication
-  *Agentive Futures*, identifying the Substack episode as the original source.
-- **Thursday, 20:00:** Publish the approved short code or UI clip on TikTok,
-  Instagram Reels, and Facebook Reels, with compact variants for X, Threads,
-  and LinkedIn.
-- **Sunday, 20:00:** Publish one approved question or honest failure case on X,
-  Threads, LinkedIn, and Facebook, and use the matching visual as an Instagram
-  Story when the prepared asset is available.
+- **Saturday or Tuesday, 09:00 (T−3):** Prepare the full Substack draft, Medium
+  adaptation, channel-specific copy, diagram, and short demo clip. Mark the
+  release bundle `review`; nothing is public at this stage.
+- **Monday or Thursday, 18:00 (T−1):** Check the article, links, figures,
+  runnable commands, social copy, and media. Public release remains blocked
+  until the complete bundle is explicitly marked `approved_for_release`,
+  hashed, and committed.
+- **Tuesday or Friday, 20:00:** Publish the approved full Substack episode and
+  repository CTA. The Substack URL is the canonical link for every downstream
+  post.
+- **Tuesday or Friday, 21:00:** Share one diagram and a channel-specific
+  takeaway on LinkedIn, X, Threads, Facebook, and Instagram.
+- **Wednesday or Saturday, 10:00 (T+1):** Submit the approved adaptation to the
+  Medium publication *Agentive Futures*, identifying the Substack episode as
+  the original source.
+- **Wednesday or Saturday, 20:00 (T+1):** Publish the approved short code or UI
+  clip on TikTok, Instagram Reels, and Facebook Reels, with compact variants for
+  X, Threads, and LinkedIn.
+- **Thursday or Sunday, 20:00 (T+2):** Publish one approved question or honest
+  failure case on X, Threads, LinkedIn, and Facebook, and use the matching
+  visual as an Instagram Story when the prepared asset is available.
+
+Every downstream channel action occurs no later than two calendar days after
+its canonical Substack episode.
 
 Each episode stores its Medium source in `docs/medium/`, reviewable channel copy
 in `docs/social/NN-launch-pack.md`, and the approved body and asset hashes in
