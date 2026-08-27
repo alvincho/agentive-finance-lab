@@ -1,265 +1,343 @@
-"""End-to-end behavior of the Data User and Data Consultant network."""
+"""Faithful YFinance-only reduction of the original Data Agent Network."""
 
 from __future__ import annotations
 
-from copy import deepcopy
-from dataclasses import replace
-import json
+from typing import Any
 
-from data_agent_network_demo.agents import DataUser
-from data_agent_network_demo.contracts import MarketDataError
-from data_agent_network_demo.workflow import build_network, run_demo
+from phemacast_lite import Persona, Pulser
+from prompits_lite import BaseAgent, Pit, StandbyAgent
 
-
-def test_complete_path_delegates_one_structured_comparison_to_the_consultant(
-    fake_source: object,
-) -> None:
-    result = run_demo(
-        primary_symbol=" aapl ",
-        benchmark_symbol="spy",
-        period="1mo",
-        source=fake_source,
-    )
-
-    assert fake_source.calls == [("AAPL", "1mo"), ("SPY", "1mo")]
-    assert result["status"] == "complete"
-    assert result["request"]["primary_symbol"] == "AAPL"
-    assert result["request"]["benchmark_symbol"] == "SPY"
-    assert result["request"]["period"] == "1mo"
-
-    consultant = result["consultant"]
-    assert consultant["status"] == "complete"
-    assert consultant["source"]["provider"] == "yfinance"
-    assert consultant["source"]["version"] == "test-double"
-    assert set(consultant["metrics"]) == {"AAPL", "SPY"}
-    assert consultant["coverage"]["observations"] == 18
-    assert consultant["relative"]["return_spread_pct_points"] == 12.0
-    assert len(consultant["series"]) == 18
-    assert consultant["errors"] == []
-
-    assert result["acceptance"]["status"] == "pass"
-    assert result["answer"]["headline"]
-    assert "investment advice" in result["answer"]["caveat"].lower()
-    assert result["network"]["dependency_direction"] == (
-        "demo -> phemacast-lite -> prompits-lite"
-    )
+from data_agent_network_demo.agents import DataConsultantPersona, DataUserPersona
+from data_agent_network_demo.contracts import (
+    DATA_ADVICE_PULSE_NAME,
+    DATA_AVAILABILITY_PULSE_NAME,
+    DATA_FETCH_PULSE_NAME,
+    DATA_REQUEST_PULSE_NAME,
+    DATA_SOURCE_STATUS_PULSE_NAME,
+    DATA_SPEC_PULSE_NAME,
+)
+from data_agent_network_demo.workflow import DataAgentNetworkDemo, DemoQuestion
+from data_agent_network_demo.yfinance_source import YFinanceDataSource
 
 
-def test_result_preserves_yfinance_provenance_and_one_routed_trace(
-    fake_source: object,
-) -> None:
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1mo",
-        source=fake_source,
-    )
-
-    serialized_provenance = json.dumps(result["consultant"]["provenance"])
-    assert "yfinance.Ticker.history" in serialized_provenance
-    assert '"symbol": "AAPL"' in serialized_provenance
-    assert '"symbol": "SPY"' in serialized_provenance
-    assert '"interval": "1d"' in serialized_provenance
-    assert '"auto_adjust": true' in serialized_provenance
-
-    stages = [event["stage"] for event in result["trace"]]
-    assert stages[0] == "client.submit"
-    assert stages.count("plaza.discover") == 1
-    assert stages.count("plaza.matches") == 1
-    assert stages.count("plaza.route") == 2
-    assert stages.count("pulse.execute") == 2
-    assert stages.count("pulse.complete") == 2
-    assert stages.count("plaza.return") == 2
-    assert "yfinance.request" in stages
-    assert "yfinance.response" in stages
-    assert "consultant.calculate" in stages
-    assert "data-user.validate" in stages
-    assert "data-user.accept" in stages
-    assert [event["sequence"] for event in result["trace"]] == list(
-        range(1, len(result["trace"]) + 1)
-    )
-    assert result["correlation_id"]
-
-
-def test_data_user_rejects_a_comparison_that_misses_the_period_minimum(
-    fake_source: object,
-) -> None:
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1y",
-        source=fake_source,
-    )
-
-    assert result["consultant"]["status"] == "needs-review"
-    assert result["consultant"]["coverage"]["observations"] == 18
-    assert result["consultant"]["coverage"]["minimum_required"] == 180
-    assert set(result["consultant"]["metrics"]) == {"AAPL", "SPY"}
-    assert result["status"] == "needs-review"
-    assert result["acceptance"]["status"] == "fail"
-    assert result["acceptance"]["failed_checks"] == [
-        "consultant completed without provider errors",
-        "requested coverage",
-        "no hard quality failures",
-    ]
-
-
-def test_quality_warning_is_accepted_with_warnings_but_not_presented_as_complete(
-    fake_source: object,
-) -> None:
-    fake_source.histories["AAPL"] = replace(
-        fake_source.histories["AAPL"],
-        warnings=("yfinance metadata was incomplete.",),
-    )
-
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1mo",
-        source=fake_source,
-    )
-
-    assert result["consultant"]["status"] == "complete"
-    assert result["acceptance"]["accepted"] is True
-    assert result["acceptance"]["status"] == "pass-with-warnings"
-    assert result["acceptance"]["failed_checks"] == []
-    assert "yfinance metadata was incomplete." in result["acceptance"]["warnings"]
-    assert result["status"] == "needs-review"
-
-
-def test_acceptance_rejects_tampered_provenance_metrics_and_hard_quality_failures(
-    fake_source: object,
-) -> None:
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1mo",
-        source=fake_source,
-    )
-    request = result["request"]
-    consultant = result["consultant"]
-
-    bad_provenance = deepcopy(consultant)
-    bad_provenance["provenance"][0]["query"]["actions"] = True
-    provenance_acceptance = DataUser._accept(bad_provenance, request)
-    assert "exact query provenance" in provenance_acceptance["failed_checks"]
-
-    bad_metrics = deepcopy(consultant)
-    bad_metrics["metrics"]["AAPL"]["total_return_pct"] = float("nan")
-    metrics_acceptance = DataUser._accept(bad_metrics, request)
-    assert "complete finite metrics" in metrics_acceptance["failed_checks"]
-
-    inconsistent_coverage = deepcopy(consultant)
-    inconsistent_coverage["metrics"]["AAPL"]["observations"] -= 1
-    coverage_acceptance = DataUser._accept(inconsistent_coverage, request)
-    assert "complete finite metrics" in coverage_acceptance["failed_checks"]
-
-    hard_failure = deepcopy(consultant)
-    hard_failure["quality"]["checks"].append(
-        {"name": "provider evidence", "status": "fail", "detail": "Evidence failed."}
-    )
-    quality_acceptance = DataUser._accept(hard_failure, request)
-    assert "no hard quality failures" in quality_acceptance["failed_checks"]
-
-
-def test_one_provider_failure_preserves_the_successful_history_without_comparing(
-    fake_source: object,
-) -> None:
-    fake_source.failures["SPY"] = MarketDataError(
-        symbol="SPY",
-        code="no_history",
-        message="yfinance returned no daily price history for SPY.",
-    )
-
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1mo",
-        source=fake_source,
-    )
-
-    assert result["status"] == "partial"
-    assert result["consultant"]["status"] == "partial"
-    assert result["consultant"]["metrics"] == {}
-    assert result["consultant"]["series"] == []
-    assert result["consultant"]["errors"] == [
-        {
-            "symbol": "SPY",
-            "code": "no_history",
-            "message": "yfinance returned no daily price history for SPY.",
-        }
-    ]
-    assert [item["symbol"] for item in result["consultant"]["provenance"]] == ["AAPL"]
-    assert result["acceptance"]["status"] == "fail"
-    assert "incomplete" in result["answer"]["headline"].lower()
-    assert result["consultant"]["source"]["provider"] == "yfinance"
-    assert "yfinance.error" in [event["stage"] for event in result["trace"]]
-
-
-def test_rate_limit_stops_the_second_request_without_inventing_data(
-    fake_source: object,
-) -> None:
-    fake_source.failures["AAPL"] = MarketDataError(
-        symbol="AAPL",
-        code="rate_limited",
-        message="yfinance was rate-limited by its upstream service.",
-    )
-
-    result = run_demo(
-        primary_symbol="AAPL",
-        benchmark_symbol="SPY",
-        period="1mo",
-        source=fake_source,
-    )
-
-    assert fake_source.calls == [("AAPL", "1mo")]
-    assert result["status"] == "unavailable"
-    assert result["consultant"]["provenance"] == []
-    assert result["consultant"]["metrics"] == {}
-    assert result["consultant"]["errors"] == [
-        {
-            "symbol": "AAPL",
-            "code": "rate_limited",
-            "message": "yfinance was rate-limited by its upstream service.",
-        },
-        {
-            "symbol": "SPY",
-            "code": "not_attempted",
-            "message": "Request not attempted after the provider rate limit.",
-        },
-    ]
-
-
-def test_network_registers_two_personas_with_discoverable_typed_pulses(
-    fake_source: object,
-) -> None:
-    network = build_network(source=fake_source)
-    cards = {card.name: card for card in network.plaza.directory()}
-    description = network.describe()
-
-    assert set(cards) == {"Data User", "Data Consultant"}
-    assert description["route"] == [
-        "Data User",
-        "Plaza",
-        "Data Consultant",
-        "yfinance",
-    ]
-    assert description["provider"] == {
-        "name": "yfinance",
-        "version": "test-double",
-        "only_external_financial_data_source": True,
+def pulse_names(agent: Pulser) -> set[str]:
+    return {
+        str(item.get("pulse_name") or item.get("name"))
+        for item in agent.supported_pulses
     }
-    assert cards["Data User"].pit_type == "Persona"
-    assert cards["Data User"].labels["role"] == "data-user"
-    assert cards["Data Consultant"].labels["role"] == "data-consultant"
 
-    user_pulse = cards["Data User"].capabilities[0]
-    consultant_pulse = cards["Data Consultant"].capabilities[0]
-    assert user_pulse.name == "compare_market_data"
-    assert user_pulse.input_schema == {
-        "primary_symbol": {"types": ["str"], "required": True},
-        "benchmark_symbol": {"types": ["str"], "required": True},
-        "period": {"types": ["str"], "required": True},
+
+def test_demo_registers_exactly_three_original_network_participants(
+    fake_provider: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    members = demo.build_local_network()
+
+    assert set(members) == {
+        "data_user",
+        "data_consultant",
+        "data_sources",
+        "plaza",
     }
-    assert consultant_pulse.name == "analyze_market_history"
-    assert consultant_pulse.input_schema == user_pulse.input_schema
+    assert set(demo.data_sources) == {"yfinance"}
+    source = demo.data_sources["yfinance"]
+    assert isinstance(source, YFinanceDataSource)
+    assert isinstance(source, Pulser)
+    assert not isinstance(source, Persona)
+    assert isinstance(demo.data_consultant, DataConsultantPersona)
+    assert isinstance(demo.data_user, DataUserPersona)
+
+    directory = demo.plaza.directory()
+    assert [(item["name"], item["pit_type"]) for item in directory] == [
+        ("YFinanceDataSource", "DataSource"),
+        ("DataConsultant", "Persona"),
+        ("DataUser", "Persona"),
+    ]
+    assert len(directory) == 3
+    assert all(
+        isinstance(participant, (Pit, BaseAgent, StandbyAgent))
+        for participant in (source, demo.data_consultant, demo.data_user)
+    )
+
+    assert pulse_names(source) == {
+        DATA_SPEC_PULSE_NAME,
+        DATA_AVAILABILITY_PULSE_NAME,
+        DATA_FETCH_PULSE_NAME,
+    }
+    assert pulse_names(demo.data_consultant) == {
+        DATA_ADVICE_PULSE_NAME,
+        DATA_SOURCE_STATUS_PULSE_NAME,
+    }
+    assert pulse_names(demo.data_user) == {
+        DATA_REQUEST_PULSE_NAME,
+        DATA_SOURCE_STATUS_PULSE_NAME,
+        DATA_SPEC_PULSE_NAME,
+        DATA_FETCH_PULSE_NAME,
+    }
+
+
+def test_consultant_startup_sync_uses_empty_availability_query_without_provider_io(
+    fake_provider: Any,
+    monkeypatch: Any,
+) -> None:
+    calls: list[dict[str, Any]] = []
+    original = YFinanceDataSource.data_availability
+
+    def record_availability(
+        source: YFinanceDataSource,
+        input_data: dict[str, Any],
+    ) -> dict[str, Any]:
+        calls.append(dict(input_data))
+        return original(source, input_data)
+
+    monkeypatch.setattr(YFinanceDataSource, "data_availability", record_availability)
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+
+    assert len(calls) == 1
+    assert calls[0]["query"] == ""
+    assert calls[0]["use_case"] == "consultant memory synchronization"
+    assert calls[0]["limit"] == 100
+    assert fake_provider.calls == []
+    assert demo.data_consultant.source_memory_status()["source_count"] == 1
+    assert demo.data_consultant.source_memory_status()["dataset_count"] == 3
+
+
+def test_data_request_routes_from_data_user_to_data_consultant_only(
+    fake_provider: Any,
+    monkeypatch: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+    events: list[tuple[str, str]] = []
+    original_advice = demo.data_consultant.data_advice
+
+    def record_advice(input_data: dict[str, Any]) -> dict[str, Any]:
+        events.append(("DataConsultant", DATA_ADVICE_PULSE_NAME))
+        return original_advice(input_data)
+
+    monkeypatch.setattr(demo.data_consultant, "data_advice", record_advice)
+    result = demo.ask(
+        DemoQuestion(
+            query="historical daily prices and volume for AAPL",
+            use_case="research prototype",
+        )
+    )
+
+    assert events == [("DataConsultant", DATA_ADVICE_PULSE_NAME)]
+    assert result["request"]["query"] == (
+        "historical daily prices and volume for AAPL"
+    )
+    assert result["source_count"] == 1
+    assert result["sources"][0]["source_id"] == "yfinance"
+    assert fake_provider.calls == []
+
+
+def test_data_user_uses_consultant_status_then_calls_source_spec_and_fetch_directly(
+    fake_provider: Any,
+    monkeypatch: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+    source = demo.data_sources["yfinance"]
+    events: list[tuple[str, str]] = []
+
+    original_status = demo.data_consultant.data_source_status
+    original_spec = source.data_spec
+    original_fetch = source.data_fetch
+
+    def record_status(input_data=None):
+        events.append(("DataConsultant", DATA_SOURCE_STATUS_PULSE_NAME))
+        return original_status(input_data)
+
+    def record_spec(input_data):
+        events.append(("YFinanceDataSource", DATA_SPEC_PULSE_NAME))
+        return original_spec(input_data)
+
+    def record_fetch(input_data):
+        events.append(("YFinanceDataSource", DATA_FETCH_PULSE_NAME))
+        return original_fetch(input_data)
+
+    monkeypatch.setattr(demo.data_consultant, "data_source_status", record_status)
+    monkeypatch.setattr(source, "data_spec", record_spec)
+    monkeypatch.setattr(source, "data_fetch", record_fetch)
+
+    specification = demo.data_user.get_pulse_data(
+        {"source_id": "yfinance", "query": "historical prices"},
+        pulse_name=DATA_SPEC_PULSE_NAME,
+    )
+    assert events == [
+        ("DataConsultant", DATA_SOURCE_STATUS_PULSE_NAME),
+        ("YFinanceDataSource", DATA_SPEC_PULSE_NAME),
+    ]
+    assert specification["endpoints"][0]["endpoint_id"] == (
+        "yfinance.ticker.history"
+    )
+    assert fake_provider.calls == []
+
+    events.clear()
+    fetched = demo.fetch(
+        DemoQuestion(
+            query="historical prices",
+            fetch_source_id="yfinance",
+            fetch_endpoint_id="yfinance.ticker.history",
+            fetch_parameters={"symbol": "AAPL", "period": "1mo"},
+        )
+    )
+    assert events == [
+        ("DataConsultant", DATA_SOURCE_STATUS_PULSE_NAME),
+        ("YFinanceDataSource", DATA_FETCH_PULSE_NAME),
+    ]
+    assert fetched["status"] == "completed"
+    assert fetched["dataset_id"] == "yfinance.ticker.history"
+    assert [item["operation"] for item in fake_provider.calls] == [
+        "Ticker",
+        "history",
+    ]
+
+
+def test_data_user_requires_an_explicit_consultant_selected_source(
+    fake_provider: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+
+    specification = demo.data_user.get_pulse_data(
+        {"query": "historical prices"},
+        pulse_name=DATA_SPEC_PULSE_NAME,
+    )
+    fetched = demo.data_user.get_pulse_data(
+        {
+            "endpoint_id": "yfinance.ticker.history",
+            "parameters": {"symbol": "AAPL"},
+        },
+        pulse_name=DATA_FETCH_PULSE_NAME,
+    )
+
+    assert specification["count"] == 0
+    assert specification["source"]["source_id"] == ""
+    assert fetched["status"] == "failed"
+    assert fetched["error"] == "source_id is required."
+    assert fake_provider.calls == []
+
+
+def test_consultant_cached_catalog_does_not_claim_an_unregistered_source_is_ready(
+    fake_provider: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+    source = demo.data_sources["yfinance"]
+
+    assert demo.data_consultant.data_source_status()["sources"][0]["available"] is True
+
+    demo.plaza.unregister(source)
+    status = demo.data_consultant.data_source_status()
+
+    assert status["source_count"] == 1
+    assert status["sources"][0]["available"] is False
+    assert status["sources"][0]["stale"] is True
+    assert status["sources"][0]["connectivity"] == {
+        **status["sources"][0]["connectivity"],
+        "status": "unavailable",
+        "address": "",
+    }
+    assert status["discovery"]["discovered_source_count"] == 0
+    assert fake_provider.calls == []
+
+
+def test_every_cross_agent_demo_call_uses_plaza_practice_routing(
+    fake_provider: Any,
+    monkeypatch: Any,
+) -> None:
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+    demo.build_local_network()
+    calls: list[tuple[str, str, str, str]] = []
+    original_invoke = demo.plaza.invoke_practice
+
+    def record_invoke(*, caller, target, practice_id, content=None):
+        destination = demo.plaza.resolve_agent(target)
+        calls.append(
+            (
+                caller.name,
+                destination.name,
+                practice_id,
+                str((content or {}).get("pulse_name") or ""),
+            )
+        )
+        return original_invoke(
+            caller=caller,
+            target=target,
+            practice_id=practice_id,
+            content=content,
+        )
+
+    monkeypatch.setattr(demo.plaza, "invoke_practice", record_invoke)
+
+    demo.ask(DemoQuestion(query="historical daily prices for AAPL"))
+    demo.data_user.get_pulse_data(
+        {"source_id": "yfinance", "endpoint_id": "yfinance.ticker.history"},
+        pulse_name=DATA_SPEC_PULSE_NAME,
+    )
+    demo.fetch(
+        DemoQuestion(
+            query="historical daily prices for AAPL",
+            fetch_source_id="yfinance",
+            fetch_endpoint_id="yfinance.ticker.history",
+            fetch_parameters={"symbol": "AAPL", "period": "1mo"},
+        )
+    )
+
+    assert calls == [
+        ("DataUser", "DataConsultant", "get_pulse_data", DATA_ADVICE_PULSE_NAME),
+        (
+            "DataUser",
+            "DataConsultant",
+            "get_pulse_data",
+            DATA_SOURCE_STATUS_PULSE_NAME,
+        ),
+        (
+            "DataUser",
+            "YFinanceDataSource",
+            "get_pulse_data",
+            DATA_SPEC_PULSE_NAME,
+        ),
+        (
+            "DataUser",
+            "DataConsultant",
+            "get_pulse_data",
+            DATA_SOURCE_STATUS_PULSE_NAME,
+        ),
+        (
+            "DataUser",
+            "YFinanceDataSource",
+            "get_pulse_data",
+            DATA_FETCH_PULSE_NAME,
+        ),
+    ]
+
+
+def test_original_demo_question_and_run_harness_are_retained(
+    fake_provider: Any,
+) -> None:
+    question = DemoQuestion(
+        query="current quote for AAPL",
+        use_case="demo",
+        preferences={"cost": "free"},
+        fetch_source_id="yfinance",
+        fetch_endpoint_id="yfinance.ticker.fast_info",
+        fetch_parameters={"symbol": "AAPL"},
+    )
+    demo = DataAgentNetworkDemo(provider=fake_provider)
+
+    results = demo.run([question])
+
+    assert isinstance(results, tuple)
+    assert len(results) == 1
+    assert results[0]["question"] == {
+        "query": "current quote for AAPL",
+        "use_case": "demo",
+        "preferences": {"cost": "free"},
+    }
+    assert results[0]["advice"]["source_count"] == 1
+    assert results[0]["fetch"]["status"] == "completed"
+    assert set(demo.data_sources) == {"yfinance"}

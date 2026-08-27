@@ -1,13 +1,13 @@
-"""Make all three source roots importable from a clean checkout."""
+"""Shared import setup and a deterministic yfinance-shaped provider seam."""
 
 from __future__ import annotations
 
-from collections.abc import Callable, Iterable
-from dataclasses import replace
-from datetime import date, timedelta
+from collections.abc import Mapping
 from pathlib import Path
 import sys
+from typing import Any
 
+import pandas as pd
 import pytest
 
 
@@ -23,114 +23,105 @@ for relative_root in (
         sys.path.insert(0, source_root)
 
 
-from data_agent_network_demo.contracts import (  # noqa: E402
-    MarketDataError,
-    MarketHistory,
-    PriceObservation,
-)
+class FakeTicker:
+    """Ticker test double whose three supported operations are independently failable."""
+
+    def __init__(self, provider: "FakeYFinanceProvider", symbol: str) -> None:
+        self._provider = provider
+        self._symbol = symbol
+
+    def history(self, **kwargs: Any) -> pd.DataFrame:
+        self._provider.record("history", self._symbol, kwargs=kwargs)
+        self._provider.raise_if_configured("history", self._symbol)
+        frame = self._provider.histories.get(self._symbol)
+        if frame is None:
+            return pd.DataFrame()
+        return frame.copy(deep=True)
+
+    @property
+    def fast_info(self) -> Mapping[str, Any]:
+        self._provider.record("fast_info", self._symbol)
+        self._provider.raise_if_configured("fast_info", self._symbol)
+        return dict(self._provider.fast_info_values.get(self._symbol, {}))
+
+    @property
+    def info(self) -> Mapping[str, Any]:
+        self._provider.record("info", self._symbol)
+        self._provider.raise_if_configured("info", self._symbol)
+        return dict(self._provider.info_values.get(self._symbol, {}))
 
 
-HistoryFactory = Callable[..., MarketHistory]
+class FakeYFinanceProvider:
+    """No-network replacement for the small yfinance module surface used by the demo."""
 
+    __version__ = "test-double-1.0"
 
-def build_history(
-    symbol: str,
-    closes: Iterable[float],
-    *,
-    dates: Iterable[str] | None = None,
-    currency: str | None = "USD",
-    period: str = "1y",
-    warnings: tuple[str, ...] = (),
-) -> MarketHistory:
-    """Build a deterministic adjusted-close history for unit tests."""
-
-    close_values = tuple(closes)
-    date_values = tuple(dates or (
-        "2024-01-02",
-        "2024-01-03",
-        "2024-01-04",
-        "2024-01-05",
-        "2024-01-08",
-    ))
-    if len(close_values) != len(date_values):
-        raise ValueError("closes and dates must have the same length")
-    observations = tuple(
-        PriceObservation(date=item_date, close=float(close), volume=1_000 + index)
-        for index, (item_date, close) in enumerate(zip(date_values, close_values))
-    )
-    return MarketHistory(
-        symbol=symbol,
-        name=f"{symbol} test instrument",
-        currency=currency,
-        exchange="TEST",
-        instrument_type="EQUITY",
-        timezone="America/New_York",
-        period=period,
-        interval="1d",
-        auto_adjust=True,
-        fetched_at_utc="2024-01-08T22:00:00+00:00",
-        rows_received=len(observations),
-        rows_dropped=0,
-        observations=observations,
-        warnings=warnings,
-    )
-
-
-class FakeMarketDataSource:
-    """Deterministic provider seam; it performs no I/O and never invents a fallback."""
-
-    provider_name = "yfinance"
-    provider_version = "test-double"
-
-    def __init__(self, histories: Iterable[MarketHistory]) -> None:
-        self.histories = {history.symbol: history for history in histories}
-        self.failures: dict[str, MarketDataError] = {}
-        self.calls: list[tuple[str, str]] = []
-
-    def fetch_history(self, *, symbol: str, period: str) -> MarketHistory:
-        self.calls.append((symbol, period))
-        if symbol in self.failures:
-            raise self.failures[symbol]
-        try:
-            history = self.histories[symbol]
-        except KeyError as error:
-            raise MarketDataError(
-                symbol=symbol,
-                code="not-configured",
-                message=f"No deterministic history configured for {symbol}.",
-            ) from error
-        return replace(history, period=period)
-
-
-@pytest.fixture
-def history_factory() -> HistoryFactory:
-    return build_history
-
-
-@pytest.fixture
-def fake_source() -> FakeMarketDataSource:
-    first_date = date.today() - timedelta(days=34)
-    dates = tuple(
-        (first_date + timedelta(days=index * 2)).isoformat()
-        for index in range(18)
-    )
-    return FakeMarketDataSource(
-        (
-            build_history(
-                "AAPL",
-                (
-                    100, 102, 101, 104, 106, 108, 107, 110, 112,
-                    111, 114, 116, 115, 118, 120, 119, 122, 124,
-                ),
-                dates=dates,
-            ),
-            build_history(
-                "SPY",
-                (
-                    100, 101, 100, 102, 103, 104, 104, 105, 106,
-                    106, 107, 108, 108, 109, 110, 110, 111, 112,
-                ),
-                dates=dates,
-            ),
+    def __init__(self) -> None:
+        index = pd.DatetimeIndex(
+            ["2026-08-24", "2026-08-25", "2026-08-26"], name="Date"
         )
-    )
+        self.histories: dict[str, pd.DataFrame] = {
+            "AAPL": pd.DataFrame(
+                {
+                    "Open": [226.1, 227.2, 228.3],
+                    "High": [228.0, 229.5, 231.0],
+                    "Low": [225.2, 226.7, 227.9],
+                    "Close": [227.4, 228.8, 230.2],
+                    "Volume": [41_000_000, 39_500_000, 42_250_000],
+                    "Dividends": [0.0, 0.0, 0.0],
+                    "Stock Splits": [0.0, 0.0, 0.0],
+                },
+                index=index,
+            )
+        }
+        self.fast_info_values: dict[str, dict[str, Any]] = {
+            "AAPL": {
+                "symbol": "AAPL",
+                "lastPrice": 230.2,
+                "currency": "USD",
+                "exchange": "NMS",
+                "marketCap": 3_420_000_000_000,
+                "dayHigh": 231.0,
+                "dayLow": 227.9,
+                "previousClose": 228.8,
+                "lastVolume": 42_250_000,
+            }
+        }
+        self.info_values: dict[str, dict[str, Any]] = {
+            "AAPL": {
+                "symbol": "AAPL",
+                "longName": "Apple Inc.",
+                "quoteType": "EQUITY",
+                "sector": "Technology",
+                "industry": "Consumer Electronics",
+                "country": "United States",
+                "website": "https://www.apple.com",
+                "longBusinessSummary": "A deterministic test profile.",
+                "marketCap": 3_420_000_000_000,
+                "currency": "USD",
+                "exchange": "NMS",
+            }
+        }
+        self.calls: list[dict[str, Any]] = []
+        self.failures: dict[tuple[str, str], Exception] = {}
+
+    def Ticker(self, symbol: str) -> FakeTicker:  # noqa: N802 - yfinance API name
+        self.record("Ticker", symbol)
+        self.raise_if_configured("Ticker", symbol)
+        return FakeTicker(self, symbol)
+
+    def record(self, operation: str, symbol: str, **detail: Any) -> None:
+        self.calls.append({"operation": operation, "symbol": symbol, **detail})
+
+    def raise_if_configured(self, operation: str, symbol: str) -> None:
+        failure = self.failures.get((operation, symbol))
+        if failure is not None:
+            raise failure
+
+    def fail(self, operation: str, symbol: str, error: Exception) -> None:
+        self.failures[(operation, symbol)] = error
+
+
+@pytest.fixture
+def fake_provider() -> FakeYFinanceProvider:
+    return FakeYFinanceProvider()

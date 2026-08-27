@@ -6,7 +6,7 @@ import os
 
 import pytest
 
-from data_agent_network_demo.yfinance_source import YFinanceSource
+from data_agent_network_demo.workflow import DataAgentNetworkDemo, DemoQuestion
 
 
 pytestmark = pytest.mark.skipif(
@@ -15,21 +15,21 @@ pytestmark = pytest.mark.skipif(
 )
 
 
-def test_live_yfinance_returns_real_adjusted_daily_histories() -> None:
-    source = YFinanceSource(timeout_seconds=15)
+def test_live_history_uses_data_user_direct_source_path() -> None:
+    demo = DataAgentNetworkDemo()
 
-    aapl = source.fetch_history(symbol="AAPL", period="1mo")
-    spy = source.fetch_history(symbol="SPY", period="1mo")
+    result = demo.fetch(
+        DemoQuestion(
+            query="historical AAPL prices",
+            fetch_source_id="yfinance",
+            fetch_endpoint_id="yfinance.ticker.history",
+            fetch_parameters={"symbol": "AAPL", "period": "1mo", "interval": "1d"},
+        )
+    )
 
-    assert source.provider_name == "yfinance"
-    assert source.provider_version
-    assert len(aapl.observations) >= 2
-    assert len(spy.observations) >= 2
-    assert aapl.provenance()["query"] == {
-        "method": "yfinance.Ticker.history",
-        "period": "1mo",
-        "interval": "1d",
-        "auto_adjust": True,
-        "actions": False,
-        "repair": False,
-    }
+    assert result["status"] == "completed"
+    assert result["source"]["source_id"] == "yfinance"
+    assert result["source"]["provider_version"]
+    assert result["dataset_id"] == "yfinance.ticker.history"
+    assert len(result["canonical_data"]["items"]) >= 2
+    assert result["attas_pulse"]["pulse_name"] == "data_fetch"

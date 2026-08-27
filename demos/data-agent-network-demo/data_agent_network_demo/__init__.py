@@ -1,6 +1,21 @@
-"""Live yfinance-backed Data Agent Network demonstration."""
+"""Reduced single- and multiple-source FinMAS Data Agent Network demos."""
 
-from .app import app, create_app
-from .workflow import build_network, run_demo
+from .agents import DataConsultant, DataConsultantPersona, DataUser, DataUserPersona
+from .multiple_sources_workflow import MultipleSourceDataAgentNetworkDemo
+from .provider_sources import AlphaVantageDataSource, FREDDataSource
+from .workflow import DataAgentNetworkDemo, DemoQuestion
+from .yfinance_source import YFinanceDataSource, YFinanceSource
 
-__all__ = ["app", "build_network", "create_app", "run_demo"]
+__all__ = [
+    "AlphaVantageDataSource",
+    "DataAgentNetworkDemo",
+    "DataConsultant",
+    "DataConsultantPersona",
+    "DataUser",
+    "DataUserPersona",
+    "DemoQuestion",
+    "FREDDataSource",
+    "MultipleSourceDataAgentNetworkDemo",
+    "YFinanceDataSource",
+    "YFinanceSource",
+]

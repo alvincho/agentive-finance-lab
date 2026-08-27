@@ -1,12 +1,20 @@
 # Prompits Lite
 
-The smallest generic layer used by the demos:
+A faithful in-process reduction of the original Prompits agent runtime.
+Prompits is owned by [Retis AI Pte Ltd](https://retis.ai/).
 
-- `Pit` identity and cards
-- discoverable capabilities with generic input/output schemas
-- a correlation trace
-- in-memory `Plaza` registration, search, and invocation
+Retained from the original implementation:
 
-It deliberately excludes networking, authentication, pools, durable state,
-billing, and process management. It must not import from `phemacast_lite` or a
-demo package.
+- `PitAddress` and `Pit` identity;
+- `Practice` and `Message`;
+- `BaseAgent` and `StandbyAgent`;
+- original-shaped agent cards and Practice metadata;
+- Plaza registration and search result shapes;
+- `search`, `lookup_agent_info`, `lookup_agent`, and `send`;
+- `UsePractice` and `UsePracticeAsync`.
+
+The Lite Plaza resolves registered Pit addresses and dispatches Practices in one
+process. Distributed HTTP transport, authentication, persistence, policy,
+billing, leases, heartbeat, and process hosting are omitted.
+
+Prompits Lite has no Phemacast, finance, or Data Agent Network concepts.

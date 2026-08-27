@@ -1,90 +1,119 @@
-# Open-source scope and boundaries
+# Public demo scope
 
-## Purpose
+The repository exists to demonstrate the benefit of explicit multi-agent
+ownership in finance applications. It is intentionally too small for
+production use.
 
-This public repository contains only enough framework and application code to
-make one multi-agent benefit inspectable: a Data User delegates specialized
-market-data work to a discoverable Data Consultant through a typed contract,
-then checks the evidence before presenting it.
+Prompits, Phemacast, and Attas are owned by
+[Retis AI Pte Ltd](https://retis.ai/). This repository includes only the
+reduced FinMAS components needed for the public demonstrations described here.
 
 ## Included
 
-- addressable Pit identities and public cards;
-- in-memory Plaza registration, discovery, and routing;
-- named, typed Pulse contracts;
-- role-aware Persona runtimes;
-- one Data User and one Data Consultant;
-- a security-versus-benchmark historical comparison;
-- live adjusted daily history through `yfinance` as the only financial-data
-  source;
-- deterministic descriptive analytics and quality checks;
-- request and provider provenance with a shared trace;
-- a compact localhost browser UI and JSON API;
-- injected deterministic test histories that are never runtime fallbacks.
+- reduced copies of the original Prompits Pit, Practice, Agent, and Plaza
+  behavior;
+- reduced copies of the original Phemacast Pulse, Pulser, and Persona behavior;
+- the original Data Agent Network roles and Pulse names;
+- in-process Plaza registration, search, Pit resolution, and `UsePractice`;
+- one transient Data Consultant endpoint/field catalog per demo network;
+- the original Data User interface copied and reduced;
+- Demo 1, **Data Agent / Single Source**, with one Data User Persona, one Data
+  Consultant Persona, and one YFinance Data Source Pulser;
+- Demo 2, **Data Agent / Multiple Sources**, with one Data User Persona, one
+  Data Consultant Persona, and YFinance, Alpha Vantage, and FRED Data Source
+  Pulsers;
+- Demo 3, **Data Agent / Real Data**, which instantiates the same five-agent
+  network in an isolated Plaza and exposes bounded live-fetch samples through
+  the reused Data User interface;
+- the reduced operations for each source: YFinance `ticker.history`,
+  `ticker.fast_info`, and `ticker.info`; Alpha Vantage `time_series_daily`,
+  `global_quote`, and `overview`; and FRED `series/observations` and
+  `series/vintagedates`;
+- direct, request-scoped provider access only when `data_fetch` executes;
+- optional server-side `ALPHA_VANTAGE_API_KEY` and `FRED_API_KEY` environment
+  variables for live fetches from those sources; and
+- deterministic provider fakes in tests only.
 
-The lite packages and demo are independently implemented for this repository.
-They preserve selected architectural vocabulary, not private product code.
+## Excluded
 
-## Explicitly excluded
+- investment advice, trading, orders, portfolio actions, forecasts, or signals;
+- production hosting, reliability, security, licensing, or accuracy claims;
+- user accounts, OAuth, UI credential fields, Pulse-carried secrets, persistent
+  credentials, or credential collection;
+- persistent data, browser storage, background collection, and provider caches;
+- synthetic or cached market observations, provider-response proxies, and
+  alternate-source fallbacks;
+- financial-data providers beyond YFinance, Alpha Vantage, and FRED, or
+  operations beyond each reduced catalog;
+- bulk downloads, scraping, streaming, or redistribution services;
+- LLM synthesis, embeddings, model routing, and learning from feedback;
+- distributed transport, Plaza authentication, billing, leases, and heartbeat;
+- the complete private FinMAS catalogs, configuration, runtime state, or data.
 
-### Production runtime
+## Demonstrated multi-agent benefit
 
-- HTTP agent-to-agent transport or distributed execution;
-- authentication, authorization, tokens, identity proof, or trust systems;
-- persistence, databases, durable queues, caching, leases, heartbeat, agent-level
-  retries, or failover orchestration (the yfinance adapter permits one bounded
-  library retry for a transient connection failure);
-- user accounts, tenancy, billing, settlement, admin controls, or deployment
-  automation;
-- a hosted market-data API, public proxy, bulk collection service, or service-
-  level guarantees.
+The examples demonstrate only these architectural benefits:
 
-### Phemacast product surface
+- the Data User owns user intent and direct selected-source access;
+- the Data Consultant owns catalog memory and source advice;
+- the Data Source owns provider documentation and execution;
+- Plaza discovers and resolves replaceable participants by their cards;
+- Pulses make cross-agent interactions explicit and inspectable;
+- provider data does not pass through an advisory agent.
 
-- Phema, Phemar, Castr, graph, map, rendering, and content-studio runtimes;
-- long-term Persona memory, RAG, social ingestion, voice, or delegated OAuth;
-- feedback learning, model routing, or model-provider configuration.
+It does not claim that multiple agents improve returns, predictions, data
+quality, latency, or cost.
 
-### Financial product surface
+## Demo boundaries
 
-- any financial-data provider other than `yfinance`;
-- alternate-provider routing, failover, scraping, or feed reconciliation;
-- runtime fixture, synthetic, generated, stale, or cached price fallback;
-- live streaming quotes, order books, filings, news, fundamentals, macro series,
-  licensed vendor catalogs, or proprietary datasets;
-- credential collection, entitlements, redistribution, resale, or public serving
-  of provider data;
-- forecasts, signals, personalized recommendations, portfolio construction,
-  orders, execution, risk approval, or investment advice.
+Demo 1 remains the original three-participant, YFinance-only reduction at
+`/demos/data-agent-network/`. Demo 2 uses the canonical UI route
+`/demos/data-agent-network/multiple-sources/`; Demo 3 uses
+`/demos/data-agent-network/real-data/`. Demos 2 and 3 each instantiate the
+existing five-participant network. Adding them must not change Demo 1's
+registration, routes, Pulse surfaces, catalog, or direct-source behavior.
 
-## Data-use boundary
+Demos 2 and 3 follow the same path:
 
-The application calls `yfinance`, an unaffiliated open-source library, for
-historical Yahoo Finance data. The project does not grant data rights. The
-`yfinance` project states that Yahoo Finance data is intended for personal use
-only; users are responsible for reviewing the library documentation and all
-applicable provider terms.
+```text
+Data User:data_request
+  -> Data Consultant:data_advice
+  -> transient source-document catalog
 
-The demo is intended for education and personal experimentation. It should not
-be deployed as a public data service, used to redistribute responses, or relied
-upon for production financial decisions.
+Data User:data_spec or data_fetch
+  -> Data Consultant:data_source_status
+  <- selected source identity and address
+  -> selected Data Source Pulser directly
+```
 
-## Failure behavior
+Both networks retain the original `data_fetch` Pulse contract. Demo 2's UI is
+catalog/specification-only; Demo 3 is the live-execution view.
 
-Provider, network, rate-limit, symbol, or coverage failures are expected
-operational outcomes. The runtime must expose them as errors or an unavailable
-result with trace evidence. It must never invent values or hide a failure behind
-test data, another source, a previous run, or browser state.
+The Consultant owns catalog advice, not provider retrieval. Plaza registers,
+discovers, and resolves participants; it is not a provider-data proxy. Neither
+component merges observations or hides one provider's failure by selecting
+another.
 
-## Security posture
+## Data-source boundary
 
-The demo binds to localhost by default, accepts no provider secrets, writes no
-browser storage, and persists no retrieved history. It lacks the security and
-operational controls required for internet exposure.
+Demo 1 uses only `yfinance==1.6.0`. Demos 2 and 3 use YFinance plus the
+documented Alpha Vantage and FRED APIs. Provider I/O occurs only inside the
+selected Data Source Pulser's `data_fetch` Pulse. Catalog advice, source status,
+and endpoint specification are local and work without live provider access.
 
-## Compatibility statement
+Alpha Vantage and FRED keys are optional server-process environment variables
+used only for live `data_fetch`; the browser never collects or stores them.
+The repository-root `.env` is ignored, its checked-in example contains blank
+values only, and process variables take precedence. When a required key is
+absent, the source returns an explicit `authentication_required` result. The
+runtime must not substitute another provider, proxy the request through the
+Consultant, or expose a secret in UI, Pulse input, result, or log.
 
-Prompits Lite and Phemacast Lite preserve concepts, not API compatibility. They
-are not drop-in replacements for the original Prompits, Phemacast, or FinMAS
-packages. Future additions should remain small enough to make a specific demo
-benefit visible; production features belong outside this repository.
+Failures remain failures. The runtime must not replace them with test fixtures,
+synthetic prices, cached responses, or another provider.
+
+`yfinance` is not affiliated with Yahoo. Yahoo Finance data is intended for
+personal use and remains subject to applicable terms. This repository does not
+grant data rights or guarantee availability, freshness, completeness, or
+accuracy. Alpha Vantage and FRED access likewise remains subject to their
+respective API terms, entitlements, and limits.

@@ -4,18 +4,20 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "multi-agent-finance-demos"
-version = "0.2.0"
-description = "A runnable Data User and Data Consultant demo using yfinance market history."
+version = "0.5.0"
+description = "Runnable multi-agent finance demos with Prompits Lite and Phemacast Lite."
 readme = "README.md"
 requires-python = ">=3.11"
 license = "Apache-2.0"
 license-files = ["LICENSE", "NOTICE"]
 authors = [
+  { name = "Retis AI Pte Ltd" },
   { name = "Agentive Finance Lab", email = "afl@agentivefinancelab.com" }
 ]
 dependencies = [
   "fastapi>=0.110,<1",
   "pydantic>=2.7,<3",
+  "python-dotenv>=1.0,<2",
   "uvicorn>=0.29,<1",
   "yfinance==1.6.0",
 ]
@@ -34,7 +36,7 @@ where = ["prompits-lite", "phemacast-lite", "demos/data-agent-network-demo"]
 include = ["prompits_lite*", "phemacast_lite*", "data_agent_network_demo*"]
 
 [tool.setuptools.package-data]
-data_agent_network_demo = ["static/*"]
+data_agent_network_demo = ["static/*", "ui/*", "ui/static/*"]
 
 [tool.pytest.ini_options]
 addopts = "-q"

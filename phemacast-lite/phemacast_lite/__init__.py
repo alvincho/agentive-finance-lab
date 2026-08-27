@@ -1,7 +1,17 @@
-"""Minimal Pulse, Pulser, and Persona composition for demonstrations."""
+"""Faithful Lite surface for Phemacast Pulse, Pulser, and Persona."""
 
-from .models import PersonaProfile, PulseSpec
-from .persona import Persona
-from .pulser import PulseHandler, Pulser
+from .models import Phema, PhemaBlock, Pulse
+from .persona import CLIPersona, Persona, RAGPersona
+from .pulser import GetPulseDataPractice, PulsePractice, Pulser
 
-__all__ = ["Persona", "PersonaProfile", "PulseHandler", "Pulser", "PulseSpec"]
+__all__ = [
+    "CLIPersona",
+    "GetPulseDataPractice",
+    "Persona",
+    "Phema",
+    "PhemaBlock",
+    "Pulse",
+    "PulsePractice",
+    "Pulser",
+    "RAGPersona",
+]

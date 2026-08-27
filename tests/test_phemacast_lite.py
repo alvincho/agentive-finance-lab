@@ -1,85 +1,195 @@
-"""Pulse and Persona validation tests."""
+"""Behavior copied from Phemacast Pulser and Persona."""
 
 from __future__ import annotations
 
-import pytest
-
-from phemacast_lite import Persona, PersonaProfile, PulseSpec, Pulser
-from prompits_lite import CallContext, CapabilityError, PitAddress, Trace
+from phemacast_lite import Persona, Pulser, RAGPersona, pulse_runtime
+from prompits_lite import BaseAgent, Plaza, StandbyAgent, directory_runtime
 
 
-def context_for(pulser: Pulser) -> CallContext:
-    return CallContext(
-        caller=PitAddress("test-client"),
-        target=pulser.address,
-        capability="calculate",
-        trace=Trace(correlation_id="pulse-test"),
+CALCULATE_PULSE = {
+    "name": "calculate",
+    "pulse_name": "calculate",
+    "pulse_address": "plaza://pulse/calculate",
+    "description": "Double one integer.",
+    "tags": ["fixture"],
+    "input_schema": {
+        "type": "object",
+        "properties": {"value": {"type": "integer"}},
+        "required": ["value"],
+    },
+    "output_schema": {
+        "type": "object",
+        "properties": {"result": {"type": "integer"}},
+        "required": ["result"],
+    },
+}
+
+
+class CalculatorPulser(Pulser):
+    def __init__(self, **kwargs) -> None:
+        super().__init__(
+            name="Calculator",
+            supported_pulses=[CALCULATE_PULSE],
+            **kwargs,
+        )
+
+    def fetch_pulse_payload(self, pulse_name, input_data, pulse_definition):
+        assert pulse_name == "calculate"
+        assert pulse_definition["pulse_address"] == "plaza://pulse/calculate"
+        return {"result": int(input_data["value"]) * 2}
+
+
+def test_pulser_keeps_dict_supported_pulses_and_get_pulse_data_practice() -> None:
+    pulser = CalculatorPulser(auto_register=False)
+
+    assert isinstance(pulser, BaseAgent)
+    assert isinstance(pulser, StandbyAgent)
+    assert pulser.agent_card["pit_type"] == "Pulser"
+    assert isinstance(pulser.supported_pulses, list)
+    assert all(isinstance(item, dict) for item in pulser.supported_pulses)
+    assert pulser.supported_pulses[0]["name"] == "calculate"
+    assert pulser.supported_pulses[0]["pulse_name"] == "calculate"
+    assert pulser.supported_pulses[0]["pulse_id"] == "urn:plaza:pulse:calculate"
+    assert pulser.agent_card["meta"]["supported_pulses"] == pulser.supported_pulses
+    assert any(
+        practice["id"] == "get_pulse_data"
+        for practice in pulser.agent_card["practices"]
     )
-
-
-def test_pulser_advertises_and_validates_typed_pulse_contract() -> None:
-    pulser = Pulser(name="Calculator", description="Test fixture")
-    pulser.register_pulse(
-        PulseSpec(
-            name="calculate",
-            description="Double one integer.",
-            required_inputs=("value",),
-            output_fields=("result",),
-            input_types={"value": int},
-            output_types={"result": int},
-        ),
-        lambda payload, _context: {"result": int(payload["value"]) * 2},
-    )
-
-    assert pulser.advertises("calculate")
-    capability = pulser.card().capabilities[0]
-    assert capability.input_schema == {
-        "value": {"types": ["int"], "required": True}
+    assert pulser.get_pulse_data({"value": 3}, pulse_name="calculate") == {
+        "result": 6
     }
-    assert capability.output_schema == {
-        "result": {"types": ["int"], "required": True}
+
+
+def test_remote_get_pulse_data_uses_plaza_and_use_practice() -> None:
+    plaza = Plaza()
+    caller = Pulser(
+        name="Caller",
+        plaza_url=plaza,
+        supported_pulses=[
+            {
+                "name": "request",
+                "pulse_name": "request",
+                "pulse_address": "plaza://pulse/request",
+            }
+        ],
+    )
+    calculator = CalculatorPulser(plaza_url=plaza)
+
+    matches = caller.search(pit_type="Pulser", pulse_name="calculate")
+    result = caller.UsePractice(
+        "get_pulse_data",
+        {"pulse_name": "calculate", "params": {"value": 4}},
+        pit_address=matches[0]["card"]["pit_address"],
+    )
+
+    assert len(matches) == 1
+    assert matches[0]["name"] == calculator.name
+    assert result == {"result": 8}
+
+
+def test_persona_is_only_a_profiled_pulser_with_original_plaza_identity() -> None:
+    plaza = Plaza()
+    persona = RAGPersona(
+        config={
+            "name": "Reviewer",
+            "persona": {
+                "name": "Reviewer",
+                "style": "skeptical and concise",
+                "preferences": "cite source contracts",
+            },
+            "supported_pulses": [
+                {
+                    "name": "review",
+                    "pulse_name": "review",
+                    "pulse_address": "plaza://pulse/review",
+                }
+            ],
+        },
+        plaza_url=plaza,
+    )
+
+    assert isinstance(persona, Persona)
+    assert isinstance(persona, Pulser)
+    assert persona.persona_profile["style"] == "skeptical and concise"
+    assert persona.agent_card["role"] == "persona"
+    assert persona.agent_card["pit_type"] == "Persona"
+    assert persona.agent_card["meta"]["persona"]["name"] == "Reviewer"
+    assert persona.search(pit_type="Persona")[0]["name"] == "Reviewer"
+
+
+def test_pulse_runtime_is_the_original_thin_prompits_wrapper() -> None:
+    assert (
+        pulse_runtime.PULSE_RUNTIME_VERSION
+        == directory_runtime.DIRECTORY_RUNTIME_VERSION
+    )
+    assert (
+        pulse_runtime.build_pulse_definition
+        is directory_runtime.build_pulse_definition
+    )
+    assert pulse_runtime.derive_pulse_id is directory_runtime.derive_pulse_id
+    assert (
+        pulse_runtime.normalize_runtime_pulse_entry
+        is directory_runtime.normalize_runtime_pulse_entry
+    )
+    assert (
+        pulse_runtime.normalize_pulse_pair_entry
+        is directory_runtime.normalize_pulse_pair_entry
+    )
+    assert pulse_runtime.__all__ == [
+        "DIRECTORY_RUNTIME_VERSION",
+        "PULSE_RUNTIME_VERSION",
+        "JsonObject",
+        "build_pulse_definition",
+        "derive_pulse_id",
+        "normalize_pulse_pair_entry",
+        "normalize_runtime_pulse_entry",
+    ]
+
+
+def test_generic_directory_runtime_preserves_original_pulse_semantics() -> None:
+    pulse = {
+        "resource_id": "urn:plaza:pulse:market.historical_data",
+        "name": "historical_data",
+        "pulse_address": "plaza://pulse/market/historical_data",
+        "description": "Retrieve historical market data.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"symbol": {"type": "string"}},
+            "required": ["symbol"],
+        },
+        "output_schema": {
+            "type": "object",
+            "properties": {"rows": {"type": "array"}},
+        },
+        "pricing": {"plaza_points": 7},
+        "extensions": {"source": "yfinance"},
+        "test_data": {"symbol": "AAPL"},
     }
-    assert pulser.handle("calculate", {"value": 3}, context_for(pulser)) == {"result": 6}
 
-    with pytest.raises(CapabilityError, match="missing required input"):
-        pulser.handle("calculate", {}, context_for(pulser))
-    with pytest.raises(CapabilityError, match="must be int, not str"):
-        pulser.handle("calculate", {"value": "three"}, context_for(pulser))
-
-
-def test_pulser_rejects_invalid_outputs_and_unknown_pulses() -> None:
-    pulser = Pulser(name="Broken", description="Test fixture")
-    pulser.register_pulse(
-        PulseSpec(
-            name="calculate",
-            description="Deliberately broken output.",
-            output_fields=("result",),
-            output_types={"result": int},
-        ),
-        lambda _payload, _context: {},
+    runtime = pulse_runtime.normalize_runtime_pulse_entry(pulse)
+    pair = pulse_runtime.normalize_pulse_pair_entry(
+        pulse,
+        pulser_id="urn:plaza:pit:data-consultant",
+        pulser_name="Data Consultant",
+        pulser_address="plaza://pit/data-consultant",
     )
 
-    with pytest.raises(CapabilityError, match="omitted output field"):
-        pulser.handle("calculate", {}, context_for(pulser))
-    with pytest.raises(CapabilityError, match="does not expose Pulse"):
-        pulser.handle("unknown", {}, context_for(pulser))
-
-
-def test_persona_keeps_profile_separate_from_runtime_identity() -> None:
-    profile = PersonaProfile(
-        role="reviewer",
-        purpose="Inspect structured output.",
-        instructions=("Cite the contract.",),
-    )
-    persona = Persona(
-        name="Reviewer",
-        description="Test Persona",
-        profile=profile,
-        labels={"role": "contradictory", "scope": "fixture"},
-    )
-
-    assert persona.pit_type == "Persona"
-    assert persona.labels["role"] == "reviewer"
-    assert persona.labels["scope"] == "fixture"
-    assert persona.profile is profile
-    assert persona.profile_dict()["purpose"] == "Inspect structured output."
+    assert runtime["pulse_id"] == pulse["resource_id"]
+    assert runtime["pulse_definition"]["id"] == pulse["resource_id"]
+    assert runtime["pulse_definition"]["extensions"] == {
+        "source": "yfinance"
+    }
+    assert runtime["interface"]["request_schema"] == pulse["input_schema"]
+    assert runtime["interface"]["response_schema"] == pulse["output_schema"]
+    assert runtime["cost_points"] == 7
+    assert runtime["pricing"] == {"plaza_points": 7, "unit": "call"}
+    assert runtime["cost_calculation"] == {
+        "type": "fixed",
+        "points": 7,
+        "currency": "plaza_point",
+        "unit": "call",
+    }
+    assert pair["pulser_id"] == "urn:plaza:pit:data-consultant"
+    assert pair["pulser_name"] == "Data Consultant"
+    assert pair["pulser_address"] == "plaza://pit/data-consultant"
+    assert pair["pulse_definition"]["test_data"] == {"symbol": "AAPL"}

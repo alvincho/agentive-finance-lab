@@ -1,0 +1,273 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f7f6f1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; connect-src 'self'; img-src 'self' data:; font-src 'self'; object-src 'none'; base-uri 'none'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <title>Data User · Data Agent Network</title>
+  <link rel="stylesheet" href="/data-user-static/data-user.css?v=__DATA_USER_ASSET_VERSION__">
+  <script src="/data-user-static/data-user.js?v=__DATA_USER_ASSET_VERSION__" defer></script>
+</head>
+<body data-demo-config="__DATA_USER_DEMO_CONFIG__">
+  <svg class="svg-defs" aria-hidden="true">
+    <symbol id="icon-menu" viewBox="0 0 24 24"><path d="M4 7h16M4 12h16M4 17h16"/></symbol>
+    <symbol id="icon-send" viewBox="0 0 24 24"><path d="m5 12 14-7-4.5 14-3-5.5L5 12Z"/><path d="m11.5 13.5 3-3"/></symbol>
+    <symbol id="icon-sliders" viewBox="0 0 24 24"><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M7 14v6"/></symbol>
+    <symbol id="icon-help" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M9.7 9a2.4 2.4 0 1 1 3.4 2.2c-.8.4-1.1.9-1.1 1.8M12 17h.01"/></symbol>
+    <symbol id="icon-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+    <symbol id="icon-chevron" viewBox="0 0 24 24"><path d="m9 6 6 6-6 6"/></symbol>
+    <symbol id="icon-external" viewBox="0 0 24 24"><path d="M14 5h5v5M19 5l-8 8"/><path d="M17 13v5a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V8a1 1 0 0 1 1-1h5"/></symbol>
+    <symbol id="icon-stop" viewBox="0 0 24 24"><rect x="7" y="7" width="10" height="10" rx="1"/></symbol>
+  </svg>
+
+  <div class="lab-frame-shell">
+    <a class="lab-skip-link" href="#dataUserWorkspace">Skip to demo</a>
+
+    <header class="lab-frame">
+      <a class="lab-brand" href="/" aria-label="Agentive Finance Lab home">
+        <span class="lab-brand-mark" aria-hidden="true">AFL</span>
+        <span class="lab-brand-copy">
+          <strong>Agentive Finance Lab</strong>
+          <small>Multi-Agent Finance Demos</small>
+        </span>
+      </a>
+
+      <div class="lab-demo-identity" aria-label="Current demo">
+        <span data-demo-number>Demo 1</span>
+        <strong data-demo-title>Data Agent / Single Source</strong>
+      </div>
+
+      <nav class="lab-navigation" aria-label="Agentive Finance Lab navigation">
+        <a href="/">Lab home</a>
+        <a href="/#frameworks">Frameworks</a>
+        <a href="/#demos">Demo catalog</a>
+        <details class="lab-demo-switcher">
+          <summary><span>Demos</span><b>03</b><i aria-hidden="true">⌄</i></summary>
+          <div class="lab-demo-menu">
+            <p>Available demos</p>
+            <a class="lab-demo-link is-current" href="/demos/data-agent-network/" data-demo-slug="single-source" aria-current="page">
+              <b>01</b>
+              <span><strong>Data Agent / Single Source</strong><small>Data User · Consultant · YFinance</small></span>
+              <i>Current</i>
+            </a>
+            <a class="lab-demo-link" href="/demos/data-agent-network/multiple-sources/" data-demo-slug="multiple-sources">
+              <b>02</b>
+              <span><strong>Data Agent / Multiple Sources</strong><small>Data User · Consultant · 3 source agents</small></span>
+              <i>Open</i>
+            </a>
+            <a class="lab-demo-link" href="/demos/data-agent-network/real-data/" data-demo-slug="real-data">
+              <b>03</b>
+              <span><strong>Data Agent / Real Data</strong><small>Direct live fetch · server-side keys</small></span>
+              <i>Open</i>
+            </a>
+            <a class="lab-catalog-link" href="/#demos"><span>Browse the demo catalog</span><b aria-hidden="true">→</b></a>
+          </div>
+        </details>
+      </nav>
+    </header>
+
+    <div class="app-shell" id="appShell">
+    <aside class="side-rail" id="sideRail" aria-label="Data User navigation">
+      <div class="brand-lockup">
+        <div class="pulse-mark pulse-mark-small" aria-hidden="true">
+          <span></span><span></span><span></span><span></span>
+        </div>
+        <div>
+          <strong>Data User</strong>
+          <span>Data Agent Network</span>
+        </div>
+      </div>
+
+      <details class="rail-section source-network-section" id="sourceNetworkDisclosure" open>
+        <summary class="source-network-toggle">
+          <span class="rail-label">Source network</span>
+          <span class="source-network-toggle-meta">
+            <span class="network-count" id="networkCount">—</span>
+            <svg aria-hidden="true"><use href="#icon-chevron"></use></svg>
+          </span>
+        </summary>
+        <div class="source-network" id="sourceNetwork" role="list" aria-live="polite">
+          <div class="source-network-row skeleton-row"><span></span><i></i></div>
+        </div>
+      </details>
+
+      <div class="rail-footer">
+        <button class="rail-utility" id="howButton" type="button">
+          <svg><use href="#icon-help"></use></svg>
+          How it works
+        </button>
+      </div>
+    </aside>
+
+    <button class="rail-scrim" id="railScrim" type="button" aria-label="Close navigation"></button>
+
+    <main class="workspace" id="dataUserWorkspace">
+      <header class="topbar">
+        <button class="icon-button mobile-menu" id="menuButton" type="button" aria-label="Open navigation">
+          <svg><use href="#icon-menu"></use></svg>
+        </button>
+        <div class="thread-heading">
+          <span>Data advisory</span>
+          <h1 id="threadTitle">New question</h1>
+        </div>
+        <div class="topbar-actions">
+          <div class="live-status" id="liveStatus"><i></i><span>Connecting</span></div>
+          <button class="icon-button" id="topHelpButton" type="button" aria-label="How this works">
+            <svg><use href="#icon-help"></use></svg>
+          </button>
+        </div>
+      </header>
+
+      <section class="conversation" id="conversation" aria-label="Data advisory conversation">
+        <div class="empty-state" id="emptyState">
+          <div class="pulse-mark pulse-mark-hero" aria-hidden="true">
+            <span></span><span></span><span></span><span></span>
+          </div>
+          <p class="eyebrow">Ask your data network</p>
+          <h2>Find the data<br>before you build.</h2>
+          <p class="empty-copy" data-empty-copy>Describe the data you need. Data User asks Data Consultant to search its synchronized YFinance endpoint catalog, then lets you inspect and call the selected Data Source directly.</p>
+          <div class="suggestion-grid" id="suggestionGrid" aria-label="Suggested questions">
+            <button type="button" class="suggestion" data-query="I need daily prices and volume for AAPL. Which YFinance endpoint and fields should I use?">
+              <span>Price history</span>
+              <strong>Daily AAPL prices and volume</strong>
+              <svg><use href="#icon-chevron"></use></svg>
+            </button>
+            <button type="button" class="suggestion" data-query="Which YFinance endpoint returns a current quote snapshot for MSFT?">
+              <span>Current quote</span>
+              <strong>MSFT snapshot fields</strong>
+              <svg><use href="#icon-chevron"></use></svg>
+            </button>
+            <button type="button" class="suggestion" data-query="What company profile and fundamental fields can I retrieve for AAPL?">
+              <span>Company profile</span>
+              <strong>AAPL fundamentals and metadata</strong>
+              <svg><use href="#icon-chevron"></use></svg>
+            </button>
+            <button type="button" class="suggestion" data-query="I need historical OHLCV data for an equity research prototype. What parameters are required?">
+              <span>Endpoint contract</span>
+              <strong>Historical OHLCV parameters</strong>
+              <svg><use href="#icon-chevron"></use></svg>
+            </button>
+          </div>
+          <aside class="env-help" data-env-help hidden aria-labelledby="envHelpTitle">
+            <div>
+              <span>SERVER-SIDE SETUP</span>
+              <strong id="envHelpTitle">Bring your own provider keys in <code>.env</code></strong>
+              <p>Copy <code>.env.example</code> to <code>.env</code>, add a key, restart the local server, then rerun the matching sample. Never paste a key into chat.</p>
+            </div>
+            <code>ALPHA_VANTAGE_API_KEY=&lt;your-key&gt;<br>FRED_API_KEY=&lt;your-key&gt;</code>
+            <nav aria-label="Free provider API key help">
+              <a href="https://www.alphavantage.co/support/#api-key" target="_blank" rel="noreferrer">Alpha Vantage key ↗</a>
+              <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank" rel="noreferrer">FRED key guide ↗</a>
+            </nav>
+          </aside>
+        </div>
+        <div class="message-stream" id="messageStream" aria-live="polite"></div>
+      </section>
+
+      <div class="composer-dock" id="composerDock">
+        <form class="composer" id="composer">
+          <div class="preference-panel" id="preferencePanel" hidden>
+            <label>
+              <span>Use case</span>
+              <input id="useCaseInput" name="use_case" type="text" placeholder="e.g. equity research prototype">
+            </label>
+            <label>
+              <span>Cost preference</span>
+              <select id="costSelect" name="cost">
+                <option value="">No preference</option>
+                <option value="free or low cost">Free or low cost</option>
+                <option value="quality over cost">Quality over cost</option>
+              </select>
+            </label>
+            <label>
+              <span>Asset class</span>
+              <input id="assetClassInput" name="asset_classes" type="text" placeholder="equity, ETF…">
+            </label>
+            <label>
+              <span>Frequency</span>
+              <select id="frequencySelect" name="frequency">
+                <option value="">Any frequency</option>
+                <option value="intraday">Intraday</option>
+                <option value="daily">Daily</option>
+                <option value="weekly">Weekly</option>
+                <option value="monthly">Monthly</option>
+              </select>
+            </label>
+            <label>
+              <span>Timeliness</span>
+              <select id="timelinessSelect" name="timeliness">
+                <option value="">Any timeliness</option>
+                <option value="delayed">Delayed</option>
+                <option value="historical">Historical</option>
+                <option value="snapshot">Snapshot</option>
+              </select>
+            </label>
+            <label>
+              <span>Region</span>
+              <input id="regionInput" name="regions" type="text" placeholder="US, global…">
+            </label>
+            <label>
+              <span>Data types</span>
+              <input id="dataTypesInput" name="data_types" type="text" placeholder="price, volume, profile…">
+            </label>
+            <label>
+              <span>Needed fields</span>
+              <input id="fieldsInput" name="fields" type="text" placeholder="close, volume, sector…">
+            </label>
+          </div>
+          <textarea id="queryInput" rows="1" maxlength="4000" aria-label="Ask about data" placeholder="Ask which YFinance data fits your work…"></textarea>
+          <div class="composer-toolbar">
+            <button class="composer-option" id="preferenceButton" type="button" aria-expanded="false">
+              <svg><use href="#icon-sliders"></use></svg>
+              Requirements
+            </button>
+            <span class="composer-hint">Enter to send · Shift + Enter for a new line</span>
+            <button class="send-button" id="sendButton" type="submit" aria-label="Send question">
+              <svg class="send-icon"><use href="#icon-send"></use></svg>
+              <svg class="stop-icon"><use href="#icon-stop"></use></svg>
+            </button>
+          </div>
+        </form>
+        <p class="network-note" data-network-note>Catalog advice is deterministic and uses no LLM. Live fetches go directly from Data User to the YFinance Data Source Pulse.</p>
+      </div>
+    </main>
+    </div>
+  </div>
+
+  <dialog class="detail-dialog" id="detailDialog" aria-labelledby="dialogTitle">
+    <div class="dialog-shell">
+      <header class="dialog-header">
+        <div>
+          <p class="eyebrow" id="dialogEyebrow">Endpoint specification</p>
+          <h2 id="dialogTitle">Source details</h2>
+        </div>
+        <button class="icon-button" id="closeDialogButton" type="button" aria-label="Close details">
+          <svg><use href="#icon-close"></use></svg>
+        </button>
+      </header>
+      <div class="dialog-body" id="dialogBody"></div>
+    </div>
+  </dialog>
+
+  <dialog class="how-dialog" id="howDialog" aria-labelledby="howDialogTitle">
+    <div class="how-shell">
+      <button class="icon-button how-close" id="closeHowButton" type="button" aria-label="Close">
+        <svg><use href="#icon-close"></use></svg>
+      </button>
+      <div class="pulse-mark pulse-mark-small" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+      <p class="eyebrow" data-how-eyebrow>Three agents, one Plaza</p>
+      <h2 id="howDialogTitle">How Data User works</h2>
+      <ol class="how-steps">
+        <li><span>1</span><div><strong>Describe the need</strong><p>Ask naturally and add requirements only when they matter.</p></div></li>
+        <li><span>2</span><div><strong>Route through Plaza</strong><p>Data User sends <code>data_request</code> to Data Consultant's <code>data_advice</code> Pulse.</p></div></li>
+        <li><span>3</span><div><strong>Search source memory</strong><p data-how-memory>Data Consultant retrieves matching endpoint and field documentation synchronized from YFinance. No provider observations are fetched and no LLM is called.</p></div></li>
+        <li><span>4</span><div><strong>Call the source directly</strong><p data-how-direct>Data User resolves YFinance through Consultant status, then uses data_spec or data_fetch on the Data Source.</p></div></li>
+      </ol>
+    </div>
+  </dialog>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

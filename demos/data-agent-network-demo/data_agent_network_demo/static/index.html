@@ -5,416 +5,929 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="A live, inspectable Data User and Data Consultant multi-agent demo backed only by yfinance."
+      content="A runnable lab for understanding multi-agent finance through reduced Prompits and Phemacast frameworks."
     />
-    <title>Data Agent Network · Agentive Finance Lab</title>
+    <title>Multi-Agent Finance Lab · Agentive Finance Lab</title>
     <link rel="icon" href="/static/favicon.svg" type="image/svg+xml" />
-    <link rel="stylesheet" href="/static/styles.css" />
-    <style>
-      /* This small, self-contained guard must work when the file is opened directly. */
-      .protocol-blocker[hidden] { display: none; }
-      .protocol-blocker {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: grid;
-        place-items: center;
-        padding: 24px;
-        color: #eef2eb;
-        background: #0b1110;
-        font: 15px/1.55 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-      }
-      .protocol-blocker__panel { width: min(980px, 100%); max-height: calc(100vh - 48px); overflow: auto; border-top: 4px solid #b8ed5f; padding: 24px 0 2px; }
-      .protocol-blocker__eyebrow { margin: 0 0 8px; color: #b8ed5f !important; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; }
-      .protocol-blocker__panel h1 { max-width: 820px; margin: 0 0 12px; font: 600 clamp(30px, 6vw, 58px)/1 sans-serif; letter-spacing: -.045em; }
-      .protocol-blocker__panel h2 { margin: 0 0 9px; color: #eef2eb; font: 700 13px/1.2 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .08em; text-transform: uppercase; }
-      .protocol-blocker__panel p { margin: 0; color: #acb6af; }
-      .protocol-blocker__lede { max-width: 780px; font-size: 16px; }
-      .protocol-blocker__grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin-top: 24px; border: 1px solid #39433e; background: #39433e; }
-      .protocol-blocker__section { padding: 18px; background: #101815; }
-      .protocol-blocker__flow { margin-top: 15px; padding: 10px 12px; color: #b8ed5f; background: #151e1b; font-size: 12px; }
-      .protocol-blocker__concepts { display: grid; grid-template-columns: 1fr 1fr; gap: 12px 18px; margin: 0; }
-      .protocol-blocker__concepts div { border-left: 2px solid #61cbbb; padding-left: 10px; }
-      .protocol-blocker__concepts dt { color: #eef2eb; font-weight: 700; }
-      .protocol-blocker__concepts dd { margin: 2px 0 0; color: #acb6af; font-size: 12px; }
-      .protocol-blocker__launch { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: end; margin-top: 1px; padding: 18px; background: #151e1b; }
-      .protocol-blocker__panel code { display: block; margin-top: 12px; padding: 13px; overflow-wrap: anywhere; color: #b8ed5f; background: #0b1110; border: 1px solid #39433e; white-space: pre-wrap; }
-      .protocol-blocker__panel a { color: #0b1110; background: #b8ed5f; display: inline-block; padding: 12px 15px; font-weight: 700; text-decoration: none; white-space: nowrap; }
-      @media (max-width: 720px) {
-        .protocol-blocker { place-items: start center; padding: 16px; }
-        .protocol-blocker__panel { max-height: calc(100vh - 32px); }
-        .protocol-blocker__grid, .protocol-blocker__launch { grid-template-columns: 1fr; }
-        .protocol-blocker__concepts { grid-template-columns: 1fr; }
-        .protocol-blocker__panel a { text-align: center; white-space: normal; }
-      }
-    </style>
+    <link id="landing-styles" rel="stylesheet" href="/static/landing.css?v=20260827.8" />
     <script>
       if (window.location.protocol === "file:") {
-        window.addEventListener("DOMContentLoaded", function () {
-          document.querySelector("#protocol-blocker").hidden = false;
-        });
+        document.querySelector("#landing-styles").href = "./landing.css";
       }
     </script>
-    <script src="/static/app.js" defer></script>
   </head>
   <body>
-    <a class="skip-link" href="#demo-workspace">Skip to demo</a>
+    <a class="skip-link" href="#workspace">Skip to the guide</a>
+    <div class="paper-grid" aria-hidden="true"></div>
 
-    <section id="protocol-blocker" class="protocol-blocker" aria-labelledby="protocol-title" hidden>
-      <div class="protocol-blocker__panel">
-        <p class="protocol-blocker__eyebrow">Agentive Finance Lab · Demo 001 · Launch brief</p>
-        <h1 id="protocol-title">See a financial data request become an inspectable agent handoff.</h1>
-        <p class="protocol-blocker__lede">This standalone open-source lab reduces the original framework ideas to one workable task: a Data User delegates a security-versus-benchmark comparison to a Data Consultant, which retrieves evidence only through yfinance.</p>
-
-        <div class="protocol-blocker__grid">
-          <section class="protocol-blocker__section" aria-labelledby="file-background-title">
-            <h2 id="file-background-title">Project background</h2>
-            <p>The point is not better arithmetic. The demo makes ownership, capability discovery, acceptance checks, provider failure, and one end-to-end trace visible without exposing the original FinMAS implementation.</p>
-            <div class="protocol-blocker__flow">Data User → Plaza → Data Consultant → yfinance → Data User</div>
-          </section>
-          <section class="protocol-blocker__section" aria-labelledby="file-framework-title">
-            <h2 id="file-framework-title">Framework primer</h2>
-            <dl class="protocol-blocker__concepts">
-              <div><dt>Pit</dt><dd>Addressable participant identity.</dd></div>
-              <div><dt>Plaza</dt><dd>Capability discovery and routing.</dd></div>
-              <div><dt>Pulser</dt><dd>Named, validated work contract.</dd></div>
-              <div><dt>Persona</dt><dd>Role-aware Pulser with bounded responsibility.</dd></div>
-            </dl>
-          </section>
-        </div>
-
-        <section class="protocol-blocker__launch" aria-labelledby="file-run-title">
-          <div>
-            <h2 id="file-run-title">Run the live demo</h2>
-            <p>A local HTML file cannot start FastAPI or call yfinance. From the repository root, create the environment once and launch the server:</p>
-            <code>python3 -m venv .venv
-source .venv/bin/activate
-python -m pip install -e '.[test]'
-python demos/data-agent-network-demo/run.py</code>
-          </div>
-          <a href="http://127.0.0.1:8000">Open the running demo →</a>
-        </section>
-      </div>
-    </section>
-
-    <div class="page-grid" aria-hidden="true"></div>
-
-    <header class="topbar">
-      <a class="brand" href="/" aria-label="Agentive Finance Lab Data Agent Network home">
-        <span class="brand-mark">AFL</span>
-        <span class="brand-name">Data Agent Network</span>
-        <span class="demo-index">/ 001</span>
+    <header class="site-header">
+      <a class="wordmark" href="/" aria-label="Agentive Finance Lab home">
+        <span class="wordmark__lab">AFL</span>
+        <span>Agentive Finance Lab</span>
       </a>
-      <div class="runtime" id="runtime-status" role="status">
-        <span class="runtime-light" aria-hidden="true"></span>
-        <span id="runtime-label">checking local runtime</span>
-      </div>
-      <span class="repo-link" aria-label="Local repository build">Local build</span>
+      <p class="header-context"><span>OPEN LAB</span> / MULTI-AGENT FINANCE DEMOS</p>
+      <a class="header-action" href="/demos/data-agent-network/real-data/" data-demo-link data-demo-route="/demos/data-agent-network/real-data/">
+        Run Demo 3 <span aria-hidden="true">↗</span>
+      </a>
     </header>
 
-    <nav class="agent-route" aria-label="Data request route">
-      <span class="route-label">LIVE ROUTE</span>
-      <ol>
-        <li data-hop="user"><strong>Data User</strong><small>frames request</small></li>
-        <li class="route-arrow" aria-hidden="true">→</li>
-        <li data-hop="plaza"><strong>Plaza</strong><small>discovers</small></li>
-        <li class="route-arrow" aria-hidden="true">→</li>
-        <li data-hop="consultant"><strong>Data Consultant</strong><small>retrieves + analyzes</small></li>
-        <li class="route-arrow" aria-hidden="true">→</li>
-        <li data-hop="yfinance"><strong>yfinance</strong><small>only data source</small></li>
-        <li class="route-arrow route-return" aria-hidden="true">↩</li>
-        <li data-hop="result"><strong>Data User</strong><small>checks + presents</small></li>
-      </ol>
-    </nav>
+    <div id="file-note" class="file-note" role="note" hidden>
+      <strong>STATIC PREVIEW</strong>
+      Start the local agents with
+      <code>python demos/data-agent-network-demo/run.py</code>
+    </div>
 
-    <main id="demo-workspace" class="workspace">
-      <aside class="request-rail" aria-labelledby="request-title">
-        <div class="rail-heading">
-          <p class="kicker">REQUEST CONTRACT</p>
-          <h2 id="request-title">Compare a security with its benchmark.</h2>
-          <p>The Data User validates the contract. The consultant owns retrieval, alignment, and descriptive calculations.</p>
+    <main id="workspace" class="guide-shell">
+      <aside class="guide-rail" aria-labelledby="repo-title">
+        <div class="rail-intro">
+          <p class="eyebrow">PUBLIC REPOSITORY · 00</p>
+          <h1 id="repo-title">Multi-agent finance, made visible.</h1>
+          <p>
+            Reduced frameworks and runnable use cases for seeing where one agent
+            stops, another begins, and the Plaza coordinates the handoff.
+          </p>
         </div>
 
-        <form id="demo-form" novalidate>
-          <div class="symbol-pair">
-            <label for="primary-symbol">
-              <span>Primary</span>
-              <input
-                id="primary-symbol"
-                name="primary_symbol"
-                value="AAPL"
-                maxlength="20"
-                spellcheck="false"
-                autocomplete="off"
-                aria-describedby="symbol-help"
-                required
-              />
-            </label>
-            <span class="versus" aria-hidden="true">vs</span>
-            <label for="benchmark-symbol">
-              <span>Benchmark</span>
-              <input
-                id="benchmark-symbol"
-                name="benchmark_symbol"
-                value="SPY"
-                maxlength="20"
-                spellcheck="false"
-                autocomplete="off"
-                aria-describedby="symbol-help"
-                required
-              />
-            </label>
+        <nav class="guide-tabs" aria-label="Repository guide">
+          <div class="guide-tabs__label">
+            <span>FIELD GUIDE</span><span>08 VIEWS</span>
           </div>
-          <p id="symbol-help" class="field-help">Yahoo Finance ticker syntax · symbols must differ</p>
-
-          <label class="period-field" for="period">
-            <span>Comparison window</span>
-            <select id="period" name="period">
-              <option value="1mo">1 month</option>
-              <option value="3mo">3 months</option>
-              <option value="6mo">6 months</option>
-              <option value="1y" selected>1 year</option>
-              <option value="2y">2 years</option>
-              <option value="5y">5 years</option>
-            </select>
-          </label>
-
-          <div class="fixed-contract" aria-label="Fixed data contract">
-            <span>interval <strong>1d</strong></span>
-            <span>price <strong>adjusted</strong></span>
-            <span>source <strong>yfinance</strong></span>
-          </div>
-
-          <p id="form-error" class="form-error" role="alert" hidden></p>
-          <button id="run-button" class="run-button" type="submit">
-            <span class="run-copy">Run live comparison</span>
-            <span class="run-glyph" aria-hidden="true">→</span>
-          </button>
-
-          <div class="presets" aria-labelledby="preset-label">
-            <span id="preset-label">Quick contracts</span>
-            <div id="preset-buttons" class="preset-buttons">
-              <button type="button" data-primary="MSFT" data-benchmark="QQQ" data-period="1y">MSFT / QQQ</button>
-              <button type="button" data-primary="NVDA" data-benchmark="SPY" data-period="6mo">NVDA / SPY</button>
-              <button type="button" data-primary="BTC-USD" data-benchmark="SPY" data-period="1y">BTC-USD / SPY</button>
+          <div role="tablist" aria-orientation="vertical">
+            <button id="tab-purpose" class="guide-tab" type="button" role="tab" aria-selected="true" aria-controls="purpose" tabindex="0">
+              <span>01</span><strong>Purpose</strong><i aria-hidden="true">→</i>
+            </button>
+            <button id="tab-multi-agent" class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="multi-agent" tabindex="-1">
+              <span>02</span><strong>Why multi-agent</strong><i aria-hidden="true">→</i>
+            </button>
+            <button id="tab-prompits" class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="prompits" tabindex="-1">
+              <span>03</span><strong>Prompits Lite</strong><i aria-hidden="true">→</i>
+            </button>
+            <button id="tab-phemacast" class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="phemacast" tabindex="-1">
+              <span>04</span><strong>Phemacast Lite</strong><i aria-hidden="true">→</i>
+            </button>
+            <button id="tab-plaza" class="guide-tab" type="button" role="tab" aria-selected="false" aria-controls="plaza" tabindex="-1">
+              <span>05</span><strong>Plaza topology</strong><i aria-hidden="true">→</i>
+            </button>
+            <div class="guide-tree" data-demo-tree role="presentation">
+              <button class="guide-tree__toggle" type="button" aria-expanded="false" aria-controls="demo-tree-children">
+                <span>06</span><strong>Demo</strong><i aria-hidden="true">›</i>
+              </button>
+              <div id="demo-tree-children" class="guide-tree__children" hidden>
+                <button class="guide-tree__toggle guide-tree__toggle--child" type="button" aria-expanded="false" aria-controls="data-agent-tree-children">
+                  <span aria-hidden="true">└</span><strong>Data Agent</strong><i aria-hidden="true">›</i>
+                </button>
+                <div id="data-agent-tree-children" class="guide-tree__children" hidden>
+                  <button id="tab-demos" class="guide-tab guide-tab--leaf" type="button" role="tab" aria-selected="false" aria-controls="demos" aria-label="Single Source" tabindex="-1">
+                    <span aria-hidden="true">├</span><strong>Single Source</strong><i aria-hidden="true">→</i>
+                  </button>
+                  <button id="tab-demos-multiple" class="guide-tab guide-tab--leaf" type="button" role="tab" aria-selected="false" aria-controls="demos-multiple" aria-label="Multiple Sources" tabindex="-1">
+                    <span aria-hidden="true">├</span><strong>Multiple Sources</strong><i aria-hidden="true">→</i>
+                  </button>
+                  <button id="tab-demos-real" class="guide-tab guide-tab--leaf" type="button" role="tab" aria-selected="false" aria-controls="demos-real" aria-label="Real Data" tabindex="-1">
+                    <span aria-hidden="true">└</span><strong>Real Data</strong><i aria-hidden="true">→</i>
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
-        </form>
+        </nav>
 
-        <div class="role-boundary">
-          <p class="kicker">WHY TWO AGENTS?</p>
-          <dl>
-            <div><dt>Data User</dt><dd>intent, delegation, acceptance</dd></div>
-            <div><dt>Consultant</dt><dd>provider, evidence, limitations</dd></div>
-          </dl>
-        </div>
+        <dl class="rail-metrics" aria-label="Repository scope">
+          <div><dt>Frameworks</dt><dd>02 lite</dd></div>
+          <div><dt>Live demos</dt><dd>03</dd></div>
+          <div><dt>Agents</dt><dd>05 max</dd></div>
+          <div><dt>Sources</dt><dd>03</dd></div>
+        </dl>
       </aside>
 
-      <section class="result-desk" aria-label="Data Agent Network evidence desk">
-        <div id="idle-state" class="idle-state">
-          <header class="project-brief">
+      <section class="panel-stage" aria-label="Repository guide content">
+        <article id="purpose" class="guide-panel" role="tabpanel" aria-labelledby="tab-purpose" tabindex="0">
+          <header class="panel-header">
             <div>
-              <p class="kicker">PROJECT BACKGROUND · AGENTIVE FINANCE LAB</p>
-              <h1 id="result-title">Make the handoff—not just the answer—visible.</h1>
+              <p class="eyebrow">01 · REPOSITORY PURPOSE</p>
+              <h2>A working lab, not a slide about agents.</h2>
             </div>
-            <div class="project-brief__copy">
-              <p>This standalone open-source demo reduces two frameworks to the smallest contracts needed to expose delegation, discovery, typed handoff, acceptance, and traceability.</p>
-              <p>The agents do not improve the arithmetic. The Data User owns intent and acceptance; the Data Consultant owns yfinance retrieval and analysis; Plaza connects them by capability.</p>
-              <ul class="brief-tags" aria-label="Project boundaries">
-                <li>standalone repository</li>
-                <li>not FinMAS</li>
-                <li>yfinance only</li>
-                <li>no synthetic fallback</li>
-                <li>not investment advice</li>
-              </ul>
-            </div>
+            <p class="panel-deck">
+              This public repository demonstrates multi-agent use cases for
+              finance with code small enough to inspect and behavior complete
+              enough to run.
+            </p>
           </header>
 
-          <section class="framework-primer" aria-labelledby="framework-title">
-            <div class="brief-section-heading">
-              <p class="kicker">FRAMEWORK IN 60 SECONDS</p>
-              <h3 id="framework-title">Three layers, four retained concepts</h3>
+          <div class="mission-grid">
+            <section class="mission-statement" aria-labelledby="mission-title">
+              <p class="plate-label">THE TEST</p>
+              <h3 id="mission-title">
+                Can specialist agents own clear financial responsibilities and
+                still work as one system?
+              </h3>
+              <p>
+                Each demo preserves the original agent roles, discovery, Pulse
+                contracts, and provider boundary. It removes production
+                infrastructure that would obscure the idea being tested.
+              </p>
+            </section>
+
+            <section class="scope-sheet" aria-labelledby="scope-title">
+              <div class="scope-sheet__head">
+                <p id="scope-title">PUBLIC SCOPE / V0.1</p><span>BOUNDED</span>
+              </div>
+              <dl>
+                <div><dt>Proves</dt><dd>role ownership, discovery, contracts, handoffs</dd></div>
+                <div><dt>Includes</dt><dd>Prompits Lite, Phemacast Lite, runnable demos</dd></div>
+                <div><dt>Starts with</dt><dd>Data User + Data Consultant + YFinance source</dd></div>
+                <div><dt>Omits</dt><dd>auth, billing, distributed transport, durable memory</dd></div>
+              </dl>
+            </section>
+          </div>
+
+          <ol class="principle-strip" aria-label="Repository principles">
+            <li><span>01</span><strong>Runnable</strong><p>Start locally and ask a real question.</p></li>
+            <li><span>02</span><strong>Inspectable</strong><p>See cards, Pulses, Plaza search, and source evidence.</p></li>
+            <li><span>03</span><strong>Faithful</strong><p>Duplicate and reduce the original design; do not invent a replacement.</p></li>
+          </ol>
+
+          <section class="layer-stack" aria-labelledby="stack-title">
+            <div class="layer-stack__intro">
+              <p class="plate-label">REPOSITORY STACK</p>
+              <h3 id="stack-title">Finance behavior stays in the demo layer.</h3>
+              <p>The dependency direction remains one-way and visible.</p>
             </div>
-            <div class="framework-stack">
-              <article class="framework-layer framework-layer--demo">
-                <span class="layer-index">03</span>
-                <div><strong>Data Agent Network Demo</strong><p>Data User + Data Consultant apply the contracts to one finance task.</p></div>
-              </article>
-              <article class="framework-layer framework-layer--phema">
-                <span class="layer-index">02</span>
-                <div>
-                  <strong>Phemacast Lite</strong>
-                  <p><b>Persona</b> bounds the role; <b>Pulser</b> binds named, typed Pulse handlers and validates their contracts.</p>
-                  <span class="layer-use">Use · define Pulse → bind handler → assign Persona responsibility</span>
-                </div>
-              </article>
-              <article class="framework-layer framework-layer--prompt">
-                <span class="layer-index">01</span>
-                <div>
-                  <strong>Prompits Lite</strong>
-                  <p><b>Pit</b> supplies addressable identity; <b>Plaza</b> registers, discovers, and invokes capabilities with one trace.</p>
-                  <span class="layer-use">Use · create Pit → register → search → invoke through Plaza</span>
-                </div>
-              </article>
+            <div class="layer-stack__layers" aria-label="Demos depend on Phemacast Lite, which depends on Prompits Lite">
+              <div class="layer layer--demo"><span>03</span><strong>demos/</strong><small>finance roles + provider sources</small></div>
+              <div class="layer layer--phema"><span>02</span><strong>phemacast-lite</strong><small>Pulse · Pulser · Persona</small></div>
+              <div class="layer layer--prompits"><span>01</span><strong>prompits-lite</strong><small>Pit · Agent · Practice · Plaza</small></div>
             </div>
-            <p class="dependency-note">Dependency direction · demo → phemacast-lite → prompits-lite</p>
+          </section>
+        </article>
+
+        <article id="multi-agent" class="guide-panel" role="tabpanel" aria-labelledby="tab-multi-agent" tabindex="0" hidden>
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">02 · WHY MULTI-AGENT</p>
+              <h2>Better for team-shaped work. Not a replacement for tools.</h2>
+            </div>
+            <p class="panel-deck">
+              Finance becomes a coordination problem when providers, policies,
+              expertise, and accountability no longer fit cleanly inside one
+              model context.
+            </p>
+          </header>
+
+          <section class="decision-rule" aria-labelledby="decision-title">
+            <div>
+              <p class="plate-label">THE DECISION RULE</p>
+              <h3 id="decision-title">Use the smallest architecture that owns the work clearly.</h3>
+            </div>
+            <div class="decision-lanes">
+              <article><span>01</span><h4>Deterministic tool</h4><p>Fetching, math, parsing, and fixed transformations.</p></article>
+              <article><span>02</span><h4>Single agent</h4><p>Linear reasoning where one context should remain intact.</p></article>
+              <article class="decision-lanes__active"><span>03</span><h4>Multi-agent system</h4><p>Specialized roles, parallel work, independent providers, or explicit checking.</p></article>
+            </div>
           </section>
 
-          <section class="demo-guide" aria-labelledby="guide-title">
-            <div class="brief-section-heading">
-              <p class="kicker">RUN THE DEMO</p>
-              <h3 id="guide-title">Follow the evidence through the network</h3>
+          <section class="comparison" aria-labelledby="comparison-title">
+            <div class="comparison__heading">
+              <p class="plate-label">DIFFERENT LAYERS, DIFFERENT JOBS</p>
+              <h3 id="comparison-title">What Prompits adds beyond MCP, Skills, and messaging</h3>
             </div>
-            <ol class="demo-steps">
-              <li><span>01</span><div><strong>Set the contract</strong><p>Choose a primary symbol, benchmark, and period.</p></div></li>
-              <li><span>02</span><div><strong>Route the work</strong><p>Plaza discovers the consultant by role and analysis capability.</p></div></li>
-              <li><span>03</span><div><strong>Inspect the result</strong><p>The consultant returns evidence; the Data User checks and presents it.</p></div></li>
+            <div class="comparison-table" role="table" aria-label="MCP, Skills, A2A, and Prompits comparison">
+              <div class="comparison-row comparison-row--head" role="row">
+                <span role="columnheader">Layer</span><span role="columnheader">Owns</span><span role="columnheader">Does not own by itself</span>
+              </div>
+              <div class="comparison-row" role="row">
+                <strong role="cell">MCP</strong><p role="cell">A model or agent connecting to tools and data.</p><p role="cell">Independent worker identity, team roles, or handoff ownership.</p>
+              </div>
+              <div class="comparison-row" role="row">
+                <strong role="cell">Skills</strong><p role="cell">Repeatable know-how and instructions for a worker.</p><p role="cell">Availability, lifecycle, negotiation, or a separate policy boundary.</p>
+              </div>
+              <div class="comparison-row" role="row">
+                <strong role="cell">A2A</strong><p role="cell">A protocol for independent agents to communicate.</p><p role="cell">The team structure, workflow, or operating model around those messages.</p>
+              </div>
+              <div class="comparison-row comparison-row--signal" role="row">
+                <strong role="cell">Prompits</strong><p role="cell">Addressable agents, advertised Practices, Plaza discovery, and coordinated invocation.</p><p role="cell">It can use MCP, Skills, or A2A; it does not need to erase them.</p>
+              </div>
+            </div>
+          </section>
+
+          <aside class="coordination-thesis">
+            <span>THE ADVANTAGE</span>
+            <p>
+              A tool catalog asks one model to understand every endpoint.
+              An agent network asks it to find the right specialist. The latter
+              is a smaller, more stable decision when the financial domain keeps expanding.
+            </p>
+          </aside>
+
+          <section class="reading-list" aria-labelledby="reading-title">
+            <div><p class="plate-label">FROM ALVIN CHO'S ESSAYS</p><h3 id="reading-title">The argument behind this lab</h3></div>
+            <ol>
+              <li><a href="https://medium.com/agentive-futures/building-ai-teams-anthropics-mcp-google-s-a2a-and-the-prompits-2f60153c9738" target="_blank" rel="noreferrer"><span>01</span>Building AI Teams: MCP, A2A, and Prompits<b aria-hidden="true">↗</b></a></li>
+              <li><a href="https://alvincho.medium.com/why-todays-ai-isn-t-ready-for-true-multi-agent-systems-yet-dcdacf69b594" target="_blank" rel="noreferrer"><span>02</span>Why Today's AI Isn't Ready for True Multi-Agent Systems—Yet<b aria-hidden="true">↗</b></a></li>
+              <li><a href="https://medium.com/agentive-futures/financial-data-should-be-a-network-of-agents-deb0c7f8cb38" target="_blank" rel="noreferrer"><span>03</span>Financial Data Should Be a Network of Agents<b aria-hidden="true">↗</b></a></li>
             </ol>
-            <div class="onboarding-actions">
-              <button id="intro-run-button" class="intro-run-button" type="button">Run AAPL / SPY now <span aria-hidden="true">→</span></button>
-              <a href="#primary-symbol">Edit the request first</a>
-            </div>
-            <p class="demo-guide__note">Live adjusted daily history · yfinance 1.6.0 · no generated substitute data</p>
+            <small>The Skills comparison is an architectural synthesis, not a quotation from an essay.</small>
           </section>
-        </div>
+        </article>
 
-        <div id="loading-state" class="loading-state" role="status" hidden>
-          <div class="loading-rule" aria-hidden="true"><span></span></div>
-          <p id="loading-label">Data User is framing the request…</p>
-          <small>Retrieval depends on Yahoo Finance availability through yfinance.</small>
-        </div>
-
-        <div id="failure-state" class="failure-state" role="alert" hidden>
-          <div class="failure-mark" aria-hidden="true">!</div>
-          <div>
-            <p class="kicker">NO FALLBACK DATA</p>
-            <h2 id="failure-title" tabindex="-1">The live comparison could not be completed.</h2>
-            <p id="failure-message"></p>
-            <ul id="failure-list"></ul>
-            <button id="retry-button" type="button">Retry the same contract</button>
-            <details class="failure-evidence">
-              <summary>Inspect the failed agent route</summary>
-              <p id="failure-correlation"></p>
-              <ol id="failure-trace-list"></ol>
-            </details>
-          </div>
-        </div>
-
-        <article id="result-content" class="result-content" aria-live="polite" hidden>
-          <header class="result-header">
+        <article id="prompits" class="guide-panel" role="tabpanel" aria-labelledby="tab-prompits" tabindex="0" hidden>
+          <header class="panel-header">
             <div>
-              <div class="result-meta">
-                <span id="result-status" class="status-chip">COMPLETE</span>
-                <span id="coverage-label">—</span>
-                <span id="observation-label">—</span>
-              </div>
-              <h2 id="result-headline" tabindex="-1">Comparison complete.</h2>
-              <p id="result-summary"></p>
+              <p class="eyebrow">03 · FRAMEWORK GUIDE</p>
+              <h2>Prompits Lite gives every participant an address and a way to work.</h2>
             </div>
-            <div class="source-stamp">
-              <span>PROVIDER</span>
-              <strong>yfinance</strong>
-              <small id="provider-version">version —</small>
-            </div>
+            <p class="panel-deck">
+              The Lite package preserves the original framework spine in one
+              process: identity, agent cards, Practices, Plaza registration,
+              filtered search, and UsePractice routing.
+            </p>
           </header>
 
-          <section class="market-overview" aria-labelledby="chart-heading">
-            <div class="chart-heading-row">
-              <div>
-                <p class="section-kicker">NORMALIZED PERFORMANCE</p>
-                <h3 id="chart-heading">Growth of 100</h3>
-              </div>
-              <div id="chart-legend" class="chart-legend" aria-label="Chart legend"></div>
-            </div>
-            <div id="chart-frame" class="chart-frame">
-              <svg id="performance-chart" viewBox="0 0 960 300" role="img" aria-labelledby="chart-heading chart-description"></svg>
-              <p id="chart-description" class="sr-only"></p>
-            </div>
-            <div id="relative-metrics" class="relative-metrics"></div>
-          </section>
-
-          <section class="metric-ledger" aria-labelledby="metric-title">
-            <div class="section-heading">
-              <div><p class="section-kicker">DESCRIPTIVE STATISTICS</p><h3 id="metric-title">Metric ledger</h3></div>
-              <p>Calculated from aligned adjusted closes; not investment advice.</p>
-            </div>
-            <div class="table-scroll">
-              <table>
-                <caption class="sr-only">Comparison metrics for the primary security and benchmark</caption>
-                <thead id="metric-head"></thead>
-                <tbody id="metric-body"></tbody>
-              </table>
-            </div>
-          </section>
-
-          <div class="evidence-grid">
-            <section class="quality-panel" aria-labelledby="quality-title">
-              <div class="section-heading compact">
-                <div><p class="section-kicker">ACCEPTANCE</p><h3 id="quality-title">Quality checks</h3></div>
-                <span id="quality-count"></span>
-              </div>
-              <ul id="quality-list" class="quality-list"></ul>
-              <div id="warning-box" class="warning-box" hidden>
-                <strong>Review notes</strong>
-                <ul id="warning-list"></ul>
-              </div>
+          <div class="framework-map">
+            <section class="concept-ledger" aria-labelledby="prompits-concepts">
+              <div class="concept-ledger__head"><p id="prompits-concepts">READ THE FRAMEWORK IN THIS ORDER</p><span>FOUNDATION</span></div>
+              <ol>
+                <li><span>01</span><div><strong>Pit</strong><p>The root addressable identity. A <code>PitAddress</code> says which participant is being referenced.</p></div></li>
+                <li><span>02</span><div><strong>BaseAgent</strong><p>A Pit that owns an Agent Card, connects to a Plaza, searches, sends, and invokes Practices.</p></div></li>
+                <li><span>03</span><div><strong>StandbyAgent</strong><p>The ready worker tier used by Phemacast's Pulser.</p></div></li>
+                <li><span>04</span><div><strong>Practice</strong><p>A named capability contract with metadata and executable behavior.</p></div></li>
+                <li><span>05</span><div><strong>Plaza</strong><p>The shared register, search, resolve, and routing point for the network.</p></div></li>
+                <li><span>06</span><div><strong>UsePractice</strong><p>The same invocation surface for local behavior or a Plaza-resolved counterpart.</p></div></li>
+              </ol>
             </section>
 
-            <section class="observations-panel" aria-labelledby="observations-title">
-              <div class="section-heading compact">
-                <div><p class="section-kicker">RAW EVIDENCE</p><h3 id="observations-title">Latest aligned closes</h3></div>
-              </div>
-              <div class="table-scroll latest-scroll">
-                <table>
-                  <caption class="sr-only">Latest aligned adjusted daily closing prices</caption>
-                  <thead id="observation-head"></thead>
-                  <tbody id="observation-body"></tbody>
-                </table>
-              </div>
+            <section class="use-sequence" aria-labelledby="prompits-use">
+              <p class="plate-label">MINIMUM USE SEQUENCE</p>
+              <h3 id="prompits-use">Publish capability. Discover counterpart. Invoke by contract.</h3>
+              <pre aria-label="Prompits Lite usage example"><code>agent.add_practice(practice)
+agent.register()
+
+matches = agent.search(
+    pit_type="Persona",
+    tag="data-consultant",
+)
+
+result = agent.UsePractice(
+    "get_pulse_data",
+    content={
+        "pulse_name": "data_advice",
+        "input_data": {"query": "AAPL history"},
+    },
+    pit_address=matches[0],
+)</code></pre>
+              <p class="code-note">The demo's Plaza resolves the target and invokes the registered Practice in-process.</p>
             </section>
           </div>
 
-          <details class="inspector" open>
-            <summary>
-              <span><b>Provenance</b> · exact source calls and row handling</span>
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div id="provenance-list" class="provenance-list"></div>
-            <p id="usage-notice" class="usage-notice">yfinance is used for research and educational purposes. Yahoo Finance data is intended for personal use.</p>
-          </details>
+          <div class="scope-contrast" aria-label="Prompits Lite retained and omitted scope">
+            <section><p>RETAINED</p><ul><li>Pit and PitAddress</li><li>Agent cards and Practice metadata</li><li>register and filtered search</li><li>resolve and UsePractice routing</li><li>Message envelope</li></ul></section>
+            <section><p>INTENTIONALLY OMITTED</p><ul><li>distributed HTTP agent services</li><li>authentication and credentials</li><li>leases and heartbeat</li><li>durable directory state</li><li>billing and production policy</li></ul></section>
+          </div>
+        </article>
 
-          <details class="inspector">
-            <summary>
-              <span><b>Agent trace</b> · one correlation id across every hop</span>
-              <span aria-hidden="true">+</span>
-            </summary>
-            <div class="trace-header">
-              <span>CORRELATION</span><code id="correlation-id">—</code>
+        <article id="phemacast" class="guide-panel" role="tabpanel" aria-labelledby="tab-phemacast" tabindex="0" hidden>
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">04 · FRAMEWORK GUIDE</p>
+              <h2>Phemacast Lite turns generic agents into role-bearing Pulsers and Personas.</h2>
             </div>
-            <ol id="trace-list" class="trace-list"></ol>
-          </details>
+            <p class="panel-deck">
+              Phemacast layers content and interaction semantics on Prompits.
+              It does not create a second agent runtime or bypass the Plaza.
+            </p>
+          </header>
 
-          <details class="inspector architecture-inspector">
-            <summary>
-              <span><b>Lite architecture</b> · what each retained concept does</span>
-              <span aria-hidden="true">+</span>
-            </summary>
-            <dl class="concept-ledger">
-              <div><dt>Pit</dt><dd>Addressable identity for each participant.</dd></div>
-              <div><dt>Plaza</dt><dd>Registry that discovers and routes to the consultant.</dd></div>
-              <div><dt>Pulser</dt><dd>Named, validated capability contract.</dd></div>
-              <div><dt>Persona</dt><dd>Role-aware Pulser with a bounded responsibility.</dd></div>
-            </dl>
-          </details>
+          <section class="inheritance-spine" aria-labelledby="inheritance-title">
+            <div>
+              <p class="plate-label">ORIGINAL INHERITANCE, REDUCED</p>
+              <h3 id="inheritance-title">One spine, increasingly specific behavior.</h3>
+            </div>
+            <ol aria-label="Pit to Persona inheritance">
+              <li><span>01</span><strong>Pit</strong><small>identity</small></li>
+              <li><span>02</span><strong>BaseAgent</strong><small>card + Plaza</small></li>
+              <li><span>03</span><strong>StandbyAgent</strong><small>worker</small></li>
+              <li><span>04</span><strong>Pulser</strong><small>Pulse provider</small></li>
+              <li><span>05</span><strong>Persona</strong><small>role + profile</small></li>
+            </ol>
+          </section>
 
-          <p id="result-caveat" class="result-caveat"></p>
+          <div class="phema-guide">
+            <section class="concept-ledger concept-ledger--short" aria-labelledby="phemacast-concepts">
+              <div class="concept-ledger__head"><p id="phemacast-concepts">CORE CONCEPTS</p><span>COLLABORATION</span></div>
+              <ol>
+                <li><span>01</span><div><strong>Pulse</strong><p>A named interaction definition: address, input schema, output schema, and meaning.</p></div></li>
+                <li><span>02</span><div><strong>Pulser</strong><p>A StandbyAgent that advertises <code>supported_pulses</code> and serves <code>get_pulse_data</code>.</p></div></li>
+                <li><span>03</span><div><strong>Persona</strong><p>A Pulser with a role profile, behavior instructions, and domain identity.</p></div></li>
+                <li><span>04</span><div><strong>RAGPersona</strong><p>The retained inheritance name used by the Data Consultant's catalog-grounded advice.</p></div></li>
+              </ol>
+            </section>
+
+            <section class="demo-mapping" aria-labelledby="mapping-title">
+              <p class="plate-label">HOW DATA AGENT / SINGLE SOURCE MAPS ONTO IT</p>
+              <h3 id="mapping-title">No fictional workflow layer.</h3>
+              <dl>
+                <div><dt>Data User</dt><dd>Persona exposing <code>data_request</code>, source status, spec, and fetch Pulses.</dd></div>
+                <div><dt>Data Consultant</dt><dd>RAGPersona exposing catalog-grounded advice and source identity.</dd></div>
+                <div><dt>YFinance source</dt><dd>Pulser owning provider documentation and provider execution.</dd></div>
+                <div><dt>Browser</dt><dd>The Data User's HTTP interface—not another agent in the Plaza.</dd></div>
+              </dl>
+            </section>
+          </div>
+
+          <aside class="dependency-callout">
+            <span>DEPENDENCY DIRECTION</span>
+            <p><b>demo</b> → <b>phemacast-lite</b> → <b>prompits-lite</b></p>
+            <small>Finance concepts remain in the demo; Phemacast remains reusable.</small>
+          </aside>
+        </article>
+
+        <article id="plaza" class="guide-panel" role="tabpanel" aria-labelledby="tab-plaza" tabindex="0" hidden>
+          <header class="panel-header panel-header--plaza">
+            <div>
+              <p class="eyebrow">05 · PROMPITS TOPOLOGY</p>
+              <h2>The Plaza is the coordination plane.</h2>
+            </div>
+            <p class="panel-deck">
+              Agents do not carry an ever-growing map of peers. They publish a
+              card to the Plaza, search the shared directory, resolve a target,
+              and invoke its Practice through one visible coordination point.
+            </p>
+          </header>
+
+          <figure class="topology-figure" aria-labelledby="topology-title topology-description">
+            <div class="topology-figure__bar">
+              <p id="topology-title">PROMPITS / PLAZA-CENTERED NETWORK</p>
+              <span>REGISTER · SEARCH · RESOLVE · ROUTE</span>
+            </div>
+            <div class="topology-map">
+              <svg class="topology-lines" viewBox="0 0 1000 460" role="img" aria-labelledby="topology-svg-title topology-description">
+                <title id="topology-svg-title">Prompits Plaza centralized coordination topology</title>
+                <desc id="topology-description">Data User Persona, Data Consultant Persona, YFinance Data Source Pulser, and a future specialist agent connect to the central Plaza for registration, discovery, resolution, and Practice routing. The agents are not arranged as an unmanaged peer mesh.</desc>
+                <defs>
+                  <marker id="route-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                    <path d="M 0 0 L 10 5 L 0 10 z"></path>
+                  </marker>
+                </defs>
+                <path class="route-line route-line--signal" d="M 245 104 C 350 104, 360 188, 442 214" marker-end="url(#route-arrow)"></path>
+                <path class="route-line" d="M 755 104 C 650 104, 640 188, 558 214" marker-end="url(#route-arrow)"></path>
+                <path class="route-line" d="M 245 356 C 350 356, 360 272, 442 246" marker-end="url(#route-arrow)"></path>
+                <path class="route-line route-line--future" d="M 755 356 C 650 356, 640 272, 558 246" marker-end="url(#route-arrow)"></path>
+                <circle cx="500" cy="230" r="102" class="orbit"></circle>
+                <circle cx="500" cy="230" r="128" class="orbit orbit--outer"></circle>
+              </svg>
+
+              <article class="agent-node agent-node--user">
+                <span>PERSONA / 01</span><strong>Data User</strong><small>owns application intent</small><i>data_request</i>
+              </article>
+              <article class="agent-node agent-node--consultant">
+                <span>PERSONA / 02</span><strong>Data Consultant</strong><small>owns source advice</small><i>data_advice</i>
+              </article>
+              <article class="agent-node agent-node--source">
+                <span>PULSER / 03</span><strong>YFinance Source</strong><small>owns provider access</small><i>data_fetch</i>
+              </article>
+              <article class="agent-node agent-node--future">
+                <span>AGENT / N</span><strong>Future Specialist</strong><small>register without rewiring peers</small><i>new Practice</i>
+              </article>
+
+              <div class="plaza-hub" aria-hidden="true">
+                <span>PROMPITS</span><strong>PLAZA</strong><small>DIRECTORY + ROUTER</small>
+                <p>REGISTER<br />SEARCH<br />RESOLVE<br />ROUTE</p>
+              </div>
+
+              <span class="edge-label edge-label--register">REGISTER / CARD</span>
+              <span class="edge-label edge-label--search">SEARCH</span>
+              <span class="edge-label edge-label--pulse">USEPRACTICE / PULSE</span>
+              <span class="edge-label edge-label--future">DISCOVER ON DEMAND</span>
+            </div>
+            <figcaption>
+              One Plaza coordinates this demo network. Larger systems may use
+              several domain or regional Plazas; “centralized” here means a
+              deliberate coordination point, not one mandatory global server.
+            </figcaption>
+          </figure>
+
+          <div class="topology-notes">
+            <ol aria-label="Plaza coordination sequence">
+              <li><span>01</span><p><strong>Register</strong>Agent publishes its card, address, type, tags, and Practices.</p></li>
+              <li><span>02</span><p><strong>Search</strong>Caller filters the shared directory instead of hardcoding a peer.</p></li>
+              <li><span>03</span><p><strong>Resolve</strong>Plaza maps the selected card to the registered participant.</p></li>
+              <li><span>04</span><p><strong>Route</strong><code>UsePractice</code> invokes the named contract and returns the result.</p></li>
+            </ol>
+            <aside class="mesh-contrast" aria-labelledby="mesh-title">
+              <p class="plate-label">TOPOLOGY CHOICE</p>
+              <h3 id="mesh-title">Coordination plane, not an unmanaged peer mesh.</h3>
+              <div class="mini-topologies" aria-hidden="true">
+                <div class="mini-topology mini-topology--plaza"><i></i><i></i><i></i><i></i><b>P</b></div>
+                <span>vs</span>
+                <div class="mini-topology mini-topology--mesh"><i></i><i></i><i></i><i></i></div>
+              </div>
+              <p>
+                A2A can carry agent-to-agent messages and can complement
+                Prompits. Plaza adds the registry and operating structure that
+                a communication protocol alone does not define.
+              </p>
+              <a href="https://medium.com/agentive-futures/from-broadcast-to-discovery-how-ai-agents-find-each-other-1609f63098df" target="_blank" rel="noreferrer">Read: From Broadcast to Discovery <span aria-hidden="true">↗</span></a>
+            </aside>
+          </div>
+        </article>
+
+        <article id="demos" class="guide-panel" role="tabpanel" aria-labelledby="tab-demos" tabindex="0" hidden>
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">06 · DEMO / DATA AGENT</p>
+              <h2>Data Agent / Single Source.</h2>
+            </div>
+            <p class="panel-deck">
+              The first reduced use case retains three original agent roles and
+              one financial data source. The browser is the Data User's interface.
+            </p>
+          </header>
+
+          <section class="demo-ticket" aria-labelledby="demo-title">
+            <div class="demo-ticket__number"><strong>01</strong><span>AVAILABLE</span></div>
+            <div class="demo-ticket__main">
+              <p class="plate-label">DATA AGENT / SINGLE SOURCE</p>
+              <h3 id="demo-title">Ask which YFinance data fits the job—then fetch it from the source agent.</h3>
+              <p>
+                The Consultant recommends from its synchronized source catalog.
+                The Data User then resolves and calls YFinance directly; the
+                Consultant never proxies market data.
+              </p>
+              <div class="participant-list" aria-label="Demo participants">
+                <span><b>01</b>Data User Persona</span>
+                <span><b>02</b>Data Consultant Persona</span>
+                <span><b>03</b>YFinance Data Source Pulser</span>
+              </div>
+            </div>
+            <div class="demo-ticket__launch">
+              <span>TRY THIS</span>
+              <blockquote>“I need free daily prices and volume for AAPL.”</blockquote>
+              <a class="primary-action" href="/demos/data-agent-network/" data-demo-link data-demo-route="/demos/data-agent-network/">Open Data User chat <b aria-hidden="true">→</b></a>
+            </div>
+          </section>
+
+          <section class="demo-walkthrough" aria-labelledby="walkthrough-title">
+            <header class="demo-walkthrough__intro">
+              <div>
+                <p class="plate-label">BEFORE THE DIAGRAM · HOW THE DEMO WORKS</p>
+                <h3 id="walkthrough-title">The chat is an agent interface, not a YFinance search box.</h3>
+              </div>
+              <p>
+                Data User owns the conversation. It discovers Data Consultant
+                through Plaza; the Consultant recommends endpoints from its
+                synchronized YFinance catalog. Data User then inspects or calls
+                the selected source directly—the Consultant never proxies data.
+              </p>
+            </header>
+
+            <ol class="demo-walkthrough__steps" aria-label="Single Source demo steps">
+              <li>
+                <span>01 / ASK</span>
+                <strong>State the need</strong>
+                <p>The browser sends the natural-language requirement to the Data User Persona.</p>
+              </li>
+              <li>
+                <span>02 / DISCOVER</span>
+                <strong>Find the specialist</strong>
+                <p>Data User searches Plaza, resolves Data Consultant, and calls <code>data_advice</code>.</p>
+              </li>
+              <li>
+                <span>03 / ADVISE</span>
+                <strong>Match catalog memory</strong>
+                <p>Consultant retrieves synchronized endpoint documentation. No LLM or provider I/O runs.</p>
+              </li>
+              <li>
+                <span>04 / INSPECT OR USE</span>
+                <strong>Call the source</strong>
+                <p>Data User sends <code>data_spec</code> or <code>data_fetch</code> directly to YFinance.</p>
+              </li>
+            </ol>
+
+            <aside class="demo-walkthrough__rule" aria-label="Advice and retrieval boundary">
+              <strong>CHAT ≠ FETCH</strong>
+              <p>
+                Every typed question below exercises <code>data_request → data_advice</code>.
+                Choose <b>Inspect</b> for the source contract or <b>Use</b> to perform the only live YFinance call.
+              </p>
+            </aside>
+
+            <div class="query-evidence__heading">
+              <div>
+                <p class="plate-label">THREE OBSERVED RUNS</p>
+                <h3>One source network, three data needs.</h3>
+              </div>
+              <p>Captured from the locally running Data User interface with the YFinance catalog expanded.</p>
+            </div>
+
+            <ol class="query-evidence" aria-label="Three example query results">
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 01</span><code>TOP MATCH · ticker.history</code></div>
+                  <a class="query-run__capture" href="/static/demo-query-price-history.jpg" data-file-href="./demo-query-price-history.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size AAPL price history query screenshot">
+                    <img src="/static/demo-query-price-history.jpg" data-file-src="./demo-query-price-history.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data User and Data Consultant response for daily AAPL prices and volume, with the YFinance source routes expanded." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“I need daily prices and volume for AAPL.”</strong>
+                    <span>Top route: historical OHLCV with period and interval parameters.</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 02</span><code>TOP MATCH · ticker.fast_info</code></div>
+                  <a class="query-run__capture" href="/static/demo-query-quote.jpg" data-file-href="./demo-query-quote.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size MSFT quote query screenshot">
+                    <img src="/static/demo-query-quote.jpg" data-file-src="./demo-query-quote.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data User and Data Consultant response for a current MSFT quote, with the YFinance source routes expanded." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“Which endpoint returns a current MSFT quote?”</strong>
+                    <span>Top route: the compact quote snapshot in <code>fast_info</code>.</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 03</span><code>MATCH · ticker.info</code></div>
+                  <a class="query-run__capture" href="/static/demo-query-company-profile.jpg" data-file-href="./demo-query-company-profile.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size AAPL company profile query screenshot">
+                    <img src="/static/demo-query-company-profile.jpg" data-file-src="./demo-query-company-profile.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data User and Data Consultant response for AAPL company profile fields, with the YFinance source route expanded." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“What profile and fundamental fields exist for AAPL?”</strong>
+                    <span>Matched route: company, sector, industry, and business metadata.</span>
+                  </figcaption>
+                </figure>
+              </li>
+            </ol>
+          </section>
+
+          <figure class="demo-flow" aria-labelledby="demo-flow-caption">
+            <div class="demo-flow__bar">
+              <p>DEMO 1 / DETAILED AGENT SEQUENCE</p>
+              <span>CATALOG SYNC + ADVICE + DIRECT DATA</span>
+            </div>
+            <img
+              src="/static/data-agent-single-source-flow-v2.png"
+              data-file-src="./data-agent-single-source-flow-v2.png"
+              width="1672"
+              height="941"
+              loading="lazy"
+              decoding="async"
+              alt="Sequence diagram showing YFinance Source registration and Consultant catalog synchronization through Plaza, Data User advice with Data Consultant, and Data User direct specification and data calls to YFinance Source."
+            />
+            <figcaption id="demo-flow-caption">
+              <b>One registry, three phases.</b> Plaza supports registration and
+              discovery; the Consultant owns catalog-grounded advice; the Data
+              User calls the YFinance source directly for schema or market data.
+            </figcaption>
+          </figure>
+
+          <section class="route-ledger" aria-labelledby="routes-title">
+            <div class="route-ledger__heading"><p class="plate-label">THREE IMPLEMENTED PHASES</p><h3 id="routes-title">Discovery coordinates the handoff without proxying the work.</h3></div>
+            <ol>
+              <li>
+                <span>CATALOG SYNC</span>
+                <p><b>YFinance Source</b> <i>register</i> → <b>Plaza</b> · <b>Data Consultant</b> <i>search: data_availability</i> → <b>Plaza</b> ↩ address · <b>Data Consultant</b> <i>data_availability</i> → <b>YFinance Source</b> ↩ catalog</p>
+                <small>The Consultant stores source documentation in its own RAG memory; no provider data is fetched.</small>
+              </li>
+              <li>
+                <span>ADVICE</span>
+                <p><b>Data User</b> <i>search: Data Consultant</i> → <b>Plaza</b> ↩ address · <b>Data User</b> <i>data_advice</i> → <b>Data Consultant</b> ↩ source advice</p>
+                <small>No provider call is needed to recommend a source.</small>
+              </li>
+              <li>
+                <span>DIRECT DATA</span>
+                <p><b>Data User</b> <i>data_source_status</i> → <b>Data Consultant</b> ↩ YFinance identity · <b>Data User</b> <i>data_spec / data_fetch</i> → <b>YFinance Source</b> ↩ schema / market data</p>
+                <small>Only <code>data_fetch</code> performs YFinance I/O.</small>
+              </li>
+            </ol>
+          </section>
+
+          <aside class="run-note">
+            <div><span>LOCAL RUN</span><code>python demos/data-agent-network-demo/run.py --open</code></div>
+            <p>Educational localhost demo · YFinance for personal use · no investment or trading advice</p>
+          </aside>
+        </article>
+
+        <article id="demos-multiple" class="guide-panel" role="tabpanel" aria-labelledby="tab-demos-multiple" tabindex="0" hidden>
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">07 · DEMO / DATA AGENT</p>
+              <h2>Data Agent / Multiple Sources.</h2>
+            </div>
+            <p class="panel-deck">
+              The same Data User and Data Consultant now work with three
+              independently registered Data Source agents: YFinance, Alpha
+              Vantage, and FRED.
+            </p>
+          </header>
+
+          <section class="demo-ticket demo-ticket--multiple" aria-labelledby="multiple-demo-title">
+            <div class="demo-ticket__number"><strong>02</strong><span>AVAILABLE</span></div>
+            <div class="demo-ticket__main">
+              <p class="plate-label">DATA AGENT / MULTIPLE SOURCES</p>
+              <h3 id="multiple-demo-title">Ask once, compare documented routes, then call the chosen source agent.</h3>
+              <p>
+                Each source owns its own catalog and provider boundary. The
+                Consultant synchronizes those catalogs and recommends matching
+                endpoints; it does not become a shared data proxy.
+              </p>
+              <div class="participant-list" aria-label="Multiple Sources demo participants">
+                <span><b>01</b>Data User Persona</span>
+                <span><b>02</b>Data Consultant Persona</span>
+                <span><b>03</b>YFinance Data Source Pulser</span>
+                <span><b>04</b>Alpha Vantage Data Source Pulser</span>
+                <span><b>05</b>FRED Data Source Pulser</span>
+              </div>
+            </div>
+            <div class="demo-ticket__launch">
+              <span>TRY THIS</span>
+              <blockquote>“Which sources provide daily AAPL prices and volume?”</blockquote>
+              <a class="primary-action" href="/demos/data-agent-network/multiple-sources/" data-demo-link data-demo-route="/demos/data-agent-network/multiple-sources/">Open Multiple Sources chat <b aria-hidden="true">→</b></a>
+            </div>
+          </section>
+
+          <section class="demo-walkthrough" aria-labelledby="multiple-walkthrough-title">
+            <header class="demo-walkthrough__intro">
+              <div>
+                <p class="plate-label">BEFORE THE DIAGRAM · HOW THE DEMO WORKS</p>
+                <h3 id="multiple-walkthrough-title">Adding sources expands the catalog, not the Data User workflow.</h3>
+              </div>
+              <p>
+                Data User still discovers one Data Consultant through Plaza.
+                The Consultant searches synchronized documentation from three
+                source agents, returns source-specific evidence, and leaves the
+                final <code>data_spec</code> or <code>data_fetch</code> call to Data User.
+              </p>
+            </header>
+
+            <ol class="demo-walkthrough__steps" aria-label="Multiple Sources demo steps">
+              <li>
+                <span>01 / ASK</span>
+                <strong>Describe the need</strong>
+                <p>Ask for financial or economic data without choosing a provider first.</p>
+              </li>
+              <li>
+                <span>02 / DISCOVER</span>
+                <strong>Find the specialist</strong>
+                <p>Data User resolves Data Consultant through the shared Plaza directory.</p>
+              </li>
+              <li>
+                <span>03 / COMPARE</span>
+                <strong>Rank catalog evidence</strong>
+                <p>Consultant matches endpoint and field documentation synchronized from all three sources.</p>
+              </li>
+              <li>
+                <span>04 / INSPECT OR USE</span>
+                <strong>Call one source</strong>
+                <p>Data User invokes the selected Data Source Pulser directly by contract.</p>
+              </li>
+            </ol>
+
+            <aside class="demo-walkthrough__rule" aria-label="Advice, credentials, and retrieval boundary">
+              <strong>CATALOG ≠ PROVIDER DATA</strong>
+              <p>
+                Advice reads synchronized documentation only. Live Alpha Vantage and FRED provider calls require server-side API keys when enabled; credentials never travel in chat or Pulse input.
+              </p>
+            </aside>
+
+            <div class="query-evidence__heading">
+              <div>
+                <p class="plate-label">THREE OBSERVED RUNS</p>
+                <h3>Three sources, three different information needs.</h3>
+              </div>
+              <p>Captured from the same Data User interface with the multi-source catalog evidence expanded.</p>
+            </div>
+
+            <ol class="query-evidence" aria-label="Three multiple-source example query results">
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 01</span><code>EQUITY HISTORY · TWO SOURCES</code></div>
+                  <a class="query-run__capture" href="/static/demo-multiple-query-daily-prices.jpg" data-file-href="./demo-multiple-query-daily-prices.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size multiple-source daily price query screenshot">
+                    <img src="/static/demo-multiple-query-daily-prices.jpg" data-file-src="./demo-multiple-query-daily-prices.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data Consultant evidence comparing daily AAPL price and volume routes from YFinance and Alpha Vantage." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“Which sources provide daily AAPL prices and volume?”</strong>
+                    <span>Compares documented equity-history routes without fetching observations.</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 02</span><code>MACRO SERIES · FRED</code></div>
+                  <a class="query-run__capture" href="/static/demo-multiple-query-macro-series.jpg" data-file-href="./demo-multiple-query-macro-series.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size FRED economic series query screenshot">
+                    <img src="/static/demo-multiple-query-macro-series.jpg" data-file-src="./demo-multiple-query-macro-series.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data Consultant evidence for U.S. CPI observations and revision vintage dates from the FRED Data Source." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“Which source provides U.S. CPI observations and revision vintage dates?”</strong>
+                    <span>Routes observations and revision history to the FRED source catalog.</span>
+                  </figcaption>
+                </figure>
+              </li>
+              <li>
+                <figure class="query-run">
+                  <div class="query-run__bar"><span>RUN 03</span><code>COMPANY PROFILE · TWO SOURCES</code></div>
+                  <a class="query-run__capture" href="/static/demo-multiple-query-company-profile.jpg" data-file-href="./demo-multiple-query-company-profile.jpg" target="_blank" rel="noreferrer" aria-label="Open full-size multiple-source company profile query screenshot">
+                    <img src="/static/demo-multiple-query-company-profile.jpg" data-file-src="./demo-multiple-query-company-profile.jpg" width="1280" height="720" loading="lazy" decoding="async" alt="Data Consultant evidence comparing AAPL company profile, sector, industry, and market-cap routes." />
+                    <span>OPEN CAPTURE ↗</span>
+                  </a>
+                  <figcaption>
+                    <strong>“Compare AAPL profile, sector, industry, and market-cap data.”</strong>
+                    <span>Shows overlapping source coverage before a direct source call.</span>
+                  </figcaption>
+                </figure>
+              </li>
+            </ol>
+          </section>
+
+          <figure class="demo-flow" aria-labelledby="multiple-demo-flow-caption">
+            <div class="demo-flow__bar">
+              <p>DEMO 2 / DETAILED AGENT SEQUENCE</p>
+              <span>THREE CATALOGS + ADVICE + DIRECT DATA</span>
+            </div>
+            <img
+              src="/static/data-agent-multiple-sources-flow.png"
+              data-file-src="./data-agent-multiple-sources-flow.png"
+              width="1672"
+              height="941"
+              loading="lazy"
+              decoding="async"
+              alt="Sequence diagram showing YFinance, Alpha Vantage, and FRED source registration and catalog synchronization, Data User advice through Data Consultant, and a direct call from Data User to the selected source."
+            />
+            <figcaption id="multiple-demo-flow-caption">
+              <b>One registry, three independent provider boundaries.</b> Plaza
+              coordinates identity and discovery; Data Consultant owns
+              catalog-grounded advice; Data User calls only the selected source.
+            </figcaption>
+          </figure>
+
+          <section class="route-ledger" aria-labelledby="multiple-routes-title">
+            <div class="route-ledger__heading"><p class="plate-label">THREE IMPLEMENTED PHASES</p><h3 id="multiple-routes-title">More sources enter through registration, not peer-to-peer rewiring.</h3></div>
+            <ol>
+              <li>
+                <span>CATALOG SYNC</span>
+                <p><b>YFinance + Alpha Vantage + FRED</b> <i>register</i> → <b>Plaza</b> · <b>Data Consultant</b> <i>search: data_availability</i> → <b>Plaza</b> ↩ three addresses · <b>Data Consultant</b> <i>data_availability</i> → <b>each source</b> ↩ three catalogs</p>
+                <small>Each Data Source Pulser remains authoritative for its own endpoint contracts.</small>
+              </li>
+              <li>
+                <span>ADVICE</span>
+                <p><b>Data User</b> <i>search: Data Consultant</i> → <b>Plaza</b> ↩ address · <b>Data User</b> <i>data_advice</i> → <b>Data Consultant</b> ↩ ranked, source-specific evidence</p>
+                <small>The Consultant searches documentation memory; no provider observation is fetched.</small>
+              </li>
+              <li>
+                <span>DIRECT DATA</span>
+                <p><b>Data User</b> <i>data_source_status</i> → <b>Data Consultant</b> ↩ selected source identity · <b>Data User</b> <i>data_spec / data_fetch</i> → <b>selected source</b> ↩ schema / provider data</p>
+                <small>Only the selected source crosses its provider boundary.</small>
+              </li>
+            </ol>
+          </section>
+
+          <aside class="run-note">
+            <div><span>LOCAL RUN</span><code>python demos/data-agent-network-demo/run.py --open</code></div>
+            <p>Catalog advice runs without API keys · live provider credentials remain server-side</p>
+          </aside>
+        </article>
+
+        <article id="demos-real" class="guide-panel" role="tabpanel" aria-labelledby="tab-demos-real" tabindex="0" hidden>
+          <header class="panel-header">
+            <div>
+              <p class="eyebrow">08 · DEMO / DATA AGENT</p>
+              <h2>Data Agent / Real Data.</h2>
+            </div>
+            <p class="panel-deck">
+              The third demo keeps the same five agents and existing Pulses,
+              then crosses each selected provider boundary to show real results,
+              real credential requirements, and real failures.
+            </p>
+          </header>
+
+          <section class="demo-ticket demo-ticket--real" aria-labelledby="real-demo-title">
+            <div class="demo-ticket__number"><strong>03</strong><span>AVAILABLE</span></div>
+            <div class="demo-ticket__main">
+              <p class="plate-label">DATA AGENT / REAL DATA</p>
+              <h3 id="real-demo-title">Move from catalog evidence to direct, source-owned provider calls.</h3>
+              <p>
+                Data User invokes <code>data_fetch</code> on YFinance, Alpha
+                Vantage, or FRED. Results remain separate by source; Plaza and
+                Data Consultant never proxy, merge, or receive provider payloads.
+              </p>
+              <div class="participant-list" aria-label="Real Data demo participants">
+                <span><b>01</b>Data User Persona</span>
+                <span><b>02</b>Data Consultant Persona</span>
+                <span><b>03</b>YFinance Data Source Pulser</span>
+                <span><b>04</b>Alpha Vantage Data Source Pulser</span>
+                <span><b>05</b>FRED Data Source Pulser</span>
+              </div>
+            </div>
+            <div class="demo-ticket__launch">
+              <span>START HERE</span>
+              <blockquote>Run the keyless baseline and observe both success and the provider boundary.</blockquote>
+              <a class="primary-action" href="/demos/data-agent-network/real-data/?sample=no-key" data-demo-link data-demo-route="/demos/data-agent-network/real-data/?sample=no-key">Run Sample 1 <b aria-hidden="true">→</b></a>
+            </div>
+          </section>
+
+          <section class="real-scenarios" aria-labelledby="real-scenarios-title">
+            <header class="query-evidence__heading">
+              <div>
+                <p class="plate-label">THREE EXECUTABLE SAMPLES</p>
+                <h3 id="real-scenarios-title">One network, three honest access states.</h3>
+              </div>
+              <p>Each launch calls existing <code>data_fetch</code> Pulses. No new workflow or combined provider response is introduced.</p>
+            </header>
+
+            <ol class="real-scenario-grid">
+              <li class="real-scenario">
+                <div class="real-scenario__head"><span>01 / NO KEY</span><b>BASELINE</b></div>
+                <h4>Public data succeeds; the missing Alpha key fails visibly.</h4>
+                <p>Runs the same AAPL daily-history request as two independent source calls.</p>
+                <dl>
+                  <div><dt>YFinance</dt><dd><code>Ticker.history</code> · AAPL · 1mo / 1d</dd></div>
+                  <div><dt>Alpha Vantage</dt><dd><code>TIME_SERIES_DAILY</code> · AAPL · compact</dd></div>
+                </dl>
+                <aside><strong>Expected without a key</strong><span>YFinance returns canonical rows. Alpha Vantage returns <code>authentication_required</code>.</span></aside>
+                <p class="real-scenario__truth">If an Alpha key is already configured, the UI says so and both calls may succeed; it never simulates a failure.</p>
+                <a href="/demos/data-agent-network/real-data/?sample=no-key" data-demo-link data-demo-route="/demos/data-agent-network/real-data/?sample=no-key">Run keyless baseline <span aria-hidden="true">→</span></a>
+              </li>
+
+              <li class="real-scenario">
+                <div class="real-scenario__head"><span>02 / ALPHA KEY</span><b>BYOK</b></div>
+                <h4>Bring one key, restart, and call both equity providers.</h4>
+                <p>Add <code>ALPHA_VANTAGE_API_KEY</code> to the repository-root <code>.env</code>, then restart the server.</p>
+                <dl>
+                  <div><dt>Call A</dt><dd>Data User → YFinance <code>data_fetch</code></dd></div>
+                  <div><dt>Call B</dt><dd>Data User → Alpha Vantage <code>data_fetch</code></dd></div>
+                </dl>
+                <aside><strong>Expected after restart</strong><span>Two separate live provider cards, each with its own canonical preview and status.</span></aside>
+                <a href="/demos/data-agent-network/real-data/?sample=alpha-key" data-demo-link data-demo-route="/demos/data-agent-network/real-data/?sample=alpha-key">Run two-source fetch <span aria-hidden="true">→</span></a>
+              </li>
+
+              <li class="real-scenario">
+                <div class="real-scenario__head"><span>03 / FRED KEY</span><b>MACRO</b></div>
+                <h4>Use a free FRED key to retrieve bounded CPI observations.</h4>
+                <p>Add <code>FRED_API_KEY</code> to <code>.env</code>, restart, and call the FRED source directly.</p>
+                <dl>
+                  <div><dt>Series</dt><dd><code>CPIAUCSL</code></dd></div>
+                  <div><dt>Request</dt><dd>12 observations · descending order</dd></div>
+                </dl>
+                <aside><strong>Expected after restart</strong><span>FRED returns a separate canonical observation preview through its Data Source Pulser.</span></aside>
+                <a href="/demos/data-agent-network/real-data/?sample=fred" data-demo-link data-demo-route="/demos/data-agent-network/real-data/?sample=fred">Run FRED fetch <span aria-hidden="true">→</span></a>
+              </li>
+            </ol>
+          </section>
+
+          <section class="real-key-setup" aria-labelledby="real-key-title">
+            <div>
+              <p class="plate-label">SERVER-SIDE ONLY</p>
+              <h3 id="real-key-title">Put keys in <code>.env</code>, then restart.</h3>
+            <p>Copy <code>.env.example</code> to the repository-root <code>.env</code>, add the needed key, and restart. The browser shows only safe readiness states—key needed, key set, or fetch verified—and never receives the key value.</p>
+            </div>
+            <pre aria-label="Environment variable names"><code>ALPHA_VANTAGE_API_KEY=&lt;your-key&gt;
+FRED_API_KEY=&lt;your-key&gt;</code></pre>
+            <nav aria-label="Provider API key documentation">
+              <a href="https://www.alphavantage.co/support/#api-key" target="_blank" rel="noreferrer">Get an Alpha Vantage key ↗</a>
+              <a href="https://fred.stlouisfed.org/docs/api/api_key.html" target="_blank" rel="noreferrer">Read the FRED key guide ↗</a>
+            </nav>
+          </section>
+
+          <figure class="demo-flow" aria-labelledby="real-demo-flow-caption">
+            <div class="demo-flow__bar">
+              <p>DEMO 3 / SAME AGENT SEQUENCE</p>
+              <span>DIRECT DATA_FETCH · SEPARATE PROVIDER RESULTS</span>
+            </div>
+            <img
+              src="/static/data-agent-multiple-sources-flow.png"
+              data-file-src="./data-agent-multiple-sources-flow.png"
+              width="1672"
+              height="941"
+              loading="lazy"
+              decoding="async"
+              alt="Sequence diagram showing the existing three-source Data Agent Network, including direct Data User calls to selected source agents without proxying provider data through Plaza or Data Consultant."
+            />
+            <figcaption id="real-demo-flow-caption">
+              <b>Execution changes; topology does not.</b> The third demo reuses
+              the Multiple Sources network and existing Pulse contracts. Each
+              guided sample invokes only the selected source agents and renders
+              every provider response independently.
+            </figcaption>
+          </figure>
+
+          <aside class="run-note">
+            <div><span>RESTART AFTER .ENV</span><code>python demos/data-agent-network-demo/run.py --open</code></div>
+            <p>Educational localhost demo · live data remains subject to provider terms and availability</p>
+          </aside>
         </article>
       </section>
     </main>
 
-    <footer>
-      <p>Agentive Finance Lab · workable multi-agent systems for finance</p>
-      <p>Live external financial data: yfinance only · educational demo · Apache-2.0</p>
-    </footer>
+    <script>
+      (function () {
+        var behavior = document.createElement("script");
+        behavior.src = window.location.protocol === "file:" ? "./landing.js" : "/static/landing.js?v=20260827.8";
+        document.body.appendChild(behavior);
+      })();
+    </script>
   </body>
 </html>

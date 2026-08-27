@@ -1,84 +1,68 @@
-"""Contracts that keep the demo's provider request explicit and inspectable."""
+"""The reduced demo keeps the original Data Agent Pulse contract names."""
 
 from __future__ import annotations
 
-import pytest
-
 from data_agent_network_demo.contracts import (
-    ALLOWED_PERIODS,
-    MINIMUM_OBSERVATIONS,
-    MINIMUM_SPAN_DAYS,
-    normalize_symbol,
+    ACCESS_MODE_PULSE,
+    DATA_ADVICE_PULSE,
+    DATA_AVAILABILITY_PULSE,
+    DATA_FETCH_PULSE,
+    DATA_REQUEST_PULSE,
+    DATA_SOURCE_STATUS_PULSE,
+    DATA_SPEC_PULSE,
+    ENDPOINT_BY_ID,
+    YFINANCE_ENDPOINTS,
 )
 
 
-@pytest.mark.parametrize(
-    ("raw", "normalized"),
-    (
-        (" aapl ", "AAPL"),
-        ("brk-b", "BRK-B"),
-        ("^gspc", "^GSPC"),
-        ("btc-usd", "BTC-USD"),
-        ("eurusd=x", "EURUSD=X"),
-        ("a" * 20, "A" * 20),
-    ),
-)
-def test_symbol_normalization_accepts_common_yfinance_ticker_forms(
-    raw: str,
-    normalized: str,
-) -> None:
-    assert normalize_symbol(raw) == normalized
+def test_six_canonical_network_pulses_are_plain_original_shaped_dicts() -> None:
+    pulses = (
+        DATA_REQUEST_PULSE,
+        DATA_ADVICE_PULSE,
+        DATA_SOURCE_STATUS_PULSE,
+        DATA_SPEC_PULSE,
+        DATA_AVAILABILITY_PULSE,
+        DATA_FETCH_PULSE,
+    )
 
-
-@pytest.mark.parametrize(
-    "raw",
-    ("", "AAPL SPY", "AAPL/../../secret", "AAPL?x=1", "'AAPL'", "A" * 21),
-)
-def test_symbol_normalization_rejects_ambiguous_or_unsafe_input(raw: str) -> None:
-    with pytest.raises(ValueError, match="Use a ticker"):
-        normalize_symbol(raw)
-
-
-def test_history_provenance_names_the_exact_yfinance_call_contract(
-    history_factory: object,
-) -> None:
-    history = history_factory("AAPL", (100, 110, 99, 120, 126))
-
-    assert history.provenance() == {
-        "symbol": "AAPL",
-        "name": "AAPL test instrument",
-        "currency": "USD",
-        "exchange": "TEST",
-        "instrument_type": "EQUITY",
-        "timezone": "America/New_York",
-        "query": {
-            "method": "yfinance.Ticker.history",
-            "period": "1y",
-            "interval": "1d",
-            "auto_adjust": True,
-            "actions": False,
-            "repair": False,
-        },
-        "fetched_at_utc": "2024-01-08T22:00:00+00:00",
-        "rows_received": 5,
-        "rows_used": 5,
-        "rows_dropped": 0,
-        "warnings": [],
+    assert all(isinstance(pulse, dict) for pulse in pulses)
+    assert {pulse["name"] for pulse in pulses} == {
+        "data_request",
+        "data_advice",
+        "data_source_status",
+        "data_spec",
+        "data_availability",
+        "data_fetch",
     }
-    assert ALLOWED_PERIODS == ("1mo", "3mo", "6mo", "1y", "2y", "5y")
-    assert MINIMUM_OBSERVATIONS == {
-        "1mo": 15,
-        "3mo": 45,
-        "6mo": 90,
-        "1y": 180,
-        "2y": 360,
-        "5y": 900,
+    for pulse in pulses:
+        assert pulse["pulse_name"] == pulse["name"]
+        assert pulse["pulse_address"] == f"plaza://pulse/attas/{pulse['name']}"
+        assert pulse["input_schema"]["type"] == "object"
+        assert pulse["output_schema"]["type"] == "object"
+
+
+def test_yfinance_catalog_contains_only_three_documented_operations() -> None:
+    assert len(YFINANCE_ENDPOINTS) == 3
+    assert set(ENDPOINT_BY_ID) == {
+        "yfinance.ticker.fast_info",
+        "yfinance.ticker.history",
+        "yfinance.ticker.info",
     }
-    assert MINIMUM_SPAN_DAYS == {
-        "1mo": 21,
-        "3mo": 73,
-        "6mo": 146,
-        "1y": 292,
-        "2y": 584,
-        "5y": 1460,
+    assert {endpoint.vendor_id for endpoint in YFINANCE_ENDPOINTS} == {"yfinance"}
+    assert {endpoint.operation for endpoint in YFINANCE_ENDPOINTS} == {
+        "yfinance.Ticker.fast_info",
+        "yfinance.Ticker.history",
+        "yfinance.Ticker.info",
     }
+    assert all(endpoint.executable for endpoint in YFINANCE_ENDPOINTS)
+    assert all(
+        any(parameter.name == "symbol" and parameter.required for parameter in endpoint.parameters)
+        for endpoint in YFINANCE_ENDPOINTS
+    )
+
+
+def test_direct_source_access_mode_is_not_a_consultant_proxy() -> None:
+    assert ACCESS_MODE_PULSE == "data_source_pulse"
+    assert DATA_FETCH_PULSE["input_schema"]["properties"]["access_mode"]["enum"] == [
+        "data_source_pulse"
+    ]

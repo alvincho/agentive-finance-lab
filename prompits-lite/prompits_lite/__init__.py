@@ -1,25 +1,18 @@
-"""Minimal, in-memory Prompits concepts for runnable demonstrations."""
+"""Faithful, in-process reduction of the Prompits agent runtime."""
 
-from .models import (
-    CallContext,
-    Capability,
-    PitAddress,
-    PitCard,
-    Trace,
-    TraceEvent,
-)
-from .pit import CapabilityError, Pit, PitUnavailable
+from .agent import BaseAgent, PracticeInvocationRequest, StandbyAgent
+from .message import Message
+from .pit import Pit, PitAddress
 from .plaza import Plaza
+from .practice import Practice
 
 __all__ = [
-    "CallContext",
-    "Capability",
-    "CapabilityError",
+    "BaseAgent",
+    "Message",
     "Pit",
     "PitAddress",
-    "PitCard",
-    "PitUnavailable",
     "Plaza",
-    "Trace",
-    "TraceEvent",
+    "Practice",
+    "PracticeInvocationRequest",
+    "StandbyAgent",
 ]

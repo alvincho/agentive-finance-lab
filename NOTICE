@@ -1,9 +1,17 @@
-Multi-Agent Finance Demos
-Copyright 2026 Agentive Finance Lab
+Agentive Finance Lab
+Copyright 2026 Retis AI Pte Ltd
+Copyright 2026 Agentive Finance Lab contributors
 
-This product includes independently implemented lite concepts inspired by the
-Prompits and Phemacast architecture vocabulary. It does not include or expose
-the original FinMAS product implementation, configuration, datasets, or secrets.
+Prompits, Phemacast, and Attas are owned by Retis AI Pte Ltd
+(https://retis.ai). This repository is a reduced public extraction from FinMAS
+and includes only the components required to run the documented local
+demonstrations. It does not include private production configuration,
+credentials, datasets, runtime state, or complete provider catalogs from
+FinMAS.
+
+The project-generated flow artwork listed in docs/ASSET_PROVENANCE.md was
+created specifically for this repository with an OpenAI image-generation
+model. It does not incorporate third-party stock photography.
 
 This product depends on the third-party yfinance Python package to request
 historical data made available through Yahoo Finance. yfinance is not affiliated
