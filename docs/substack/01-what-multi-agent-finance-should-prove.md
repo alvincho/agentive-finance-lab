@@ -15,6 +15,14 @@ subscribe_url: "https://agentivefinancelab.substack.com/subscribe"
 *A public, runnable lab for explicit ownership, discovery, and handoffs—without
 promising better predictions or returns.*
 
+![Sequence diagram with Data User, Plaza, Data Consultant, and YFinance Source columns. It shows YFinance registration and catalog synchronization through Plaza, Data User requesting advice from Data Consultant, and Data User targeting YFinance for schema or market data.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-v2.png)
+
+*Figure 1. Illustrative sequence diagram generated for this repository from the
+implemented local lite-demo flow. Arrows identify logical Pulse targets; Plaza
+mediates cross-agent Practice calls. This depicts ownership and flow—not
+distributed infrastructure, production tracing, predictive accuracy, or
+investment performance.*
+
 One agent can call many tools. That does not, by itself, make a multi-agent
 system.
 
@@ -121,15 +129,7 @@ resolution, and mediates the local Practice request/return path between
 participants. It does not call an upstream provider, interpret observations,
 or become another financial-data source.
 
-![Sequence diagram with Data User, Plaza, Data Consultant, and YFinance Source columns. It shows YFinance registration and catalog synchronization through Plaza, Data User requesting advice from Data Consultant, and Data User targeting YFinance for schema or market data.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-v2.png)
-
-*Figure 1. Illustrative sequence diagram generated for this repository from the
-implemented local lite-demo flow. Arrows identify logical Pulse targets; Plaza
-mediates cross-agent Practice calls. This depicts ownership and flow—not
-distributed infrastructure, production tracing, predictive accuracy, or
-investment performance.*
-
-The diagram is intentionally centralized. The agents do not form an
+Figure 1 is intentionally centralized. The agents do not form an
 unstructured peer mesh and hope that the right participant eventually answers.
 They register in one place, are discovered through explicit metadata, and use
 named interaction boundaries.
