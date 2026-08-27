@@ -155,29 +155,58 @@ observations are needed, Data User resolves the source and invokes that Data
 Source directly. The advisory participant never becomes an invisible data
 pipeline.
 
-## Why not just add more tools to one agent?
+## Why MCP and skills are not enough
 
-Tools are useful. Model Context Protocol (MCP) servers expose tools and
-resources through a common interface. Skills can package instructions and
-repeatable practices. Tool calling can let one model perform many kinds of
-work.
+MCP and skills solve real problems. MCP gives a model or application a common
+way to discover and invoke tools and resources. A skill packages instructions
+and repeatable practice. For one user, a few sources, and a bounded tool menu,
+that may be exactly the right architecture.
 
-Agentive Finance Lab is not an argument for throwing any of those away. They
-solve a different layer of the problem.
+The problem appears when a financial application tries to turn its entire data
+universe into one menu. As I argued in
+[MCP in Finance Is Great — Until You Need 1,000 Tools](https://medium.com/agentive-futures/mcp-in-finance-is-great-until-you-need-1-000-tools-d09fc350a85e),
+finance expands quickly from prices into fundamentals, filings, estimates,
+options, rates, risk, and internal portfolio data. Every domain brings its own
+endpoints, identifiers, parameters, permissions, and exceptions. A central
+catalog either becomes an encyclopedia the model must inspect, or collapses
+into a mega-tool such as `fetch_everything(spec)` that hides the boundaries we
+need to test.
 
-A tool tells a model what it *can call*. A multi-agent network also needs to
-make clear *who owns the decision*, *who owns execution*, *how that participant
-is discovered*, and *where the result travels next*.
+The distinction is simple:
 
-Those questions can be encoded inside one long system prompt. This lab moves
-them into visible participants, registered descriptions called cards, named
-Pulses, and Plaza-mediated discovery so that a developer can inspect the
-boundary rather than infer it from prompt text.
+- **MCP answers:** what capability can this model or application call?
+- **A skill answers:** how should a task be performed?
+- **A multi-agent network answers:** who owns the role, decision, and execution;
+  how is that participant found; and where does the result go next?
 
-That does not make multi-agent architecture universally better. If one agent
-and three tools are sufficient, use them. The multi-agent approach becomes
-interesting when responsibilities need to remain independent, discoverable,
-extensible, and observable as the application grows.
+These layers can work together. A Data Source agent may eventually expose a
+compact MCP surface. A Data Consultant may use a skill for evaluating source
+documentation. Neither mechanism, by itself, defines role-bearing agents,
+decision ownership, or their end-to-end handoffs. In
+[Building AI Teams: Anthropic’s MCP, Google’s A2A, and the Prompits](https://medium.com/agentive-futures/building-ai-teams-anthropics-mcp-google-s-a2a-and-the-prompits-2f60153c9738),
+I described them as complementary layers: MCP connects an agent to
+capabilities, while the multi-agent framework supplies the roles and
+coordination that make a team legible.
+
+In
+[Financial Data Should Be a Network of Agents](https://medium.com/agentive-futures/financial-data-should-be-a-network-of-agents-deb0c7f8cb38),
+I described the scaling move as choosing a specialist rather than choosing
+among an ever-growing list of financial functions. Each source agent can own
+its provider's coverage, identifiers, authentication boundary, limitations,
+and definitions. The user-facing agent does not have to absorb all of that
+provider-specific complexity.
+
+This lite repository demonstrates the smallest useful version of that idea.
+Data User owns intent and the selected-source call. Data Consultant owns catalog
+advice. Data Source owns provider execution. Plaza registers and resolves the
+participants, while named Pulses make the handoffs visible.
+
+It does not implement the enterprise registry described in the earlier
+articles: there is no distributed health routing, entitlement engine, quota or
+cost policy, or provider failover. MCP and skills can be added inside the
+agents later. The claim is narrower: once independent responsibility and
+coordination matter, capability access and task instructions are necessary,
+but they are not the whole system.
 
 ## Lite means reduced, not reinvented
 
