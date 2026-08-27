@@ -7,7 +7,7 @@ title: What Multi-Agent Finance Should Actually Prove
 subtitle: A public, runnable lab for explicit ownership, discovery, and handoffs—without promising better predictions or returns.
 preview: One agent can call many tools. That does not, by itself, make a multi-agent system.
 repository_url: "https://github.com/alvincho/agentive-finance-lab"
-subscribe_url: "{{SUBSTACK_SUBSCRIBE_URL}}"
+subscribe_url: "https://agentivefinancelab.substack.com/subscribe"
 ---
 
 # What Multi-Agent Finance Should Actually Prove
@@ -283,7 +283,7 @@ service will be required.
 
 **Explore the repository:** https://github.com/alvincho/agentive-finance-lab
 
-**Subscribe to the series:** {{SUBSTACK_SUBSCRIBE_URL}}
+**Subscribe to the series:** https://agentivefinancelab.substack.com/subscribe
 
 ---
 
@@ -294,7 +294,6 @@ remains subject to each provider’s terms and limits.*
 
 <!--
 Publishing checklist:
-- Replace SUBSTACK_SUBSCRIBE_URL with the Agentive Finance Lab subscribe URL.
 - Use the Plaza responsibility diagram above as the lead visual or recreate it
   as a high-resolution image with equivalent alt text.
 - Confirm all provider and data-use notices remain linked from the repository.
