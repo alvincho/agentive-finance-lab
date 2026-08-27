@@ -1,0 +1,21 @@
+{
+  "schema_version": 1,
+  "destination_key": "youtube_shorts",
+  "account_name": "Agentive Finance Lab",
+  "handle": "@AgentiveFinanceLab",
+  "channel_id": "UCBUlIH03zTzZyhEnOls6Aqw",
+  "channel_url": "https://www.youtube.com/@AgentiveFinanceLab",
+  "locale": "en",
+  "observed_at": "2026-08-28",
+  "identity_status": "authenticated_observed",
+  "delivery_mode": "youtube_studio",
+  "default_audience": "not_made_for_kids",
+  "required_format": {
+    "aspect_ratio": "9:16",
+    "caption_track": true,
+    "approved_title": true,
+    "approved_description": true
+  },
+  "timezone": "Asia/Taipei",
+  "notes": "Publish only through this immutable channel ID. Do not substitute Alvin Cho's personal channel. Attach a Related Video only when its exact video ID is approved in the episode release bundle."
+}

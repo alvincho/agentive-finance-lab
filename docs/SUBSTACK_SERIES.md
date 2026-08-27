@@ -99,6 +99,12 @@ Use the same five-part structure so readers know what to expect:
 Every downstream channel action occurs no later than two calendar days after
 its canonical Substack episode.
 
+The YouTube Shorts destination is the branded `Agentive Finance Lab` channel,
+handle `@AgentiveFinanceLab`, with immutable channel ID
+`UCBUlIH03zTzZyhEnOls6Aqw`. Its machine-readable allowlist is
+`docs/channels/youtube-shorts.json`. Never substitute Alvin Cho's personal
+channel, even when that account is also signed in.
+
 Each episode stores its Medium source in `docs/medium/`, reviewable channel copy
 in `docs/social/NN-launch-pack.md`, its Taiwan Facebook source in
 `docs/locales/zh-TW/NN-facebook.md`, its mainland-China WeChat source in
