@@ -62,8 +62,10 @@ Use the same five-part structure so readers know what to expect:
 
 - **Saturday or Tuesday, 09:00 (T−3):** Prepare the full Substack draft, Medium
   adaptation, channel-specific copy, Taiwan Facebook edition, mainland-China
-  WeChat (Weixin) edition, diagram, and short demo clip. Mark the release bundle
-  `review`; nothing is public at this stage.
+  WeChat (Weixin) edition, diagram, and one reusable 9:16 short demo clip for
+  TikTok, YouTube Shorts, and Instagram Reels. Prepare the approved YouTube
+  title, description, audience setting, and caption track with the same asset.
+  Mark the release bundle `review`; nothing is public at this stage.
 - **Monday or Thursday, 18:00 (T−1):** Check the article, links, figures,
   runnable commands, social copy, and media. Public release remains blocked
   until the complete bundle is explicitly marked `approved_for_release`,
@@ -84,9 +86,11 @@ Use the same five-part structure so readers know what to expect:
   A draft or non-broadcast publication is not recorded as a successful
   broadcast.
 - **Wednesday or Saturday, 20:00 (T+1):** Publish the approved short code or UI
-  clip on TikTok, Instagram Reels, and Facebook Reels, with compact variants for
-  X, Threads, and LinkedIn. Facebook captions and subtitles use Traditional
-  Chinese.
+  clip on TikTok, YouTube Shorts, Instagram Reels, and Facebook Reels, with
+  compact variants for X, Threads, and LinkedIn. YouTube uses the allowlisted
+  Agentive Finance Lab channel, an approved caption track, and a Related Video
+  only when its exact video ID was reviewed. Facebook captions and subtitles
+  use Traditional Chinese.
 - **Thursday or Sunday, 20:00 (T+2):** Publish one approved question or honest
   failure case on X, Threads, and LinkedIn, use a Traditional Chinese variant on
   Facebook, and use the matching visual as an Instagram Story when the prepared
