@@ -3,17 +3,18 @@ series: Build a Multi-Agent Finance Lab
 episode: 1 of 10
 status: draft
 publish_at: 2026-09-01 20:00 Asia/Taipei
-title: Why MCP and Skills Are Not Enough for Multi-Agent Finance
-subtitle: A public, runnable lab for explicit ownership, discovery, and handoffs—without promising better predictions or returns.
-preview: One agent can call many tools. That does not, by itself, make a multi-agent system.
+title: "MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution"
+subtitle: A runnable demonstration of replacing an overloaded tool catalog with specialist data agents, centralized discovery, explicit ownership, and traceable handoffs.
+preview: MCP standardizes tool access, but financial applications still need a scalable way to manage catalog overload, specialist knowledge, routing, provenance, and provider failure.
 repository_url: "https://github.com/alvincho/agentive-finance-lab"
 subscribe_url: "https://agentivefinancelab.substack.com/subscribe"
 ---
 
-# Why MCP and Skills Are Not Enough for Multi-Agent Finance
+# MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution
 
-*A public, runnable lab for explicit ownership, discovery, and handoffs—without
-promising better predictions or returns.*
+*A runnable demonstration of replacing an overloaded tool catalog with
+specialist data agents, centralized discovery, explicit ownership, and
+traceable handoffs.*
 
 ![Two-stage flow chart. In Choose a Source, Data User requests advice through Plaza, Data Consultant recommends YFinance from catalog documentation, and Data User selects it. In Get the Data, Data User calls YFinance Source through Plaza, the source fetches provider data, and Data User returns a traceable result. Data Consultant does not receive provider data.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-simple.png)
 
@@ -22,21 +23,34 @@ finds the needed specialist, and mediates the advice and fetch handoffs. Data
 Consultant advises from catalog documentation; YFinance Source executes; Data
 User returns the accountable result.*
 
-One agent can call many tools. That does not, by itself, make a multi-agent
-system.
+MCP solves an important integration problem: it gives models and applications a
+standard way to discover tools and resources, call tools, and read resources.
+Skills add reusable instructions for using those capabilities. Both are useful
+foundations.
 
-That is the central claim of this episode: **MCP and skills are useful, but
-they are not a multi-agent system.** MCP standardizes access to tools and
-resources. Skills package reusable instructions. Neither, by itself, assigns a
-role, establishes decision or execution ownership, discovers a specialist
-participant, or defines an end-to-end handoff. Those are the responsibilities
-this lab moves into Data User, Data Consultant, Data Source, Plaza, and named
-Pulses.
+The serious limitation relevant here appears when a financial application
+scales. Prices, fundamentals, filings, estimates, options, rates, risk, and
+internal portfolio data quickly create hundreds of sources and thousands of
+operations. MCP can connect a host to multiple focused servers. But when the
+host flattens their operations into one model-visible surface, it still has to
+search, understand, authorize, and route across an ever-growing catalog. Large
+catalogs consume context and make tool selection fragile. Hiding the catalog
+behind one mega-tool reduces the visible count but obscures provider contracts,
+permissions, provenance, and failures.
 
-This distinction matters in finance because even an apparently simple request
-crosses several responsibilities. Consider: “Give me one month of daily AAPL
-prices.” Someone—or something—must understand the request, identify an
-appropriate source, check the source’s contract, supply valid parameters,
+**A coordinated multi-agent system can solve this catalog-and-ownership problem
+by moving complexity behind bounded specialists.** The user-facing agent
+chooses an appropriate specialist instead of choosing among thousands of
+provider functions. Each Data Source agent owns a compact capability surface,
+provider semantics, authentication boundary, and failure behavior. Data
+Consultant finds and recommends the specialist. Plaza provides centralized
+registration, discovery, and coordination. MCP and skills can remain inside
+those agents where they are most useful.
+
+This scaling problem matters in finance because even an apparently simple
+request crosses several responsibilities. Consider: “Give me one month of
+daily AAPL prices.” Someone—or something—must understand the request, identify
+an appropriate source, check the source’s contract, supply valid parameters,
 handle authentication, execute the call, and report what failed if the data
 does not arrive.
 
@@ -148,38 +162,54 @@ observations are needed, Data User resolves the source and invokes that Data
 Source directly. The advisory participant never becomes an invisible data
 pipeline.
 
-## Why MCP and skills are not enough
+## Where MCP hits its limits in finance
 
 MCP and skills solve real problems. MCP gives a model or application a common
-way to discover and invoke tools and resources. A skill packages instructions
-and repeatable practice. For one user, a few sources, and a bounded tool menu,
-that may be exactly the right architecture.
+way to discover tools and resources, call tools, and read resources. A skill
+packages instructions and repeatable practice. For one user, a few sources,
+and a bounded tool menu, that may be exactly the right architecture.
 
-The problem appears when a financial application tries to turn its entire data
-universe into one menu. As I argued in
+The problem appears when a financial application tries to expose its entire
+data universe through one tool surface. As I argued in
 [MCP in Finance Is Great — Until You Need 1,000 Tools](https://medium.com/agentive-futures/mcp-in-finance-is-great-until-you-need-1-000-tools-d09fc350a85e),
 finance expands quickly from prices into fundamentals, filings, estimates,
 options, rates, risk, and internal portfolio data. Every domain brings its own
-endpoints, identifiers, parameters, permissions, and exceptions. A central
-catalog either becomes an encyclopedia the model must inspect, or collapses
-into a mega-tool such as `fetch_everything(spec)` that hides the boundaries we
-need to test.
+endpoints, identifiers, parameters, permissions, limits, and exceptions. The
+[MCP maintainers now identify this growing primitive surface as a challenge](https://blog.modelcontextprotocol.io/posts/mcp-roadmap/):
+a server with one hundred visible tools makes the model pay for the surface
+before the user asks a question, and selection tends to worsen as the list
+grows. Four limitations become difficult to ignore in a flat finance catalog:
 
-The distinction is simple:
+1. **Catalog overload.** Unless the host filters or progressively reveals the
+   available surface, a model must inspect more tool definitions, spend more
+   context on provider-specific detail, and make a more fragile selection among
+   similar operations. MCP standardizes the definitions; it does not make a
+   fully exposed catalog small.
+2. **The mega-tool trap.** Collapsing hundreds of operations into something
+   like `fetch_everything(spec)` reduces the advertised tool count, but moves
+   complexity into an opaque router. The endpoint contract, source decision,
+   field mapping, and failure boundary become harder to inspect and test.
+3. **Centralized provider knowledge.** In a flat, fully exposed catalog, the
+   host's selection layer must choose across the identifiers, adjustment
+   policies, vintages, permissions, and exceptions of every provider. A
+   reusable skill can improve the procedure, but it does not reduce the size of
+   that provider universe or give each provider boundary an independent owner.
+4. **Finance-specific operating policy is not supplied by MCP alone.** The
+   [2026 MCP specification](https://blog.modelcontextprotocol.io/posts/2026-07-28/)
+   adds stateless server scaling, header-based routing, cacheable catalogs, and
+   authorization improvements. Those address transport and infrastructure
+   scale. Provider selection, entitlements, health policy, quotas, cost policy,
+   provenance requirements, and failover remain application concerns. In
+   finance, they determine whether a result is usable and explainable.
 
-- **MCP answers:** what capability can this model or application call?
-- **A skill answers:** how should a task be performed?
-- **A multi-agent network answers:** who owns the role, decision, and execution;
-  how is that participant found; and where does the result go next?
-
-These layers can work together. A Data Source agent may eventually expose a
-compact MCP surface. A Data Consultant may use a skill for evaluating source
-documentation. Neither mechanism, by itself, defines role-bearing agents,
-decision ownership, or their end-to-end handoffs. In
-[Building AI Teams: Anthropic’s MCP, Google’s A2A, and the Prompits](https://medium.com/agentive-futures/building-ai-teams-anthropics-mcp-google-s-a2a-and-the-prompits-2f60153c9738),
-I described them as complementary layers: MCP connects an agent to
-capabilities, while the multi-agent framework supplies the roles and
-coordination that make a team legible.
+The multi-agent solution is to make the specialist—not one of its many
+functions—the unit of discovery. Data Consultant discovers registered sources
+through Plaza, retrieves their catalog knowledge, and recommends an appropriate
+specialist. Data User owns the source decision and calls the selected source.
+Each Data Source agent owns its provider's compact capability surface,
+documentation, credentials, limits, and execution result. Plaza registers,
+finds, and coordinates those participants through explicit request and return
+boundaries.
 
 In
 [Financial Data Should Be a Network of Agents](https://medium.com/agentive-futures/financial-data-should-be-a-network-of-agents-deb0c7f8cb38),
@@ -189,17 +219,25 @@ its provider's coverage, identifiers, authentication boundary, limitations,
 and definitions. The user-facing agent does not have to absorb all of that
 provider-specific complexity.
 
-This lite repository demonstrates the smallest useful version of that idea.
-Data User owns intent and the selected-source call. Data Consultant owns catalog
-advice. Data Source owns provider execution. Plaza registers and resolves the
-participants, while named Pulses make the handoffs visible.
+This does not discard MCP or skills. A Data Source agent can expose a compact
+MCP surface for its own domain, and a Data Consultant can use a skill to apply a
+repeatable evaluation procedure. The coordinated-agent layer supplies the
+finance-specific ownership, selection, and handoff boundary used here: which
+specialist owns the work, how that specialist is found, and how the request and
+result move through the system.
+
+This lite repository demonstrates the smallest useful version of that
+solution. Data User owns intent and the selected-source call. Data Consultant
+owns catalog advice. Data Source owns provider execution. Plaza registers and
+resolves the participants, while named Pulses make the handoffs visible.
 
 It does not implement the enterprise registry described in the earlier
 articles: there is no distributed health routing, entitlement engine, quota or
-cost policy, or provider failover. MCP and skills can be added inside the
-agents later. The claim is narrower: once independent responsibility and
-coordination matter, capability access and task instructions are necessary,
-but they are not the whole system.
+cost policy, or provider failover. The claim is narrower: the demo demonstrates
+one application-level decomposition of a flat capability catalog into bounded
+ownership, centralized discovery, and explicit coordination. It makes the
+boundaries visible where those production controls could be added; it does not
+claim to implement them.
 
 ## Lite means reduced, not reinvented
 
