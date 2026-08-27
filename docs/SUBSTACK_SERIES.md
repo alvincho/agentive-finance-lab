@@ -57,14 +57,32 @@ Use the same five-part structure so readers know what to expect:
 5. **Boundary and next step:** what the demo intentionally does not prove, then
    a teaser for the next episode.
 
-## Weekly distribution rhythm
+## Weekly editorial and distribution rhythm
 
-- **Tuesday:** Publish the full Substack episode and repository CTA.
-- **Wednesday:** Share one diagram and a three-sentence takeaway on LinkedIn,
-  X, and Threads.
-- **Thursday:** Post a short code or UI clip showing the episode’s runnable
-  action.
-- **Sunday:** Publish one question or failure case that tees up the next episode.
+- **Saturday, 20:00 (T−3):** Prepare the full Substack draft, Medium adaptation,
+  channel-specific copy, diagram, and short demo clip. Mark the article and its
+  social launch pack `review`; nothing is public at this stage.
+- **Monday, 20:00 (T−1):** Check the article, links, figures, runnable commands,
+  social copy, and media. Public release remains blocked until both the article
+  and social launch pack are explicitly marked `approved` and committed.
+- **Tuesday, 20:00:** Publish the approved full Substack episode and repository
+  CTA. The Substack URL is the canonical link for every downstream post.
+- **Wednesday, 12:30:** Share one diagram and a channel-specific takeaway on
+  LinkedIn, X, Threads, Facebook, and Instagram.
+- **Wednesday, 20:00:** Submit the approved adaptation to the Medium publication
+  *Agentive Futures*, identifying the Substack episode as the original source.
+- **Thursday, 20:00:** Publish the approved short code or UI clip on TikTok,
+  Instagram Reels, and Facebook Reels, with compact variants for X, Threads,
+  and LinkedIn.
+- **Sunday, 20:00:** Publish one approved question or honest failure case on X,
+  Threads, LinkedIn, and Facebook, and use the matching visual as an Instagram
+  Story when the prepared asset is available.
+
+Each episode stores reviewable channel copy in `docs/social/NN-launch-pack.md`.
+Automated publication records each successful destination and remote URL in
+`docs/social/NN-receipts.json`; a destination with a receipt must never be
+published a second time by a retry. Failure on one channel must not be hidden by
+success on another channel.
 
 Keep a single canonical link to the Substack post in social messages. Every
 episode should also link directly to the relevant repository section or demo,
