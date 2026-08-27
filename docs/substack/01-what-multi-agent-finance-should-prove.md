@@ -15,13 +15,12 @@ subscribe_url: "https://agentivefinancelab.substack.com/subscribe"
 *A public, runnable lab for explicit ownership, discovery, and handoffs—without
 promising better predictions or returns.*
 
-![Sequence diagram with Data User, Plaza, Data Consultant, and YFinance Source columns. It shows YFinance registration and catalog synchronization through Plaza, Data User requesting advice from Data Consultant, and Data User targeting YFinance for schema or market data.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-v2.png)
+![Two-stage flow chart. In Choose a Source, Data User requests advice through Plaza, Data Consultant recommends YFinance from catalog documentation, and Data User selects it. In Get the Data, Data User calls YFinance Source through Plaza, the source fetches provider data, and Data User returns a traceable result. Data Consultant does not receive provider data.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-simple.png)
 
-*Figure 1. Illustrative sequence diagram generated for this repository from the
-implemented local lite-demo flow. Arrows identify logical Pulse targets; Plaza
-mediates cross-agent Practice calls. This depicts ownership and flow—not
-distributed infrastructure, production tracing, predictive accuracy, or
-investment performance.*
+*Figure 1. A reader-level view of the same architecture: Plaza registers agents,
+finds the needed specialist, and mediates the advice and fetch handoffs. Data
+Consultant advises from catalog documentation; YFinance Source executes; Data
+User returns the accountable result.*
 
 One agent can call many tools. That does not, by itself, make a multi-agent
 system.
