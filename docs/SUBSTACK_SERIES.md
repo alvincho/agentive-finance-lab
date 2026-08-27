@@ -61,8 +61,9 @@ Use the same five-part structure so readers know what to expect:
 ## Twice-weekly editorial and distribution rhythm
 
 - **Saturday or Tuesday, 09:00 (T−3):** Prepare the full Substack draft, Medium
-  adaptation, channel-specific copy, diagram, and short demo clip. Mark the
-  release bundle `review`; nothing is public at this stage.
+  adaptation, channel-specific copy, Taiwan Facebook edition, mainland-China
+  WeChat (Weixin) edition, diagram, and short demo clip. Mark the release bundle
+  `review`; nothing is public at this stage.
 - **Monday or Thursday, 18:00 (T−1):** Check the article, links, figures,
   runnable commands, social copy, and media. Public release remains blocked
   until the complete bundle is explicitly marked `approved_for_release`,
@@ -71,33 +72,55 @@ Use the same five-part structure so readers know what to expect:
   repository CTA. The Substack URL is the canonical link for every downstream
   post.
 - **Tuesday or Friday, 21:00:** Share one diagram and a channel-specific
-  takeaway on LinkedIn, X, Threads, Facebook, and Instagram.
+  takeaway on LinkedIn, X, Threads, and Instagram. Publish the Taiwan-facing
+  Facebook variant in Traditional Chinese.
 - **Wednesday or Saturday, 10:00 (T+1):** Submit the approved adaptation to the
   Medium publication *Agentive Futures*, identifying the Substack episode as
   the original source.
+- **Wednesday or Saturday, 19:00 (T+1):** Publish the approved standalone
+  Simplified Chinese article through the designated WeChat Official Account.
+  Use a follower-facing broadcast when the account permits it; a draft or
+  non-broadcast publication is not recorded as a successful broadcast.
 - **Wednesday or Saturday, 20:00 (T+1):** Publish the approved short code or UI
   clip on TikTok, Instagram Reels, and Facebook Reels, with compact variants for
-  X, Threads, and LinkedIn.
+  X, Threads, and LinkedIn. Facebook captions and subtitles use Traditional
+  Chinese.
 - **Thursday or Sunday, 20:00 (T+2):** Publish one approved question or honest
-  failure case on X, Threads, LinkedIn, and Facebook, and use the matching
-  visual as an Instagram Story when the prepared asset is available.
+  failure case on X, Threads, and LinkedIn, use a Traditional Chinese variant on
+  Facebook, and use the matching visual as an Instagram Story when the prepared
+  asset is available.
 
 Every downstream channel action occurs no later than two calendar days after
 its canonical Substack episode.
 
 Each episode stores its Medium source in `docs/medium/`, reviewable channel copy
-in `docs/social/NN-launch-pack.md`, and the approved body and asset hashes in
+in `docs/social/NN-launch-pack.md`, its Taiwan Facebook source in
+`docs/locales/zh-TW/NN-facebook.md`, its mainland-China WeChat source in
+`docs/locales/zh-CN/NN-weixin.md`, and the approved body and asset hashes in
 `docs/releases/NN-release.json`. Any post-approval content or asset change
 invalidates the bundle until it is reviewed and hashed again. Automated
-publication records each attempt, successful destination, remote ID, and URL in
-`docs/social/NN-receipts.json`; a destination with a successful receipt must
-never be published a second time by a retry. An interrupted `attempting` record
-must be reconciled against the remote platform before retrying. Failure on one
-channel must not be hidden by success on another channel.
+publication records each attempt, successful destination, locale, remote ID,
+and URL in `docs/social/NN-receipts.json`; a destination with a successful
+receipt must never be published a second time by a retry. An interrupted
+`attempting` record must be reconciled against the remote platform before
+retrying. Failure on one channel must not be hidden by success on another
+channel.
 
-Keep a single canonical link to the Substack post in social messages. Every
-episode should also link directly to the relevant repository section or demo,
-not only to the repository root.
+The Taiwan Facebook edition is a localized explanation, not a literal
+translation: retain framework names in English, introduce them in Traditional
+Chinese on first use, and use Taiwan financial-technology terminology. The
+WeChat edition must stand on its own because access to external destinations can
+vary. It includes the complete argument, native cover and inline images, concise
+code excerpts, the educational disclaimer, and only links or QR destinations
+verified during preparation. WeChat credentials remain server-side; no AppID,
+secret, access token, or login cookie belongs in the repository or browser
+storage.
+
+Keep the Substack post as the canonical source. Link to it directly from social
+messages and also link to the relevant repository section or demo, not only the
+repository root. The WeChat edition references the canonical source only when
+the destination is allowed and verified; its core explanation and runnable
+context must not depend on following an external link.
 
 ## Season-wide editorial guardrails
 
