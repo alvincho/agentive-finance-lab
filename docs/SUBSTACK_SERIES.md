@@ -63,35 +63,34 @@ Use the same five-part structure so readers know what to expect:
 - **Saturday or Tuesday, 09:00 (T−3):** Prepare the full Substack draft, Medium
   adaptation, channel-specific copy, Taiwan Facebook edition, mainland-China
   WeChat (Weixin) edition, diagram, and one reusable 9:16 short demo clip for
-  TikTok, YouTube Shorts, and Instagram Reels. Prepare the approved YouTube
+  TikTok, YouTube Shorts, and Instagram Reels. Prepare the selected YouTube
   title, description, audience setting, and caption track with the same asset.
-  Mark the release bundle `review`; nothing is public at this stage.
+  Mark the release bundle `prepared`; nothing is public at this stage.
 - **Monday or Thursday, 18:00 (T−1):** Check the article, links, figures,
-  runnable commands, social copy, and media. Public release remains blocked
-  until the complete bundle is explicitly marked `approved_for_release`,
-  hashed, and committed.
-- **Tuesday or Friday, 20:00:** Publish the approved full Substack episode and
-  repository CTA. The Substack URL is the canonical link for every downstream
-  post.
+  runnable commands, social copy, and media. This is a readiness audit, not a
+  second approval checkpoint. Refresh hashes after any changes.
+- **Tuesday or Friday, 20:00:** Publish the full Substack episode and repository
+  CTA after the three-day revision window. A verified live canonical URL is the
+  authorization for every downstream job; no additional approval is required.
 - **Tuesday or Friday, 21:00:** Share one diagram and a channel-specific
   takeaway on LinkedIn, X, Threads, and Instagram. Publish the Taiwan-facing
   Facebook variant in Traditional Chinese.
-- **Wednesday or Saturday, 10:00 (T+1):** Submit the approved adaptation to the
+- **Wednesday or Saturday, 10:00 (T+1):** Submit the prepared adaptation to the
   Medium publication *Agentive Futures*, identifying the Substack episode as
   the original source.
-- **Wednesday or Saturday, 18:30 (T+1):** Deliver the approved standalone
+- **Wednesday or Saturday, 18:30 (T+1):** Deliver the prepared standalone
   Simplified Chinese article as a ready-to-paste HTML and media package for the
   allowlisted WeChat Official Account `AI智域边界` (`retis_ai`). The operator
   previews and confirms the intended 19:00 dashboard publication or broadcast.
   A draft or non-broadcast publication is not recorded as a successful
   broadcast.
-- **Wednesday or Saturday, 20:00 (T+1):** Publish the approved short code or UI
+- **Wednesday or Saturday, 20:00 (T+1):** Publish the prepared short code or UI
   clip on TikTok, YouTube Shorts, Instagram Reels, and Facebook Reels, with
   compact variants for X, Threads, and LinkedIn. YouTube uses the allowlisted
-  Agentive Finance Lab channel, an approved caption track, and a Related Video
-  only when its exact video ID was reviewed. Facebook captions and subtitles
+  Agentive Finance Lab channel, a validated caption track, and a Related Video
+  only when its exact video ID is configured. Facebook captions and subtitles
   use Traditional Chinese.
-- **Thursday or Sunday, 20:00 (T+2):** Publish one approved question or honest
+- **Thursday or Sunday, 20:00 (T+2):** Publish one prepared question or honest
   failure case on X, Threads, and LinkedIn, use a Traditional Chinese variant on
   Facebook, and use the matching visual as an Instagram Story when the prepared
   asset is available.
@@ -108,10 +107,10 @@ channel, even when that account is also signed in.
 Each episode stores its Medium source in `docs/medium/`, reviewable channel copy
 in `docs/social/NN-launch-pack.md`, its Taiwan Facebook source in
 `docs/locales/zh-TW/NN-facebook.md`, its mainland-China WeChat source in
-`docs/locales/zh-CN/NN-weixin.md`, and the approved body and asset hashes in
-`docs/releases/NN-release.json`. Any post-approval content or asset change
-invalidates the bundle until it is reviewed and hashed again. Automated
-publication records each attempt, successful destination, locale, remote ID,
+`docs/locales/zh-CN/NN-weixin.md`, and the validated body and asset hashes in
+`docs/releases/NN-release.json`. Any content or asset change requires hashes and
+technical validation to be refreshed, but never creates a new approval gate.
+Automated publication records each attempt, successful destination, locale, remote ID,
 and URL in `docs/social/NN-receipts.json`; a destination with a successful
 receipt must never be published a second time by a retry. An interrupted
 `attempting` record must be reconciled against the remote platform before

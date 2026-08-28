@@ -1,0 +1,21 @@
+WEBVTT
+
+NOTE Reviewed 2026-08-28 Asia/Taipei. English master only. Captured Demo 1 YFinance path; no Alpha Vantage or FRED execution.
+
+00:00:00.000 --> 00:00:05.000
+Finance does not need one mega-tool.
+
+00:00:05.000 --> 00:00:12.000
+Data User asks. Data Consultant recommends YFinance from catalog documentation.
+
+00:00:12.000 --> 00:00:20.000
+The selected route is inspectable: yfinance.ticker.history.
+
+00:00:20.000 --> 00:00:29.000
+Data User calls data_fetch through Plaza. YFinance owns provider execution.
+
+00:00:29.000 --> 00:00:34.000
+The captured run returned a 23-row canonical result. No other source was called.
+
+00:00:34.000 --> 00:00:37.000
+Educational demo. Not investment advice.

@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>当金融工具越来越多，系统真正缺少的是清晰的责任边界</title>
+</head>
+<body style="margin:0;padding:0;background:#ffffff;color:#17201d;font-family:-apple-system,BlinkMacSystemFont,'PingFang SC','Microsoft YaHei',sans-serif;line-height:1.8;">
+  <section style="max-width:680px;margin:0 auto;padding:24px 18px 36px;box-sizing:border-box;">
+    <p style="margin:0 0 8px;color:#168b81;font-size:13px;font-weight:700;letter-spacing:.08em;">AGENTIVE FINANCE LAB · EPISODE 1</p>
+    <h1 style="margin:0 0 18px;font-size:30px;line-height:1.28;color:#101917;">当金融工具越来越多，系统真正缺少的是清晰的责任边界</h1>
+    <p style="margin:0 0 18px;">MCP 解决了工具访问的标准化问题，Skills 把可复用的操作方法整理成指令与流程。但金融应用扩展到行情、基本面、公告、宏观数据、风险和内部组合数据后，新的瓶颈是：谁理解来源，谁做选择，谁执行，以及失败时谁能解释清楚。</p>
+    <p style="margin:0 0 18px;">把所有能力平铺成一个巨大目录，会让模型先处理大量无关定义；把它们藏进一个 <code style="background:#eef4f1;padding:2px 5px;border-radius:4px;">fetch_everything(spec)</code>，又会遮住来源选择、字段映射、权限与错误边界。</p>
+
+    <img data-media-id="weixin-inline-flow" src="../../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-simple.png" alt="单一数据源的两阶段流程：Data User 先通过 Plaza 向 Data Consultant 询问并选择 YFinance，再通过 Plaza 直接调用 YFinance Data Source；Data Consultant 不接收供应商结果。" style="display:block;width:100%;height:auto;margin:24px 0 8px;border:0;">
+    <p style="margin:0 0 24px;color:#5f6c67;font-size:13px;">图 1：先选择来源，再取得数据。Plaza 协调交接，但不成为数据提供方。</p>
+
+    <h2 style="margin:26px 0 12px;font-size:22px;color:#101917;">三个角色，一条可检查的路径</h2>
+    <p style="margin:0 0 12px;"><strong>Data User（数据用户）</strong>负责需求和最终来源调用；<strong>Data Consultant（数据顾问）</strong>只根据同步到内存的目录文档给出确定性建议；<strong>YFinance Data Source（数据源）</strong>拥有端点规范和 <code style="background:#eef4f1;padding:2px 5px;border-radius:4px;">data_fetch</code> 执行。</p>
+    <p style="margin:0 0 18px;">三者注册到进程内的 <strong>Plaza</strong>。Plaza 提供注册、发现、解析和请求/返回路径，但不解释、合并、缓存或代理供应商结果。</p>
+
+    <div style="margin:20px 0;padding:16px;background:#eef8f6;border-left:4px solid #1fb5a8;">
+      <p style="margin:0 0 8px;font-weight:700;">阶段一：选择来源</p>
+      <p style="margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;">Data User → Plaza → Data Consultant:data_advice → YFinance 目录建议</p>
+    </div>
+    <p style="margin:0 0 18px;">这里保留了 <code style="background:#eef4f1;padding:2px 5px;border-radius:4px;">catalog_rag</code> 标签，但 lite 版本没有调用大语言模型生成答案；它执行的是对同步文档的确定性检索。</p>
+    <div style="margin:20px 0;padding:16px;background:#eef3ff;border-left:4px solid #2f67e8;">
+      <p style="margin:0 0 8px;font-weight:700;">阶段二：取得数据</p>
+      <p style="margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:14px;">Data User → Plaza → YFinance Data Source:data_fetch → 结果与错误边界</p>
+    </div>
+    <p style="margin:0 0 18px;">Data Consultant 不接收供应商结果。它负责“哪个来源和端点适合”，而不是成为隐藏的数据代理。</p>
+
+    <h2 style="margin:26px 0 12px;font-size:22px;color:#101917;">为什么金融场景更需要这条边界</h2>
+    <p style="margin:0 0 18px;">一次 AAPL 日线请求涉及需求理解、来源选择、参数、认证、供应商调用与失败解释。静默切换来源还可能改变字段定义、复权方式、时间点、权限和允许用途。因此，本演示不使用运行时假数据、缓存结果、测试夹具或其他来源掩盖失败。</p>
+    <p style="margin:0 0 18px;">这套拆分证明的是可检查性，而不是收益：谁理解需求，谁掌握目录，谁触及供应商，失败发生在哪个边界。它不声称多代理会带来更好的预测、更高回报或更准确的市场数据。</p>
+
+    <h2 style="margin:26px 0 12px;font-size:22px;color:#101917;">本次捕捉严格限定为 YFinance</h2>
+    <p style="margin:0 0 18px;">2026 年 8 月 28 日（Asia/Taipei）的本地 Demo 1 捕捉只包括：Data User 提问、Data Consultant 返回 YFinance 目录建议、选择 <code style="background:#eef4f1;padding:2px 5px;border-radius:4px;">yfinance.ticker.history</code>、Data User 通过 Plaza 发起 <code style="background:#eef4f1;padding:2px 5px;border-radius:4px;">data_fetch</code>，以及 YFinance 返回 23 行规范化结果。没有打开或执行 Alpha Vantage、FRED，也没有把当次市场数值包装成投资结论。</p>
+    <img data-media-id="weixin-inline-advice" src="../../media/01/01-demo1-advice.png" alt="本地 Demo 1 界面：Data Consultant 返回 YFinance 目录建议，界面显示单一来源及可检查的端点路径。" style="display:block;width:100%;height:auto;margin:24px 0 8px;border:0;">
+    <p style="margin:0 0 24px;color:#5f6c67;font-size:13px;">图 2：本次本地捕捉中的目录建议画面。后续 data_fetch 由 Data User 直接调用 YFinance Data Source。</p>
+
+    <h2 style="margin:26px 0 12px;font-size:22px;color:#101917;">MCP 与 Skills 仍然有位置</h2>
+    <p style="margin:0 0 18px;">数据源代理可以在自身边界内暴露精简 MCP 能力；数据顾问也可以使用 Skill 执行一致的评估流程。协调层补充的是责任：哪个专业角色拥有任务，如何找到它，以及请求和结果如何在不隐藏来源的情况下移动。</p>
+    <p style="margin:0 0 18px;">Agentive Finance Lab 是从 FinMAS——原始完整金融多代理应用——缩减而来的公开可运行示范。Prompits、Phemacast 和 Attas 由 Retis AI Pte Ltd 所有。</p>
+
+    <h2 style="margin:26px 0 12px;font-size:22px;color:#101917;">讨论</h2>
+    <p style="margin:0 0 18px;">当一次金融数据请求失败时，应该由用户侧代理、来源选择专家，还是具体数据源来解释？在允许切换供应商之前，你会要求系统保留哪些证据？</p>
+
+    <p style="margin:22px 0 4px;font-size:13px;color:#5f6c67;">原始英文文章（已验证）</p>
+    <p style="margin:0 0 12px;font-size:13px;word-break:break-all;">https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in</p>
+    <p style="margin:0 0 4px;font-size:13px;color:#5f6c67;">开源仓库（已验证）</p>
+    <p style="margin:0 0 24px;font-size:13px;word-break:break-all;">https://github.com/alvincho/agentive-finance-lab</p>
+
+    <div style="margin-top:26px;padding:16px;background:#f5f5f2;color:#4d5753;font-size:13px;">
+      <strong>教育用途声明：</strong>Agentive Finance Lab 是教育用途的软件示范，不提供投资建议、交易建议或数据权利，也不保证供应商的可用性、时效性、完整性或准确性。yfinance 与 Yahoo 无关联；Yahoo Finance 数据仅供个人使用，并受适用条款约束。
+    </div>
+  </section>
+</body>
+</html>

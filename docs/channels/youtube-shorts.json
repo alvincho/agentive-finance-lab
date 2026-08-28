@@ -13,9 +13,9 @@
   "required_format": {
     "aspect_ratio": "9:16",
     "caption_track": true,
-    "approved_title": true,
-    "approved_description": true
+    "title_required": true,
+    "description_required": true
   },
   "timezone": "Asia/Taipei",
-  "notes": "Publish only through this immutable channel ID. Do not substitute Alvin Cho's personal channel. Attach a Related Video only when its exact video ID is approved in the episode release bundle."
+  "notes": "Publish only through this immutable channel ID. Do not substitute Alvin Cho's personal channel. Attach a Related Video only when its exact video ID is configured in the episode release bundle."
 }

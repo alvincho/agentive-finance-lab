@@ -1,0 +1,334 @@
+{
+  "schema_version": 1,
+  "release_id": "agentive-finance-lab-episode-01",
+  "episode": 1,
+  "timezone": "Asia/Taipei",
+  "prepared_at": "2026-08-28T15:20:00+08:00",
+  "release_status": "canonical_published",
+  "downstream_authorization": {
+    "basis": "verified_live_canonical_substack_publication",
+    "status": "authorized",
+    "canonical_url": "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in",
+    "remote_post_id": "212984190",
+    "published_at": "2026-08-27T21:52:00+08:00"
+  },
+  "canonical": {
+    "destination": "substack",
+    "account_name": "Agentive Finance Lab",
+    "url": "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in",
+    "published_at": "2026-08-27T21:52:00+08:00",
+    "source_path": "docs/substack/01-what-multi-agent-finance-should-prove.md",
+    "source_sha256": "75ff8f00bc7e9024de54bd78e38ce01148c9d323b5d14d8bd1c073064530e7f2",
+    "remote_post_id": "212984190",
+    "status": "observed_existing_published"
+  },
+  "live_article_audit": {
+    "audited_at": "2026-08-28 Asia/Taipei",
+    "http_status": 200,
+    "canonical_url_match": true,
+    "title_match": true,
+    "subtitle_match": true,
+    "author_name": "Agentive Finance Lab",
+    "published_date_match": true,
+    "rendered_word_count": 2648,
+    "content_image_count": 2,
+    "heading_sequence_match": true,
+    "lead_figure_alt_text_match": true,
+    "educational_disclaimer_present": true,
+    "claims_or_structure_discrepancies": [],
+    "rendered_text_sha256": "df756e3c71338daa7f0cd5ae6e30cc12712fd7e4fc163b229dde87612122d9be"
+  },
+  "artifacts": [
+    {
+      "role": "canonical_source",
+      "path": "docs/substack/01-what-multi-agent-finance-should-prove.md",
+      "sha256": "75ff8f00bc7e9024de54bd78e38ce01148c9d323b5d14d8bd1c073064530e7f2",
+      "status": "published_source_read_only"
+    },
+    {
+      "role": "medium_adaptation",
+      "path": "docs/medium/01-mcp-and-skills-hit-their-limits.md",
+      "sha256": "4a0dd23fa17d6460157bc1ad11e86abcf3be6574a50fa64a650b39a7afcf3b6d",
+      "status": "prepared"
+    },
+    {
+      "role": "social_launch_pack",
+      "path": "docs/social/01-launch-pack.md",
+      "sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "status": "prepared"
+    },
+    {
+      "role": "facebook_zh_tw",
+      "path": "docs/locales/zh-TW/01-facebook.md",
+      "sha256": "d17d2d1f2973005c971e995b652250973013b6c59c820a5e6d727dca216f31fd",
+      "status": "prepared"
+    },
+    {
+      "role": "weixin_zh_cn_source",
+      "path": "docs/locales/zh-CN/01-weixin.md",
+      "sha256": "a5eb480cc39a218735a437901aa1b714e25d94b117318aa0cdcde7c5c8922ae1",
+      "status": "prepared"
+    },
+    {
+      "role": "weixin_zh_cn_rendered_html",
+      "path": "docs/locales/zh-CN/01-weixin.html",
+      "sha256": "a95c0cdb287eaee47e8cd9b6f8e2be2161702dd0f99d7c9ac869d4d1ee6fd641",
+      "status": "validated"
+    },
+    {
+      "role": "weixin_local_media_manifest",
+      "path": "docs/locales/zh-CN/01-weixin-media.json",
+      "sha256": "63ffaa7b84684552dd61e120e3eeb60b273cbbd9ba3bba8baf7582195fa6164d",
+      "status": "validated"
+    },
+    {
+      "role": "short_storyboard_source",
+      "path": "docs/media/01/01-short-master-storyboard.html",
+      "sha256": "983a9462414313349423c2543295d6c7a0be22fe4bbc30bf556798d4e372f9f9",
+      "status": "validated"
+    },
+    {
+      "role": "short_master",
+      "path": "docs/media/01/01-short-master-en-9x16.mp4",
+      "sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "status": "validated"
+    },
+    {
+      "role": "caption_track_en",
+      "path": "docs/media/01/01-short-master-en.vtt",
+      "sha256": "07333d76121d92cc219e78d66b8ae530cb10a958dee8ab1ead3b624123e35e4a",
+      "status": "validated_timing_and_text"
+    },
+    {
+      "role": "receipts_ledger",
+      "path": "docs/social/01-receipts.json",
+      "sha256": "6997ba9dea149293c2f29de752830303ddf7b7dd6bf3b1f6b940cac3161dbb41",
+      "status": "active"
+    }
+  ],
+  "short_master": {
+    "locale": "en",
+    "width": 1080,
+    "height": 1920,
+    "aspect_ratio": "9:16",
+    "duration_seconds": 37,
+    "frame_rate": 30,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio": false,
+    "destinations": [
+      "tiktok",
+      "youtube_shorts",
+      "instagram_reels"
+    ],
+    "capture_scope": {
+      "demo": "Data Agent / Single Source",
+      "route": "/demos/data-agent-network/",
+      "participants": [
+        "Data User Persona",
+        "Data Consultant Persona",
+        "YFinance Data Source Pulser"
+      ],
+      "path": "Data User -> Plaza -> Data Consultant -> Plaza -> Data User -> Plaza -> YFinance Data Source -> Plaza -> Data User",
+      "endpoint": "yfinance.ticker.history",
+      "pulse": "data_fetch",
+      "parameters_shown": {
+        "symbol": "AAPL",
+        "period": "1mo",
+        "interval": "1d"
+      },
+      "observed_result": "23 canonical rows",
+      "alpha_vantage_execution": false,
+      "fred_execution": false,
+      "market_values_used_as_claims": false
+    },
+    "capture_evidence": [
+      {
+        "path": "docs/media/01/01-demo1-advice.png",
+        "sha256": "0e545acfad0fc5e3122d21382cdc0d37bff722a95c7a1bd36c9ffad104bf3a37"
+      },
+      {
+        "path": "docs/media/01/01-demo1-fetch-form.png",
+        "sha256": "997dab6a9a2a97bd2487ff86a649edc847174ee4f109ab9e7cbfc269d4cc9d0e"
+      },
+      {
+        "path": "docs/media/01/01-demo1-fetch-result.png",
+        "sha256": "71661e77435cce37b82bdd1e5766d84c59a36b1e361796d3d1e80ead748f8cc1"
+      }
+    ]
+  },
+  "youtube_shorts": {
+    "identity_allowlist_source": "docs/channels/youtube-shorts.json",
+    "identity_allowlist_sha256": "40b2515c70d58947831f1b988610ad3d93c589504d7e482dea6877dcf9302184",
+    "account_name": "Agentive Finance Lab",
+    "handle": "@AgentiveFinanceLab",
+    "channel_id": "UCBUlIH03zTzZyhEnOls6Aqw",
+    "channel_url": "https://www.youtube.com/@AgentiveFinanceLab",
+    "delivery_mode": "youtube_studio",
+    "title": "Why 1,000 Finance Tools Need Clear Owners",
+    "title_status": "selected_copy",
+    "description": "One implemented path, made visible: Data User asks, Data Consultant recommends YFinance from catalog documentation, and Data User calls the selected YFinance Source through Plaza. The Consultant never receives the provider result.\n\nAgentive Finance Lab is an educational software demo—not investment advice. yfinance is unaffiliated with Yahoo; Yahoo Finance data is intended for personal use and remains subject to applicable terms.",
+    "description_status": "selected_copy",
+    "description_requires_clickable_external_url": false,
+    "audience": "not_made_for_kids",
+    "caption_track": "docs/media/01/01-short-master-en.vtt",
+    "caption_validation_status": "validated_timing_wording_names_endpoint_and_disclaimer",
+    "related_video_id": null,
+    "related_video_status": "not_configured",
+    "personal_channel_substitution_allowed": false,
+    "release_status": "ready_from_live_canonical"
+  },
+  "destination_allowlist": [
+    {
+      "destination_key": "substack_canonical",
+      "account_name": "Agentive Finance Lab",
+      "exact_url": "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in",
+      "identity_status": "live_verified",
+      "action": "none_already_live"
+    },
+    {
+      "destination_key": "medium",
+      "account_name": "Alvin Cho",
+      "publication_name": "Agentive Futures",
+      "publication_url": "https://medium.com/agentive-futures",
+      "identity_status": "runtime_visible_account_check",
+      "action": "submit_to_agentive_futures"
+    },
+    {
+      "destination_key": "facebook_tw",
+      "locale": "zh-TW",
+      "account_name": "Alvin Cho",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_traditional_chinese_to_taiwan_facing_account"
+    },
+    {
+      "destination_key": "weixin_cn",
+      "account_name": "AI智域边界",
+      "public_account_id": "retis_ai",
+      "identity_allowlist_source": "docs/channels/weixin-cn.json",
+      "identity_allowlist_sha256": "af87c958a55c679021fb72fb8747431e4fec4c3a737bafb3274da7f6c629c516",
+      "delivery_mode": "manual_dashboard",
+      "identity_status": "user_confirmed_logged_in_2026_08_28",
+      "action": "manual_dashboard_handoff"
+    },
+    {
+      "destination_key": "youtube_shorts",
+      "account_name": "Agentive Finance Lab",
+      "handle": "@AgentiveFinanceLab",
+      "channel_id": "UCBUlIH03zTzZyhEnOls6Aqw",
+      "identity_status": "authenticated_observed",
+      "action": "publish_scheduled_short"
+    },
+    {
+      "destination_key": "tiktok",
+      "account_name": "Agentive Finance Lab",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_if_visible_account_matches"
+    },
+    {
+      "destination_key": "instagram_reels",
+      "account_name": "Agentive Finance Lab",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_if_visible_account_matches"
+    },
+    {
+      "destination_key": "facebook_reels",
+      "account_name": "Alvin Cho",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_traditional_chinese_if_visible_account_matches"
+    },
+    {
+      "destination_key": "linkedin",
+      "account_name": "Alvin Cho",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_if_visible_account_matches"
+    },
+    {
+      "destination_key": "x",
+      "account_name": "Agentive Finance Lab",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_if_visible_account_matches"
+    },
+    {
+      "destination_key": "threads",
+      "account_name": "Agentive Finance Lab",
+      "identity_status": "runtime_visible_account_check",
+      "action": "publish_if_visible_account_matches"
+    }
+  ],
+  "idempotency_keys": {
+    "medium": "afl:e01:medium:agentive-futures:20260827",
+    "facebook_tw": "afl:e01:facebook:zh-TW:20260827",
+    "weixin_cn": "afl:e01:weixin:retis_ai:20260827",
+    "youtube_shorts": "afl:e01:youtube:UCBUlIH03zTzZyhEnOls6Aqw:20260827",
+    "tiktok": "afl:e01:tiktok:unverified:20260827",
+    "instagram_reels": "afl:e01:instagram-reels:unverified:20260827",
+    "facebook_reels": "afl:e01:facebook-reels:unverified:20260827",
+    "linkedin": "afl:e01:linkedin:unverified:20260827",
+    "x": "afl:e01:x:unverified:20260827",
+    "threads": "afl:e01:threads:unverified:20260827"
+  },
+  "disclaimer": "Agentive Finance Lab is an educational software demonstration. It does not provide investment advice, trading recommendations, data rights, or guarantees about provider availability, freshness, completeness, or accuracy. Live data remains subject to each provider's terms and limits.",
+  "checks": {
+    "technical": {
+      "status": "pass",
+      "pytest": "51 passed, 1 skipped, 2 deprecation warnings",
+      "compileall": "pass",
+      "note": "The in-place run reached 12 passing tests before iCloud-backed file reads stalled. The unchanged Python, UI, test, and required root files were copied to a local temporary directory; the complete suite and compileall then passed."
+    },
+    "links": {
+      "status": "pass_with_documented_bot_challenge",
+      "http_200": [
+        "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in",
+        "https://agentivefinancelab.substack.com/subscribe",
+        "https://github.com/alvincho/agentive-finance-lab",
+        "https://retis.ai/",
+        "https://blog.modelcontextprotocol.io/posts/mcp-roadmap/",
+        "https://blog.modelcontextprotocol.io/posts/2026-07-28/",
+        "https://www.youtube.com/@AgentiveFinanceLab"
+      ],
+      "medium_links": "Direct curl returned 403 bot protection; both exact Agentive Futures article URLs and the publication were independently found with matching titles through web search."
+    },
+    "media": {
+      "status": "pass",
+      "video_decode": "pass",
+      "dimensions": "1080x1920",
+      "duration_seconds": 37,
+      "frame_rate": 30,
+      "weixin_media_hashes": "pass",
+      "rendered_weixin_mobile_preview": "pass"
+    },
+    "captions": {
+      "status": "pass",
+      "cues": 6,
+      "last_end_seconds": 37,
+      "overlap": false,
+      "review_scope": "timing, wording, participant names, endpoint, YFinance-only boundary, disclaimer"
+    },
+    "localization": {
+      "status": "pass",
+      "zh_tw": "Taiwan terminology and Traditional Chinese reviewed",
+      "zh_cn": "standalone Simplified Chinese article, inline images, disclaimer, verified URLs, and manual-dashboard boundary reviewed"
+    },
+    "placeholders": {
+      "status": "pass",
+      "patterns_scanned": [
+        "TODO",
+        "TBD",
+        "FIXME",
+        "CHANGEME",
+        "example.com",
+        "{{",
+        "[insert",
+        "<placeholder>"
+      ]
+    }
+  },
+  "operational_prerequisites": [
+    "Verify the visible Medium account is Alvin Cho and submit the story to Agentive Futures.",
+    "Verify the visible Taiwan-facing Facebook account is Alvin Cho before posting.",
+    "Verify AI智域边界 / retis_ai in the WeChat dashboard before manual delivery or broadcast.",
+    "Verify each visible destination account at runtime and block only a mismatched destination.",
+    "Add a Related Video only if its exact YouTube video ID is configured."
+  ]
+}

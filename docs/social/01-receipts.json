@@ -1,0 +1,124 @@
+{
+  "schema_version": 1,
+  "release_id": "agentive-finance-lab-episode-01",
+  "episode": 1,
+  "timezone": "Asia/Taipei",
+  "release_status": "authorized_by_live_canonical",
+  "authorization_basis": "verified_live_canonical_substack_publication",
+  "receipts": [
+    {
+      "destination_key": "substack_canonical",
+      "idempotency_key": "afl:e01:substack:agentive-finance-lab:20260827",
+      "status": "observed_existing_published",
+      "attempted_by_this_workflow": false,
+      "content_sha256": "75ff8f00bc7e9024de54bd78e38ce01148c9d323b5d14d8bd1c073064530e7f2",
+      "remote_id": "212984190",
+      "remote_url": "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in",
+      "observed_at": "2026-08-28 Asia/Taipei"
+    },
+    {
+      "destination_key": "medium",
+      "idempotency_key": "afl:e01:medium:agentive-futures:20260827",
+      "status": "not_attempted",
+      "content_sha256": "4a0dd23fa17d6460157bc1ad11e86abcf3be6574a50fa64a650b39a7afcf3b6d",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "facebook_tw",
+      "idempotency_key": "afl:e01:facebook:zh-TW:20260827",
+      "status": "not_attempted",
+      "content_sha256": "d17d2d1f2973005c971e995b652250973013b6c59c820a5e6d727dca216f31fd",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "weixin_cn",
+      "idempotency_key": "afl:e01:weixin:retis_ai:20260827",
+      "status": "not_attempted",
+      "delivery_mode": "manual_dashboard",
+      "account_name": "AI智域边界",
+      "public_account_id": "retis_ai",
+      "content_sha256": "a95c0cdb287eaee47e8cd9b6f8e2be2161702dd0f99d7c9ac869d4d1ee6fd641",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null,
+      "broadcast_confirmed": false
+    },
+    {
+      "destination_key": "youtube_shorts",
+      "idempotency_key": "afl:e01:youtube:UCBUlIH03zTzZyhEnOls6Aqw:20260827",
+      "status": "not_attempted",
+      "account_name": "Agentive Finance Lab",
+      "handle": "@AgentiveFinanceLab",
+      "channel_id": "UCBUlIH03zTzZyhEnOls6Aqw",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "tiktok",
+      "idempotency_key": "afl:e01:tiktok:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "instagram_reels",
+      "idempotency_key": "afl:e01:instagram-reels:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "facebook_reels",
+      "idempotency_key": "afl:e01:facebook-reels:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "d17d2d1f2973005c971e995b652250973013b6c59c820a5e6d727dca216f31fd",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "linkedin",
+      "idempotency_key": "afl:e01:linkedin:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "x",
+      "idempotency_key": "afl:e01:x:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    },
+    {
+      "destination_key": "threads",
+      "idempotency_key": "afl:e01:threads:unverified:20260827",
+      "status": "not_attempted",
+      "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
+      "attempt_id": null,
+      "remote_id": null,
+      "remote_url": null
+    }
+  ]
+}

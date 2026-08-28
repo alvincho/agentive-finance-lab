@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Episode 1 vertical short storyboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #080d0b; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .scene {
+      position: relative;
+      width: 1080px;
+      height: 1920px;
+      overflow: hidden;
+      background: #0d1814;
+      color: #fff;
+    }
+    .scene + .scene { margin-top: 24px; }
+    .eyebrow {
+      position: absolute;
+      left: 72px;
+      top: 180px;
+      color: #b7f034;
+      font-weight: 800;
+      font-size: 34px;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .eyebrow::before {
+      content: "";
+      display: block;
+      width: 120px;
+      height: 12px;
+      margin-bottom: 30px;
+      background: #b7f034;
+    }
+    h1 {
+      position: absolute;
+      left: 72px;
+      top: 540px;
+      width: 930px;
+      margin: 0;
+      font-size: 82px;
+      line-height: 1.14;
+      letter-spacing: -.035em;
+    }
+    h2 {
+      position: absolute;
+      left: 72px;
+      top: 292px;
+      width: 936px;
+      margin: 0;
+      font-size: 60px;
+      line-height: 1.14;
+      letter-spacing: -.025em;
+    }
+    .sub {
+      position: absolute;
+      left: 72px;
+      top: 442px;
+      width: 920px;
+      margin: 0;
+      color: #c6d2cd;
+      font-size: 40px;
+      line-height: 1.35;
+    }
+    .hero-sub {
+      position: absolute;
+      left: 72px;
+      top: 820px;
+      color: #c6d2cd;
+      font-size: 50px;
+    }
+    .visual {
+      position: absolute;
+      left: 40px;
+      top: 650px;
+      width: 1000px;
+      height: auto;
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 32px 80px rgba(0,0,0,.35);
+    }
+    .flow-visual { top: 620px; }
+    .result-visual { top: 650px; }
+    .tag {
+      position: absolute;
+      left: 72px;
+      top: 1490px;
+      width: 930px;
+      margin: 0;
+      font-weight: 800;
+      font-size: 52px;
+      line-height: 1.2;
+    }
+    .footer {
+      position: absolute;
+      left: 72px;
+      bottom: 220px;
+      width: 930px;
+      margin: 0;
+      color: #82928b;
+      font-size: 30px;
+      line-height: 1.35;
+    }
+    code { font-family: Menlo, Monaco, monospace; }
+  </style>
+</head>
+<body>
+  <section class="scene" aria-label="Scene 1">
+    <div class="eyebrow">Agentive Finance Lab</div>
+    <h1>Finance does not need one mega-tool.</h1>
+    <p class="hero-sub">It needs clear owners.</p>
+    <p class="footer">EPISODE 1&nbsp;&nbsp;•&nbsp;&nbsp;EDUCATIONAL DEMO</p>
+  </section>
+
+  <section class="scene" aria-label="Scene 2">
+    <div class="eyebrow">1&nbsp;&nbsp;Choose a source</div>
+    <h2>Data User asks.</h2>
+    <p class="sub">Consultant recommends YFinance from catalog documentation.</p>
+    <img class="visual flow-visual" src="../../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-simple.png" alt="Episode 1 single-source flow diagram">
+    <p class="footer">Deterministic catalog search&nbsp;&nbsp;•&nbsp;&nbsp;no LLM</p>
+  </section>
+
+  <section class="scene" aria-label="Scene 3">
+    <div class="eyebrow">2&nbsp;&nbsp;Inspect the route</div>
+    <h2><code>yfinance.ticker.history</code></h2>
+    <p class="sub">Source and endpoint stay visible.</p>
+    <img class="visual" src="01-demo1-advice.png" alt="Captured Demo 1 YFinance catalog advice and endpoint route">
+    <p class="footer">Captured from Demo 1&nbsp;&nbsp;•&nbsp;&nbsp;YFinance only</p>
+  </section>
+
+  <section class="scene" aria-label="Scene 4">
+    <div class="eyebrow">3&nbsp;&nbsp;Call the source</div>
+    <h2>Data User → Plaza → YFinance</h2>
+    <p class="sub"><code>data_fetch</code>&nbsp;&nbsp;•&nbsp;&nbsp;AAPL&nbsp;&nbsp;•&nbsp;&nbsp;1mo&nbsp;&nbsp;•&nbsp;&nbsp;1d</p>
+    <img class="visual" src="01-demo1-fetch-form.png" alt="Captured Demo 1 direct YFinance fetch form">
+    <p class="footer">Consultant stays outside the provider-result path.</p>
+  </section>
+
+  <section class="scene" aria-label="Scene 5">
+    <div class="eyebrow">4&nbsp;&nbsp;Return a traceable result</div>
+    <h2>23 canonical rows</h2>
+    <p class="sub">Captured from YFinance only.</p>
+    <img class="visual result-visual" src="01-demo1-fetch-result.png" alt="Captured 23-row canonical YFinance result">
+    <p class="tag">Clear owner. Visible handoff.</p>
+    <p class="footer">Educational demo&nbsp;&nbsp;•&nbsp;&nbsp;not investment advice</p>
+  </section>
+</body>
+</html>
