@@ -35,8 +35,8 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "failed_at": "2026-08-28T23:11:43+08:00",
-      "failure_reason": "Facebook login screen was visible; Alvin Cho Taiwan-facing account could not be verified. No post was submitted."
+      "failed_at": "2026-08-28T23:44:38+08:00",
+      "failure_reason": "Facebook login screen was visible on relaunch verification; Alvin Cho Taiwan-facing account could not be verified. No post was submitted."
     },
     {
       "destination_key": "weixin_cn",
@@ -85,8 +85,8 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "failed_at": "2026-08-28T23:11:43+08:00",
-      "failure_reason": "Instagram login screen was visible; Agentive Finance Lab account could not be verified. No post was submitted."
+      "failed_at": "2026-08-28T23:44:38+08:00",
+      "failure_reason": "Instagram login screen was visible on relaunch verification; Agentive Finance Lab account could not be verified. No post was submitted."
     },
     {
       "destination_key": "facebook_reels",
@@ -101,12 +101,15 @@
     {
       "destination_key": "linkedin",
       "idempotency_key": "afl:e01:linkedin:unverified:20260827",
-      "status": "not_attempted",
+      "status": "awaiting_browser_confirmation",
+      "account_name": "Alvin Cho",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
       "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
       "attempt_id": null,
       "remote_id": null,
-      "remote_url": null
+      "remote_url": null,
+      "verified_at": "2026-08-28T23:44:38+08:00",
+      "awaiting_reason": "LinkedIn feed visibly showed Alvin Cho (/in/alvinchokc/). The prepared English post is ready, but final publication is awaiting the browser action-time confirmation required immediately before submitting a public post."
     },
     {
       "destination_key": "x",
@@ -119,23 +122,22 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "failed_at": "2026-08-28T23:11:43+08:00",
-      "failure_reason": "X login screen was visible; Agentive Finance Lab account could not be verified. No post was submitted."
+      "failed_at": "2026-08-28T23:44:38+08:00",
+      "failure_reason": "X login screen was visible on relaunch verification; Agentive Finance Lab account could not be verified. No post was submitted."
     },
     {
       "destination_key": "threads",
       "idempotency_key": "afl:e01:threads:unverified:20260827",
-      "status": "failed_wrong_visible_account",
+      "status": "failed_missing_login",
       "account_name": "Agentive Finance Lab",
-      "visible_account": "@lyunchi_",
       "locale": "en",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
       "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "failed_at": "2026-08-28T23:11:43+08:00",
-      "failure_reason": "Visible Threads account was @lyunchi_, not Agentive Finance Lab. No post was submitted."
+      "failed_at": "2026-08-28T23:44:38+08:00",
+      "failure_reason": "Threads showed its public feed and a Log in or sign up prompt on relaunch verification; Agentive Finance Lab account could not be verified. No post was submitted."
     }
   ]
 }
