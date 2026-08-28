@@ -86,7 +86,7 @@
       "remote_id": null,
       "remote_url": null,
       "awaiting_at": "2026-08-29T00:15:00+08:00",
-      "awaiting_reason": "Persistent Chrome is signed in as CollAtlas. The user action is limited to switching to Agentive Finance Lab and replying AUTH DONE; the job must prepare the Reel, upload the verified 9:16 master, configure it, and advance to the grouped confirmation automatically.",
+      "awaiting_reason": "Persistent Chrome is signed in as CollAtlas. The user action is limited to switching to Agentive Finance Lab and replying DONE; the job must prepare the Reel, upload the verified 9:16 master, configure it, and advance to the grouped confirmation automatically.",
       "automation_last_checked_at": "2026-08-29T00:21:38+08:00"
     },
     {
@@ -142,7 +142,7 @@
       "remote_id": null,
       "remote_url": null,
       "awaiting_at": "2026-08-29T00:15:00+08:00",
-      "awaiting_reason": "Persistent Chrome is signed in as CollAtlas, not Agentive Finance Lab. The user action is limited to switching to Agentive Finance Lab and replying AUTH DONE; the job must prepare the post and advance to the grouped confirmation automatically.",
+      "awaiting_reason": "Persistent Chrome is signed in as CollAtlas, not Agentive Finance Lab. The user action is limited to switching to Agentive Finance Lab and replying DONE; the job must prepare the post and advance to the grouped confirmation automatically.",
       "automation_last_checked_at": "2026-08-29T00:21:38+08:00"
     }
   ]
