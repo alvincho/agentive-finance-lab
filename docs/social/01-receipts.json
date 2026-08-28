@@ -28,7 +28,7 @@
     {
       "destination_key": "facebook_tw",
       "idempotency_key": "afl:e01:facebook:zh-TW:20260827",
-      "status": "ready_for_grouped_confirmation",
+      "status": "prepared_awaiting_batch_setup",
       "account_name": "Alvin Cho",
       "locale": "zh-TW",
       "content_sha256": "d17d2d1f2973005c971e995b652250973013b6c59c820a5e6d727dca216f31fd",
@@ -36,7 +36,7 @@
       "remote_id": null,
       "remote_url": null,
       "verified_at": "2026-08-29T00:21:38+08:00",
-      "automation_note": "Persistent Chrome visibly identifies the allowlisted Taiwan-facing Alvin Cho account as 卓坤慶 at facebook.com/alvincho. The prepared Traditional Chinese Episode 1 post is fully filled, audience is 所有人 (Everyone), and its final composer control is ready."
+      "automation_note": "Persistent Chrome visibly identifies the allowlisted Taiwan-facing Alvin Cho account as 卓坤慶 at facebook.com/alvincho. The prepared Traditional Chinese Episode 1 post remains fully filled with audience 所有人 (Everyone). Its previous Facebook-only confirmation was canceled; it awaits the complete batch-wide grouped confirmation."
     },
     {
       "destination_key": "weixin_cn",
