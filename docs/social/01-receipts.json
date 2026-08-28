@@ -28,15 +28,15 @@
     {
       "destination_key": "facebook_tw",
       "idempotency_key": "afl:e01:facebook:zh-TW:20260827",
-      "status": "awaiting_user_action",
+      "status": "ready_for_automation",
       "account_name": "Alvin Cho",
       "locale": "zh-TW",
       "content_sha256": "d17d2d1f2973005c971e995b652250973013b6c59c820a5e6d727dca216f31fd",
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "awaiting_at": "2026-08-28T23:58:44+08:00",
-      "awaiting_reason": "Facebook login screen is open. Log in, verify the visible Taiwan-facing account is Alvin Cho, then prepare the Traditional Chinese Episode 1 post and confirm the platform's final publish control. No post was submitted."
+      "verified_at": "2026-08-29T00:15:00+08:00",
+      "automation_note": "Persistent Chrome is authenticated as 卓坤慶. The publishing job must verify this is the allowlisted Taiwan-facing Alvin Cho identity, then prepare the Traditional Chinese post and media automatically. The user must not be asked to compose, paste, upload, or click the platform publish control."
     },
     {
       "destination_key": "weixin_cn",
@@ -77,7 +77,7 @@
     {
       "destination_key": "instagram_reels",
       "idempotency_key": "afl:e01:instagram-reels:unverified:20260827",
-      "status": "awaiting_user_action",
+      "status": "authentication_required",
       "account_name": "Agentive Finance Lab",
       "locale": "en",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
@@ -85,8 +85,8 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "awaiting_at": "2026-08-28T23:58:44+08:00",
-      "awaiting_reason": "Instagram login screen is open. Log in, switch to and verify the visible account is Agentive Finance Lab, then prepare the Episode 1 launch/insight Reel using the verified 9:16 master and confirm the platform's final Share control. No post was submitted."
+      "awaiting_at": "2026-08-29T00:15:00+08:00",
+      "awaiting_reason": "Persistent Chrome is signed in as CollAtlas. The user action is limited to switching to Agentive Finance Lab and replying AUTH DONE; the job must prepare the Reel, upload the verified 9:16 master, configure it, and advance to the grouped confirmation automatically."
     },
     {
       "destination_key": "facebook_reels",
@@ -101,20 +101,20 @@
     {
       "destination_key": "linkedin",
       "idempotency_key": "afl:e01:linkedin:unverified:20260827",
-      "status": "awaiting_user_action",
+      "status": "ready_for_automation",
       "account_name": "Alvin Cho",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
       "media_sha256": "28748f2a17c0b9d2fe34e20d9e489da2a687f3041a30fe6eb59ef4e932cf4dac",
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "verified_at": "2026-08-28T23:58:44+08:00",
-      "awaiting_reason": "LinkedIn feed visibly shows Alvin Cho (/in/alvinchokc/). Use the visible Start a post control, verify posting as Alvin Cho (not a Page), attach the verified Episode 1 media if used, and confirm the final Post control. No post was submitted."
+      "verified_at": "2026-08-29T00:15:00+08:00",
+      "automation_note": "Persistent Chrome is authenticated as Alvin Cho (/in/alvinchokc/). The job must open the composer, fill the approved variant, attach approved media when specified, and advance to the grouped confirmation automatically. The user must not be asked to compose, paste, upload, or click Post."
     },
     {
       "destination_key": "x",
       "idempotency_key": "afl:e01:x:unverified:20260827",
-      "status": "awaiting_user_action",
+      "status": "ready_for_automation",
       "account_name": "Agentive Finance Lab",
       "locale": "en",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
@@ -122,13 +122,13 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "awaiting_at": "2026-08-28T23:58:44+08:00",
-      "awaiting_reason": "X login screen is open. Log in, switch to and verify the visible account is Agentive Finance Lab, then prepare the Episode 1 launch/insight post and confirm the platform's final Post control. No post was submitted."
+      "verified_at": "2026-08-29T00:15:00+08:00",
+      "automation_note": "Persistent Chrome is authenticated as Agentive Finance Lab (@agentivefinlab). The job must prepare the post and media and advance to the grouped confirmation automatically. The user must not be asked to compose, paste, upload, or click Post."
     },
     {
       "destination_key": "threads",
       "idempotency_key": "afl:e01:threads:unverified:20260827",
-      "status": "awaiting_user_action",
+      "status": "identity_verification_required",
       "account_name": "Agentive Finance Lab",
       "locale": "en",
       "content_sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
@@ -136,8 +136,8 @@
       "attempt_id": null,
       "remote_id": null,
       "remote_url": null,
-      "awaiting_at": "2026-08-28T23:58:44+08:00",
-      "awaiting_reason": "Threads is open on its public feed with the visible Log in or sign up / Continue with Instagram controls. Log in, switch to and verify the visible account is Agentive Finance Lab, then prepare the Episode 1 launch/insight post and confirm the platform's final Post control. No post was submitted."
+      "awaiting_at": "2026-08-29T00:15:00+08:00",
+      "awaiting_reason": "Persistent Chrome has an authenticated Threads session whose identity still needs verification. If it is not Agentive Finance Lab, the user action is limited to switching accounts and replying AUTH DONE; the job must prepare the post and advance to the grouped confirmation automatically."
     }
   ]
 }
