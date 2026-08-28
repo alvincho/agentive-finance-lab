@@ -7,9 +7,9 @@
     "destination_key": "weixin_cn",
     "account_name": "AI智域边界",
     "public_account_id": "retis_ai",
-    "delivery_mode": "manual_dashboard",
+    "delivery_mode": "browser_automation",
     "account_verification": "unverified",
-    "delivery_status": "ready_for_manual_dashboard_handoff"
+    "delivery_status": "ready_for_automated_browser_composition"
   },
   "html_source": {
     "path": "docs/locales/zh-CN/01-weixin.html",

@@ -42,7 +42,7 @@
       "destination_key": "weixin_cn",
       "idempotency_key": "afl:e01:weixin:retis_ai:20260827",
       "status": "not_attempted",
-      "delivery_mode": "manual_dashboard",
+      "delivery_mode": "browser_automation",
       "account_name": "AI智域边界",
       "public_account_id": "retis_ai",
       "content_sha256": "a95c0cdb287eaee47e8cd9b6f8e2be2161702dd0f99d7c9ac869d4d1ee6fd641",

@@ -66,7 +66,7 @@
     {
       "role": "weixin_zh_cn_source",
       "path": "docs/locales/zh-CN/01-weixin.md",
-      "sha256": "a5eb480cc39a218735a437901aa1b714e25d94b117318aa0cdcde7c5c8922ae1",
+      "sha256": "84d18ae0f783442126f9bddab70b8757eadd166a746142ad44fe44e3641644fe",
       "status": "prepared"
     },
     {
@@ -78,7 +78,7 @@
     {
       "role": "weixin_local_media_manifest",
       "path": "docs/locales/zh-CN/01-weixin-media.json",
-      "sha256": "63ffaa7b84684552dd61e120e3eeb60b273cbbd9ba3bba8baf7582195fa6164d",
+      "sha256": "dad12da02bedf78a6f42777b2df411ad2a05198a3ea0dafa8c83c2760afbade9",
       "status": "validated"
     },
     {
@@ -102,7 +102,7 @@
     {
       "role": "receipts_ledger",
       "path": "docs/social/01-receipts.json",
-      "sha256": "04a665be971fb219b818ab6a3e014205a71c65c6a83635699a04779f9af90cd0",
+      "sha256": "e3aeafafb6fe3dd467649f77e4906a6e17c28064f125cffb29c8204781b6294c",
       "status": "active"
     }
   ],
@@ -206,10 +206,10 @@
       "account_name": "AI智域边界",
       "public_account_id": "retis_ai",
       "identity_allowlist_source": "docs/channels/weixin-cn.json",
-      "identity_allowlist_sha256": "af87c958a55c679021fb72fb8747431e4fec4c3a737bafb3274da7f6c629c516",
-      "delivery_mode": "manual_dashboard",
+      "identity_allowlist_sha256": "1686baed5de04b0d9e9599e20d90dc3ed16b1c6b1a6ab6ddbcab623378eec92a",
+      "delivery_mode": "browser_automation",
       "identity_status": "user_confirmed_logged_in_2026_08_28",
-      "action": "manual_dashboard_handoff"
+      "action": "automated_browser_composition"
     },
     {
       "destination_key": "youtube_shorts",

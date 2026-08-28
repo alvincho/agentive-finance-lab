@@ -127,16 +127,17 @@ verified during preparation. WeChat credentials remain server-side; no AppID,
 secret, access token, or login cookie belongs in the repository or browser
 storage. API publishing is enabled only after the account type, verification,
 API permission, delivery mode, and allowlisted account identity are confirmed.
-When API publishing is unavailable, the scheduled job prepares and validates
-the complete package but reports a manual handoff instead of claiming success.
+When API publishing is unavailable, the scheduled job uses the allowlisted
+persistent Chrome session to prepare the complete dashboard item automatically.
+It never asks the user to copy, paste, upload, or configure the article.
 
 As recorded on 28 August 2026, the mainland-China destination is the WeChat
 Official Account `AI智域边界`, public-account ID `retis_ai`, and its dashboard
 shows both account and personal verification as unverified. Its release-manifest
-delivery mode therefore remains `manual_dashboard` until verification and API
-permissions are separately confirmed. Never substitute another signed-in
-Official Account, even when its session is available. The machine-readable
-allowlist is `docs/channels/weixin-cn.json`.
+delivery mode is therefore `browser_automation` until verification and API
+permissions make unattended official-API publishing available. Never substitute
+another signed-in Official Account, even when its session is available. The
+machine-readable allowlist is `docs/channels/weixin-cn.json`.
 
 Keep the Substack post as the canonical source. Link to it directly from social
 messages and also link to the relevant repository section or demo, not only the

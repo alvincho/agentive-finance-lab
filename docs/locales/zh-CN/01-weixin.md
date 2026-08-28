@@ -3,11 +3,11 @@ episode: 1
 destination: weixin_cn
 account_name: AI智域边界
 public_account_id: retis_ai
-delivery_mode: manual_dashboard
+delivery_mode: browser_automation
 locale: zh-CN
 status: ready_from_live_canonical
 account_verification: unverified
-delivery_status: ready_for_manual_dashboard_handoff
+delivery_status: ready_for_automated_browser_composition
 canonical_url: "https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in"
 prepared_at: 2026-08-28 Asia/Taipei
 ---
@@ -96,4 +96,4 @@ Agentive Finance Lab 是教育用途的软件示范，不提供投资建议、�
 
 **交付状态**
 
-目标公众号仅允许为“AI智域边界”，公众号 ID 为 `retis_ai`，交付方式为 `manual_dashboard`。截至 2026 年 8 月 28 日，账号与个人验证状态均为未验证，因此只能准备本地交付包，禁止自动发布、广播或替换为其他已登录公众号。
+目标公众号仅允许为“AI智域边界”，公众号 ID 为 `retis_ai`，交付方式为 `browser_automation`。截至 2026 年 8 月 28 日，账号与个人验证状态均为未验证，因此暂不使用公众号 API；发布任务会通过已登录且经核对的 Chrome 会话自动填写正文、封面、摘要与素材，不得要求用户手动复制粘贴，也不得替换为其他已登录公众号。
