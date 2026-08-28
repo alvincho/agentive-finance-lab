@@ -102,7 +102,7 @@
     {
       "role": "receipts_ledger",
       "path": "docs/social/01-receipts.json",
-      "sha256": "6997ba9dea149293c2f29de752830303ddf7b7dd6bf3b1f6b940cac3161dbb41",
+      "sha256": "04a665be971fb219b818ab6a3e014205a71c65c6a83635699a04779f9af90cd0",
       "status": "active"
     }
   ],
