@@ -24,15 +24,22 @@ Repository demo: https://github.com/alvincho/agentive-finance-lab#demo-1-data-ag
 
 ### LinkedIn
 
-Finance does not run out of APIs. It runs out of clear ownership.
+Financial professionals need more than another AI demo with a single assistant calling a long list of tools.
 
-MCP and skills remain useful, but a flat model-visible catalog becomes difficult to search, authorize, and debug as providers multiply. Episode 1 of Agentive Finance Lab makes the alternative runnable: Data User owns intent, Data Consultant owns catalog advice, YFinance Source owns execution, and Plaza keeps each handoff explicit.
+We built an open-source repository to demonstrate how to use a multi-agent system for financial applications. The design gives each component a clear responsibility, keeps handoffs inspectable, and isolates provider-specific execution.
 
-No trading. No forecast claims. One inspectable source path and an honest failure boundary.
+Episode 1 implements one runnable financial-data path:
 
-Read the canonical article: https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in
+• Data User owns the request and intent
+• Data Consultant recommends YFinance from catalog documentation
+• YFinance Source executes the provider call
+• Plaza coordinates the handoffs
 
-Run the Demo 1 path: https://github.com/alvincho/agentive-finance-lab#demo-1-data-agent--single-source
+This is a practical architecture example, not a trading strategy. It does not promise better forecasts or returns. It shows who selected the provider, who executed the request, and where a failure belongs.
+
+Read the design and reasoning: https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in
+
+Explore and run the repository: https://github.com/alvincho/agentive-finance-lab#demo-1-data-agent--single-source
 
 #MultiAgentSystems #FinTech #MCP #OpenSource
 

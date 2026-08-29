@@ -11,19 +11,23 @@ repository_url: "https://github.com/alvincho/agentive-finance-lab"
 downstream_authorization: verified_live_substack
 ---
 
-# When Finance Outgrows a Flat Tool Catalog
+# MCP and Skills Hit Their Limits in Finance: The Multi-Agent Solution
 
-*A runnable multi-agent demonstration of explicit ownership, centralized discovery, and a direct source boundary.*
+*A runnable multi-agent demonstration of explicit ownership, centralized discovery, and a direct source boundary for finance-data work.*
 
 > Editor’s note: This is an adaptation for *Agentive Futures*. The original Episode 1 was published by Agentive Finance Lab on Substack: https://agentivefinancelab.substack.com/p/mcp-and-skills-hit-their-limits-in
 
-![A two-stage Data Agent flow: Data User asks Data Consultant for source advice through Plaza, selects YFinance, then calls the YFinance Source through Plaza. Data Consultant does not receive the provider result.](../../demos/data-agent-network-demo/data_agent_network_demo/static/data-agent-single-source-flow-simple.png)
+![From a flat tool catalog to a coordinated system of bounded finance-data roles.](../media/01/medium/episode-1-medium-hero.png)
+
+This argument extends the earlier *Agentive Futures* piece, [Financial Data Should Be a Network of Agents](https://medium.com/agentive-futures/financial-data-should-be-a-network-of-agents-deb0c7f8cb38): the implementation here makes that network concrete with accountable roles and an inspectable request path.
 
 MCP gives applications a common way to discover and call tools. Skills add reusable operating instructions. Both are useful. Neither, by itself, answers a question that becomes uncomfortable in financial software: what happens when the model-visible catalog grows from a few clear operations into hundreds of sources and thousands of similar functions?
 
 Prices, fundamentals, filings, estimates, options, rates, risk, and internal portfolio data do not merely add more endpoints. They add different identifiers, permissions, adjustment policies, vintages, quotas, failure modes, and permitted uses. If one assistant sees all of that as a flat menu, it must spend context understanding the menu before it can answer the request. If the menu is hidden behind a single `fetch_everything(spec)` tool, the count falls but the ownership, provider decision, and failure boundary become harder to inspect.
 
 The smallest useful alternative is not “more agents.” It is bounded responsibility.
+
+![A contrast between tangled anonymous tool paths and a system with bounded, inspectable responsibilities.](../media/01/medium/episode-1-medium-ownership.png)
 
 ## Make the specialist the unit of discovery
 
@@ -36,6 +40,8 @@ Agentive Finance Lab demonstrates three roles in its single-source example:
 All three register with one in-process **Plaza**. Plaza provides centralized registration, discovery, resolution, and the local request/return path. It does not become a financial-data provider, interpret observations, or proxy a provider payload through the Consultant.
 
 The flow deliberately has two stages.
+
+![Two separate paths: source advice flows from Data User through Plaza to Data Consultant; provider execution flows from Data User through Plaza to the Data Source.](../media/01/medium/episode-1-medium-flow.png)
 
 First, Data User asks which source and endpoint fit the request. Data Consultant searches its transient copy of the YFinance catalog and returns evidence-grounded advice. The implementation retains a `catalog_rag` policy label, but the lite demo does not run a language-model generation step. It is deterministic lexical retrieval over documentation.
 

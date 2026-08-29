@@ -48,13 +48,31 @@
     {
       "role": "medium_adaptation",
       "path": "docs/medium/01-mcp-and-skills-hit-their-limits.md",
-      "sha256": "4a0dd23fa17d6460157bc1ad11e86abcf3be6574a50fa64a650b39a7afcf3b6d",
-      "status": "prepared"
+      "sha256": "98620714d12a1c1350847cfb0b63b0dde5c12c6692b44229d9afffe6c9c5027e",
+      "status": "published"
+    },
+    {
+      "role": "medium_hero_image",
+      "path": "docs/media/01/medium/episode-1-medium-hero.png",
+      "sha256": "01da11bedbfe8d590cb90e1bfdd6db38c7954319dfd6b67532fce4c65933044d",
+      "status": "published"
+    },
+    {
+      "role": "medium_ownership_image",
+      "path": "docs/media/01/medium/episode-1-medium-ownership.png",
+      "sha256": "9309c66e70c05e62e17345371f4eab39763e23336efcac693c82863f05783eba",
+      "status": "published"
+    },
+    {
+      "role": "medium_flow_image",
+      "path": "docs/media/01/medium/episode-1-medium-flow.png",
+      "sha256": "134a1dac3c7588eef19fa92aea0f74faafa9c3b727979c5e116f192eca6bbd58",
+      "status": "published"
     },
     {
       "role": "social_launch_pack",
       "path": "docs/social/01-launch-pack.md",
-      "sha256": "941e819b48f839a27bb2282901be15d97f1eddbb807eee72f2e1ac0bff71c54b",
+      "sha256": "469624183df98c3f44f6c5e8dc3d5a00d46e8cdf3467d2340416d703863d54e4",
       "status": "prepared"
     },
     {
@@ -102,7 +120,7 @@
     {
       "role": "receipts_ledger",
       "path": "docs/social/01-receipts.json",
-      "sha256": "3946ffab66ae4676022d33a7ec27b132a96ec1c601c21f69431797889ac068d9",
+      "sha256": "e92176159c9f9778d04eb4e7241fe4492207312f9d87fa588a105a3254c834f9",
       "status": "active"
     }
   ],
@@ -191,8 +209,9 @@
       "account_name": "Alvin Cho",
       "publication_name": "Agentive Futures",
       "publication_url": "https://medium.com/agentive-futures",
-      "identity_status": "runtime_visible_account_check",
-      "action": "submit_to_agentive_futures"
+      "exact_url": "https://medium.com/agentive-futures/mcp-and-skills-hit-their-limits-in-finance-the-multi-agent-solution-c276d55bd733",
+      "identity_status": "live_verified",
+      "action": "none_already_live"
     },
     {
       "destination_key": "facebook_tw",
