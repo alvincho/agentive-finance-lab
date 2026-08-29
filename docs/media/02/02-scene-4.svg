@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#07110e"/>
+  <rect x="72" y="165" width="120" height="12" fill="#b7f034"/>
+  <text x="72" y="225" fill="#b7f034" font-family="Arial" font-size="32" font-weight="700" letter-spacing="3">3 · VERIFY /HEALTH</text>
+  <text x="72" y="390" fill="#fff" font-family="Arial" font-size="66" font-weight="800">Make the first result</text>
+  <text x="72" y="470" fill="#fff" font-family="Arial" font-size="66" font-weight="800">inspectable.</text>
+  <rect x="120" y="650" width="840" height="720" rx="26" fill="#0b1713" stroke="#36554b" stroke-width="2"/>
+  <text x="174" y="770" fill="#dce9e4" font-family="Menlo" font-size="34">{</text>
+  <text x="214" y="865" fill="#dce9e4" font-family="Menlo" font-size="34">"status": "ok",</text>
+  <text x="214" y="960" fill="#dce9e4" font-family="Menlo" font-size="34">"participants": 3,</text>
+  <text x="214" y="1055" fill="#dce9e4" font-family="Menlo" font-size="34">"sources": 1,</text>
+  <text x="214" y="1150" fill="#b7f034" font-family="Menlo" font-size="34">"provider": "yfinance"</text>
+  <text x="174" y="1245" fill="#dce9e4" font-family="Menlo" font-size="34">}</text>
+  <text x="72" y="1710" fill="#81968e" font-family="Arial" font-size="27">Local health does not guarantee provider availability,</text>
+  <text x="72" y="1750" fill="#81968e" font-family="Arial" font-size="27">data freshness, or production readiness.</text>
+</svg>

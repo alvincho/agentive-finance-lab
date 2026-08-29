@@ -1,0 +1,18 @@
+WEBVTT
+
+NOTE Prepared 2026-08-29 Asia/Taipei. English Episode 2 master. No market values or provider result claims.
+
+00:00:00.000 --> 00:00:06.000
+Clone the lab. Start it locally. Inspect the result.
+
+00:00:06.000 --> 00:00:13.000
+Create a clean Python environment and install the checkout.
+
+00:00:13.000 --> 00:00:20.000
+One launcher starts the local host. No API key or model account is required.
+
+00:00:20.000 --> 00:00:27.000
+The health endpoint reports three participants and one YFinance source.
+
+00:00:27.000 --> 00:00:35.000
+Open the Single Source, Multiple Sources, and Real Data demos. Educational software demo; not investment advice.

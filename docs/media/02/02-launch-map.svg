@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Clone the Lab and Meet the Network</title>
+  <desc id="desc">A terminal-to-browser path showing repository clone, Python environment setup, one launcher, the health response, and three local Data Agent demo routes.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#07110e"/>
+      <stop offset="1" stop-color="#173029"/>
+    </linearGradient>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="16" stdDeviation="18" flood-color="#000" flood-opacity=".28"/>
+    </filter>
+  </defs>
+  <rect width="1600" height="900" fill="url(#bg)"/>
+  <rect x="74" y="62" width="128" height="12" fill="#b7f034"/>
+  <text x="74" y="116" fill="#b7f034" font-family="Arial, Helvetica, sans-serif" font-size="28" font-weight="700" letter-spacing="3">AGENTIVE FINANCE LAB · EPISODE 2</text>
+  <text x="74" y="196" fill="#ffffff" font-family="Arial, Helvetica, sans-serif" font-size="64" font-weight="800">Clone. Start. Inspect.</text>
+  <text x="74" y="246" fill="#b8c8c2" font-family="Arial, Helvetica, sans-serif" font-size="28">One local host · one health check · three Data Agent routes</text>
+
+  <g filter="url(#shadow)">
+    <rect x="74" y="310" width="680" height="450" rx="24" fill="#0b1713" stroke="#345248"/>
+    <rect x="74" y="310" width="680" height="54" rx="24" fill="#172722"/>
+    <circle cx="112" cy="337" r="8" fill="#ff6b6b"/>
+    <circle cx="139" cy="337" r="8" fill="#ffd166"/>
+    <circle cx="166" cy="337" r="8" fill="#6ee7a8"/>
+    <text x="200" y="346" fill="#8ea39b" font-family="Menlo, Monaco, monospace" font-size="20">terminal</text>
+    <text x="108" y="414" fill="#dbe8e3" font-family="Menlo, Monaco, monospace" font-size="23">$ git clone .../agentive-finance-lab.git</text>
+    <text x="108" y="460" fill="#dbe8e3" font-family="Menlo, Monaco, monospace" font-size="23">$ python3 -m venv .venv</text>
+    <text x="108" y="506" fill="#dbe8e3" font-family="Menlo, Monaco, monospace" font-size="23">$ python -m pip install -e .</text>
+    <text x="108" y="552" fill="#ffffff" font-family="Menlo, Monaco, monospace" font-size="22">$ python demos/.../run.py --open</text>
+    <text x="108" y="628" fill="#b7f034" font-family="Menlo, Monaco, monospace" font-size="23">Uvicorn running on 127.0.0.1:8000</text>
+    <text x="108" y="688" fill="#91a69e" font-family="Menlo, Monaco, monospace" font-size="21">/health → 3 participants · 1 source</text>
+  </g>
+
+  <path d="M 784 535 H 846" stroke="#b7f034" stroke-width="8" stroke-linecap="round"/>
+  <path d="M 832 519 L 852 535 L 832 551" fill="none" stroke="#b7f034" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <g filter="url(#shadow)" font-family="Arial, Helvetica, sans-serif">
+    <rect x="884" y="310" width="642" height="126" rx="22" fill="#f5f7f4"/>
+    <text x="918" y="353" fill="#167a58" font-size="20" font-weight="700">DEMO 1</text>
+    <text x="918" y="398" fill="#11231d" font-size="32" font-weight="800">Single Source</text>
+    <text x="1300" y="392" fill="#5e7069" font-size="22" text-anchor="end">3 participants</text>
+
+    <rect x="884" y="462" width="642" height="126" rx="22" fill="#f5f7f4"/>
+    <text x="918" y="505" fill="#167a58" font-size="20" font-weight="700">DEMO 2</text>
+    <text x="918" y="550" fill="#11231d" font-size="32" font-weight="800">Multiple Sources</text>
+    <text x="1470" y="544" fill="#5e7069" font-size="22" text-anchor="end">catalog view</text>
+
+    <rect x="884" y="614" width="642" height="126" rx="22" fill="#f5f7f4"/>
+    <text x="918" y="657" fill="#167a58" font-size="20" font-weight="700">DEMO 3</text>
+    <text x="918" y="702" fill="#11231d" font-size="32" font-weight="800">Real Data</text>
+    <text x="1470" y="696" fill="#5e7069" font-size="22" text-anchor="end">explicit failures</text>
+  </g>
+
+  <text x="74" y="842" fill="#789088" font-family="Arial, Helvetica, sans-serif" font-size="23">Educational software demo · no API key required for this walkthrough · not investment advice</text>
+</svg>

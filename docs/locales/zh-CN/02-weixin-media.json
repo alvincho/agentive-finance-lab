@@ -1,0 +1,77 @@
+{
+  "schema_version": 1,
+  "episode": 2,
+  "status": "prepared",
+  "destination": {
+    "destination_key": "weixin_cn",
+    "account_name": "AI智域边界",
+    "public_account_id": "retis_ai",
+    "locale": "zh-CN",
+    "delivery_mode": "browser_automation",
+    "account_verification": "unverified",
+    "delivery_status": "dashboard_package_ready"
+  },
+  "html_source": {
+    "path": "docs/locales/zh-CN/02-weixin.html",
+    "sha256": "2e7953374ecee7511e2e8cb67f50b07a5c1121f8021e196dc6f9cb80384d06c9"
+  },
+  "media": [
+    {
+      "media_id": "weixin-cover",
+      "role": "cover",
+      "local_path": "docs/media/02/02-launch-map.png",
+      "sha256": "f8cdcc305fdf94e116b41b84a981959341d587e0fe35917c61425e07855060e7",
+      "mime_type": "image/png",
+      "width": 1600,
+      "height": 900,
+      "source": "episode_2_original_launch_map",
+      "upload_instruction": "Use as the native WeChat cover and preview the 16:9 crop before saving.",
+      "remote_media_id": null
+    },
+    {
+      "media_id": "weixin-inline-launch-map",
+      "role": "inline",
+      "local_path": "docs/media/02/02-launch-map.png",
+      "sha256": "f8cdcc305fdf94e116b41b84a981959341d587e0fe35917c61425e07855060e7",
+      "mime_type": "image/png",
+      "width": 1600,
+      "height": 900,
+      "source": "episode_2_original_launch_map",
+      "html_selector": "img[data-media-id=\"weixin-inline-launch-map\"]",
+      "alt": "从克隆仓库到健康检查，再到三个 Data Agent 演示的本地启动路径。",
+      "remote_media_id": null
+    },
+    {
+      "media_id": "weixin-inline-landing",
+      "role": "inline",
+      "local_path": "docs/media/02/02-local-landing.png",
+      "sha256": "5fb766330d7ff03ad89c0a45cc0ef8ce232de86dcef61033c44bd7afc9e11afe",
+      "mime_type": "image/png",
+      "width": 1600,
+      "height": 900,
+      "source": "verified_local_application_capture_2026-08-29_asia_taipei",
+      "html_selector": "img[data-media-id=\"weixin-inline-landing\"]",
+      "alt": "本地运行的 Agentive Finance Lab 首页，左侧是八个仓库导览视图，主区域说明这是可运行、可检查且保留原始边界的公开实验室。",
+      "remote_media_id": null
+    }
+  ],
+  "external_links": [
+    {
+      "url": "https://github.com/alvincho/agentive-finance-lab#quick-start-clone-and-run-the-ui",
+      "verified_http_status": 200,
+      "verified_at": "2026-08-29 Asia/Taipei",
+      "required_for_comprehension": false
+    }
+  ],
+  "canonical_link": {
+    "url": null,
+    "status": "await_verified_live_substack",
+    "required_for_comprehension": false
+  },
+  "operator_notes": [
+    "The separate publication job uses the allowlisted persistent Chrome session and fills the AI智域边界 dashboard automatically.",
+    "Replace local img src values with dashboard-hosted media after upload, then preview the complete article on mobile.",
+    "Do not record delivery, publication, or broadcast until the dashboard result is reconciled into receipts.",
+    "Do not substitute another signed-in Official Account."
+  ]
+}

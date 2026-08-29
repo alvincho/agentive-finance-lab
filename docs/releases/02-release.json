@@ -1,0 +1,165 @@
+{
+  "schema_version": 1,
+  "release_id": "agentive-finance-lab-episode-02",
+  "episode": 2,
+  "timezone": "Asia/Taipei",
+  "prepared_at": "2026-08-29T09:21:07+08:00",
+  "scheduled_publish_at": "2026-09-01T20:00:00+08:00",
+  "revision_window": {
+    "status": "open",
+    "starts_at": "2026-08-29T09:00:00+08:00",
+    "ends_at": "2026-09-01T20:00:00+08:00"
+  },
+  "release_status": "prepared",
+  "canonical": {
+    "destination": "substack",
+    "account_name": "Agentive Finance Lab",
+    "title": "Clone the Lab and Meet the Network",
+    "scheduled_publish_at": "2026-09-01T20:00:00+08:00",
+    "source_path": "docs/substack/02-clone-the-lab-and-meet-the-network.md",
+    "source_sha256": "1e4955bddac5af3a1cacbfe8568a92df4a9cf26e9a4e715438032d5b6806c151",
+    "url": null,
+    "remote_post_id": null,
+    "status": "prepared_local_source",
+    "browser_editor": {
+      "identity_observed": "Agentive Finance Lab",
+      "authentication_status": "authenticated",
+      "draft_status": "not_created_browser_action_confirmation_required",
+      "publication_attempted": false
+    }
+  },
+  "downstream_authorization": {
+    "basis": "verified_live_canonical_substack_publication",
+    "status": "pending_canonical_publication",
+    "canonical_url": null,
+    "remote_post_id": null
+  },
+  "artifacts": [
+    {"role":"canonical_source","path":"docs/substack/02-clone-the-lab-and-meet-the-network.md","sha256":"1e4955bddac5af3a1cacbfe8568a92df4a9cf26e9a4e715438032d5b6806c151","status":"prepared"},
+    {"role":"medium_adaptation","path":"docs/medium/02-clone-the-lab-and-meet-the-network.md","sha256":"17e18a43e1e939582dfbf035fa29f8fcd7da9b5048f20d8014d629fa477ecc21","status":"prepared"},
+    {"role":"social_launch_and_discussion_pack","path":"docs/social/02-launch-pack.md","sha256":"f6fcaaf2f2decace239b485fb3603e2236c534b077f84c7ce31c054e26ca6061","status":"prepared"},
+    {"role":"facebook_zh_tw","path":"docs/locales/zh-TW/02-facebook.md","sha256":"54ee545095c3c3adfb6d4ebb8e13bca81f3fbcd30e6afdd8732cb1d36fbae15c","status":"prepared"},
+    {"role":"weixin_zh_cn_source","path":"docs/locales/zh-CN/02-weixin.md","sha256":"a468dab75f88cba691b018c25302d29fea962344bd6b8527a0ce65fc0d47b936","status":"prepared"},
+    {"role":"weixin_zh_cn_rendered_html","path":"docs/locales/zh-CN/02-weixin.html","sha256":"2e7953374ecee7511e2e8cb67f50b07a5c1121f8021e196dc6f9cb80384d06c9","status":"validated"},
+    {"role":"weixin_media_manifest","path":"docs/locales/zh-CN/02-weixin-media.json","sha256":"06f60528205e73c428cad2562c9046d6dbac95978eae168c7156546cd84d0b6e","status":"validated"},
+    {"role":"lead_visual_source","path":"docs/media/02/02-launch-map.svg","sha256":"4df25ca3d493f602831bf1cdd3765c84f98d03c56a283a41f6e56009202e3cee","status":"reviewable"},
+    {"role":"lead_visual","path":"docs/media/02/02-launch-map.png","sha256":"f8cdcc305fdf94e116b41b84a981959341d587e0fe35917c61425e07855060e7","status":"validated"},
+    {"role":"local_application_capture","path":"docs/media/02/02-local-landing.png","sha256":"5fb766330d7ff03ad89c0a45cc0ef8ce232de86dcef61033c44bd7afc9e11afe","status":"validated"},
+    {"role":"short_storyboard_source","path":"docs/media/02/02-short-master-storyboard.html","sha256":"336beb9dd8394a19f1dac273b98dc5a0b9ae500fb453533cf5d6d5291a60cdbc","status":"reviewable"},
+    {"role":"short_master","path":"docs/media/02/02-short-master-en-9x16.mp4","sha256":"168669a2d5e3ae9b7562a3ca63dc4d2742ed19fde6b43b4e918332116fc368b2","status":"validated"},
+    {"role":"caption_track_en","path":"docs/media/02/02-short-master-en.vtt","sha256":"ce2db8c30adca72fe67cc4df1f437b6f4c10ea9b6b7ffa9c59987fb61040916a","status":"validated"},
+    {"role":"caption_track_zh_tw","path":"docs/media/02/02-short-master-zh-TW.vtt","sha256":"ec06864e549540508e8ee46196f99d1b6266a7a26e43e225851de8a85bcf0b80","status":"validated"},
+    {"role":"receipts_ledger","path":"docs/social/02-receipts.json","sha256":"50453a176d57e5d21ab008cc2679c4e147687a413913b1059398018a7d76cb74","status":"prepared"}
+  ],
+  "short_master": {
+    "locale": "en",
+    "width": 1080,
+    "height": 1920,
+    "aspect_ratio": "9:16",
+    "duration_seconds": 35,
+    "frame_rate": 30,
+    "video_codec": "h264",
+    "pixel_format": "yuv420p",
+    "audio": false,
+    "destinations": ["youtube_shorts","tiktok","instagram_reels","facebook_reels","linkedin","x","threads"],
+    "capture_scope": {
+      "application": "Agentive Finance Lab local landing page",
+      "captured_at": "2026-08-29 Asia/Taipei",
+      "host": "127.0.0.1:8765",
+      "health_response": {"status":"ok","demo":"data-agent-network","participants":3,"sources":1,"provider":"yfinance"},
+      "routes_verified_http_200": ["/","/demos/data-agent-network/","/demos/data-agent-network/multiple-sources/","/demos/data-agent-network/real-data/"],
+      "provider_fetch_performed": false,
+      "market_values_used_as_claims": false
+    },
+    "production_sources": [
+      {"path":"docs/media/02/02-scene-1.svg","sha256":"028ba48b1a70f03d8f92ca30364bdf85b5368f6ac492ecbb497555711a89d3b4"},
+      {"path":"docs/media/02/02-scene-2.svg","sha256":"1854ca6a0df14162c9d8c4d420e56b36cbce2254f70dc081fa5225b40ac2ec87"},
+      {"path":"docs/media/02/02-scene-3.svg","sha256":"6f8464c0b8b22ed0987978c304adadde60f54e2f66d9f01fa6ac31cc2fda82bc"},
+      {"path":"docs/media/02/02-scene-4.svg","sha256":"848bf8340a0e7b830f1d5665d187c96a06de62abdf1fcf14a390c0fd424d02ef"},
+      {"path":"docs/media/02/02-scene-5.svg","sha256":"99a5f59b79e66ff7a0777c379173135a3f97f85cb97c5acfe8b35d8096a48be7"}
+    ]
+  },
+  "youtube_shorts": {
+    "identity_allowlist_source": "docs/channels/youtube-shorts.json",
+    "identity_allowlist_sha256": "40b2515c70d58947831f1b988610ad3d93c589504d7e482dea6877dcf9302184",
+    "account_name": "Agentive Finance Lab",
+    "handle": "@AgentiveFinanceLab",
+    "channel_id": "UCBUlIH03zTzZyhEnOls6Aqw",
+    "channel_url": "https://www.youtube.com/@AgentiveFinanceLab",
+    "delivery_mode": "youtube_studio",
+    "title": "Clone a Multi-Agent Finance Lab in 35 Seconds",
+    "description": "Start the reduced Agentive Finance Lab locally: clone the repository, create a Python environment, run one launcher, verify /health, and open the Single Source, Multiple Sources, and Real Data routes.\n\nThis is an educational software demonstration—not investment advice. A local health result does not guarantee provider availability, data freshness, accuracy, or production readiness.",
+    "audience": "not_made_for_kids",
+    "caption_track": "docs/media/02/02-short-master-en.vtt",
+    "caption_validation_status": "validated_timing_wording_health_scope_routes_and_disclaimer",
+    "related_video_id": null,
+    "related_video_status": "not_configured",
+    "personal_channel_substitution_allowed": false,
+    "release_status": "prepared"
+  },
+  "destination_allowlist": [
+    {"destination_key":"substack_canonical","account_name":"Agentive Finance Lab","identity_status":"authenticated_observed","action":"publish_at_scheduled_time_after_revision_window"},
+    {"destination_key":"medium","account_name":"Alvin Cho","publication_name":"Agentive Futures","publication_url":"https://medium.com/agentive-futures","identity_status":"runtime_visible_account_check","action":"submit_after_verified_canonical"},
+    {"destination_key":"facebook_tw","account_name":"Alvin Cho","locale":"zh-TW","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"weixin_cn","account_name":"AI智域边界","public_account_id":"retis_ai","locale":"zh-CN","identity_allowlist_source":"docs/channels/weixin-cn.json","identity_allowlist_sha256":"1686baed5de04b0d9e9599e20d90dc3ed16b1c6b1a6ab6ddbcab623378eec92a","delivery_mode":"browser_automation","identity_status":"allowlisted_unverified_account","action":"automated_browser_composition_after_verified_canonical"},
+    {"destination_key":"youtube_shorts","account_name":"Agentive Finance Lab","handle":"@AgentiveFinanceLab","channel_id":"UCBUlIH03zTzZyhEnOls6Aqw","identity_status":"authenticated_observed","action":"publish_after_verified_canonical"},
+    {"destination_key":"tiktok","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"instagram_reels","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"facebook_reels","account_name":"Alvin Cho","locale":"zh-TW","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"linkedin","account_name":"Alvin Cho","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"x","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"},
+    {"destination_key":"threads","identity_status":"runtime_visible_account_check","action":"publish_after_verified_canonical"}
+  ],
+  "checks": {
+    "technical": {
+      "status": "pass_with_unrelated_episode_1_policy_failures",
+      "runtime_tests": "51 passed, 1 skipped when tests/test_release_policy.py was excluded",
+      "compileall": "pass",
+      "live_local_routes": "all four Episode 2 routes returned HTTP 200",
+      "full_suite": "2 failed due to pre-existing dirty Episode 1 receipt approval fields and an Episode 1 Medium hash mismatch"
+    },
+    "links": {
+      "status": "pass",
+      "http_200": ["https://github.com/alvincho/agentive-finance-lab","https://github.com/alvincho/agentive-finance-lab#quick-start-clone-and-run-the-ui","https://agentivefinancelab.substack.com/subscribe","https://www.youtube.com/@AgentiveFinanceLab"]
+    },
+    "media": {
+      "status": "pass",
+      "lead_visual_dimensions": "1600x900",
+      "landing_capture_dimensions": "1600x900",
+      "video_decode": "pass",
+      "video_dimensions": "1080x1920",
+      "duration_seconds": 35,
+      "frame_rate": 30,
+      "pixel_format": "yuv420p",
+      "audio": false
+    },
+    "captions": {
+      "status": "pass",
+      "english_cues": 5,
+      "traditional_chinese_cues": 5,
+      "last_end_seconds": 35,
+      "overlap": false
+    },
+    "localization": {
+      "status": "pass",
+      "zh_tw": "Taiwan terminology and Traditional Chinese localized edition prepared",
+      "zh_cn": "standalone Simplified Chinese HTML and media package prepared for AI智域边界 / retis_ai"
+    },
+    "placeholders": {
+      "status": "pass",
+      "patterns_scanned": ["task markers","unfinished-copy markers","sample-domain markers","template delimiters","insertion markers"]
+    }
+  },
+  "blockers": [
+    "Authenticated Chrome shows the Agentive Finance Lab Substack publisher, but creating or modifying the remote draft requires browser action-time confirmation; no cloud draft was created in this run.",
+    "The full repository suite has two unrelated Episode 1 release-policy failures in user-owned dirty files: forbidden approval fields in docs/social/01-receipts.json and a stale Medium hash in docs/releases/01-release.json."
+  ],
+  "operational_prerequisites": [
+    "At publication time, re-run all checks and publish the prepared Substack source at 2026-09-01 20:00 Asia/Taipei after the revision window.",
+    "Treat only the verified live canonical URL as downstream authorization and inject it into prepared variants at delivery.",
+    "Use browser_automation for AI智域边界 / retis_ai until official API eligibility is confirmed.",
+    "Use only Agentive Finance Lab / @AgentiveFinanceLab / UCBUlIH03zTzZyhEnOls6Aqw for YouTube Shorts.",
+    "Read destination receipts first and skip every matching successful delivery."
+  ],
+  "disclaimer": "Agentive Finance Lab is an educational software demonstration. It does not provide investment advice, trading recommendations, data rights, or guarantees about provider availability, freshness, completeness, or accuracy. Live data remains subject to each provider's terms and limits."
+}

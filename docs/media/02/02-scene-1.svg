@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#07110e"/>
+  <rect x="72" y="165" width="120" height="12" fill="#b7f034"/>
+  <text x="72" y="225" fill="#b7f034" font-family="Arial" font-size="32" font-weight="700" letter-spacing="3">AGENTIVE FINANCE LAB · EPISODE 2</text>
+  <text x="72" y="710" fill="#fff" font-family="Arial" font-size="108" font-weight="800">CLONE.</text>
+  <text x="72" y="855" fill="#fff" font-family="Arial" font-size="108" font-weight="800">START.</text>
+  <text x="72" y="1000" fill="#fff" font-family="Arial" font-size="108" font-weight="800">INSPECT.</text>
+  <text x="72" y="1090" fill="#c2d0cb" font-family="Arial" font-size="42">One local host.</text>
+  <text x="72" y="1150" fill="#c2d0cb" font-family="Arial" font-size="42">Three Data Agent demos.</text>
+  <text x="72" y="1750" fill="#81968e" font-family="Arial" font-size="28">Educational software demo · not investment advice</text>
+</svg>

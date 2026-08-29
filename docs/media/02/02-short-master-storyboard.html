@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Episode 2 vertical short storyboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    html, body { margin: 0; background: #07110e; }
+    body { font-family: Arial, Helvetica, sans-serif; }
+    .scene { position: relative; width: 1080px; height: 1920px; overflow: hidden; background: #0b1713; color: #fff; }
+    .scene + .scene { margin-top: 24px; }
+    .eyebrow { position: absolute; left: 72px; top: 170px; color: #b7f034; font-size: 32px; font-weight: 800; letter-spacing: .08em; }
+    .eyebrow::before { content: ""; display: block; width: 120px; height: 12px; margin-bottom: 28px; background: #b7f034; }
+    h1 { position: absolute; left: 72px; top: 530px; width: 920px; margin: 0; font-size: 92px; line-height: 1.08; letter-spacing: -.04em; }
+    h2 { position: absolute; left: 72px; top: 310px; width: 920px; margin: 0; font-size: 66px; line-height: 1.12; }
+    .sub { position: absolute; left: 72px; top: 510px; width: 920px; color: #c0d0ca; font-size: 40px; line-height: 1.35; }
+    .terminal { position: absolute; left: 54px; top: 740px; width: 972px; padding: 46px; border: 2px solid #355047; border-radius: 24px; background: #07110e; color: #e1ece7; font: 30px/1.7 Menlo, Monaco, monospace; white-space: pre-wrap; }
+    .map { position: absolute; left: 54px; top: 710px; width: 972px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 28px 70px rgba(0,0,0,.35); }
+    .screen { position: absolute; left: 54px; top: 770px; width: 972px; border: 1px solid rgba(255,255,255,.18); box-shadow: 0 28px 70px rgba(0,0,0,.35); }
+    .footer { position: absolute; left: 72px; bottom: 180px; width: 930px; color: #82958e; font-size: 28px; line-height: 1.35; }
+    code { font-family: Menlo, Monaco, monospace; }
+  </style>
+</head>
+<body>
+  <section class="scene" aria-label="Scene 1">
+    <div class="eyebrow">AGENTIVE FINANCE LAB · EPISODE 2</div>
+    <h1>Clone.<br>Start.<br>Inspect.</h1>
+    <p class="footer">One local host · three Data Agent demos</p>
+  </section>
+  <section class="scene" aria-label="Scene 2">
+    <div class="eyebrow">1 · CLONE + ENVIRONMENT</div>
+    <h2>Start from a clean checkout.</h2>
+    <pre class="terminal">git clone https://github.com/alvincho/agentive-finance-lab.git
+cd agentive-finance-lab
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip install -e .</pre>
+    <p class="footer">Python 3.11+ · no API key or model account required</p>
+  </section>
+  <section class="scene" aria-label="Scene 3">
+    <div class="eyebrow">2 · ONE LAUNCHER</div>
+    <h2>Start the local host.</h2>
+    <pre class="terminal">python demos/data-agent-network-demo/run.py --open
+
+Uvicorn running on
+http://127.0.0.1:8000</pre>
+    <p class="footer">The launcher keeps running until Ctrl+C.</p>
+  </section>
+  <section class="scene" aria-label="Scene 4">
+    <div class="eyebrow">3 · VERIFY HEALTH</div>
+    <h2><code>/health</code> makes the first result inspectable.</h2>
+    <pre class="terminal">{
+  "status": "ok",
+  "participants": 3,
+  "sources": 1,
+  "provider": "yfinance"
+}</pre>
+    <p class="footer">Local network health does not guarantee provider availability.</p>
+  </section>
+  <section class="scene" aria-label="Scene 5">
+    <div class="eyebrow">4 · OPEN THREE DEMOS</div>
+    <h2>Single Source. Multiple Sources. Real Data.</h2>
+    <img class="map" src="02-launch-map.svg" alt="Terminal-to-browser launch map for the three Data Agent demos">
+    <p class="footer">Educational software demo · not investment advice</p>
+  </section>
+</body>
+</html>

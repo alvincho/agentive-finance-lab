@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#07110e"/>
+  <rect x="72" y="165" width="120" height="12" fill="#b7f034"/>
+  <text x="72" y="225" fill="#b7f034" font-family="Arial" font-size="32" font-weight="700" letter-spacing="3">2 · ONE LAUNCHER</text>
+  <text x="72" y="390" fill="#fff" font-family="Arial" font-size="66" font-weight="800">Start the local host.</text>
+  <rect x="54" y="650" width="972" height="650" rx="26" fill="#0b1713" stroke="#36554b" stroke-width="2"/>
+  <text x="104" y="770" fill="#dce9e4" font-family="Menlo" font-size="28">python demos/data-agent-network-demo/</text>
+  <text x="104" y="825" fill="#dce9e4" font-family="Menlo" font-size="28">run.py --open</text>
+  <text x="104" y="1005" fill="#b7f034" font-family="Menlo" font-size="30">Uvicorn running on</text>
+  <text x="104" y="1075" fill="#b7f034" font-family="Menlo" font-size="30">http://127.0.0.1:8000</text>
+  <text x="104" y="1220" fill="#91a69e" font-family="Menlo" font-size="27">Ctrl+C stops the local process.</text>
+  <text x="72" y="1750" fill="#81968e" font-family="Arial" font-size="28">One command exposes the guide, health, and demo routes.</text>
+</svg>

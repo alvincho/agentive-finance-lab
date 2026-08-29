@@ -1,0 +1,19 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#07110e"/>
+  <rect x="72" y="165" width="120" height="12" fill="#b7f034"/>
+  <text x="72" y="225" fill="#b7f034" font-family="Arial" font-size="32" font-weight="700" letter-spacing="3">4 · OPEN THREE DEMOS</text>
+  <text x="72" y="390" fill="#fff" font-family="Arial" font-size="64" font-weight="800">Single Source.</text>
+  <text x="72" y="470" fill="#fff" font-family="Arial" font-size="64" font-weight="800">Multiple Sources.</text>
+  <text x="72" y="550" fill="#fff" font-family="Arial" font-size="64" font-weight="800">Real Data.</text>
+  <rect x="72" y="720" width="936" height="190" rx="26" fill="#f5f7f4"/>
+  <text x="116" y="790" fill="#167a58" font-family="Arial" font-size="27" font-weight="700">DEMO 1</text>
+  <text x="116" y="860" fill="#11231d" font-family="Arial" font-size="48" font-weight="800">Single Source</text>
+  <rect x="72" y="960" width="936" height="190" rx="26" fill="#f5f7f4"/>
+  <text x="116" y="1030" fill="#167a58" font-family="Arial" font-size="27" font-weight="700">DEMO 2</text>
+  <text x="116" y="1100" fill="#11231d" font-family="Arial" font-size="48" font-weight="800">Multiple Sources</text>
+  <rect x="72" y="1200" width="936" height="190" rx="26" fill="#f5f7f4"/>
+  <text x="116" y="1270" fill="#167a58" font-family="Arial" font-size="27" font-weight="700">DEMO 3</text>
+  <text x="116" y="1340" fill="#11231d" font-family="Arial" font-size="48" font-weight="800">Real Data</text>
+  <text x="72" y="1710" fill="#81968e" font-family="Arial" font-size="27">Clone. Start. Inspect the boundary.</text>
+  <text x="72" y="1750" fill="#81968e" font-family="Arial" font-size="27">Educational software demo · not investment advice</text>
+</svg>

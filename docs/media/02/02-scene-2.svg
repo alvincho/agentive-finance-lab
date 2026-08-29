@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1080" height="1920" viewBox="0 0 1080 1920">
+  <rect width="1080" height="1920" fill="#07110e"/>
+  <rect x="72" y="165" width="120" height="12" fill="#b7f034"/>
+  <text x="72" y="225" fill="#b7f034" font-family="Arial" font-size="32" font-weight="700" letter-spacing="3">1 · CLONE + ENVIRONMENT</text>
+  <text x="72" y="390" fill="#fff" font-family="Arial" font-size="66" font-weight="800">Start from a</text>
+  <text x="72" y="470" fill="#fff" font-family="Arial" font-size="66" font-weight="800">clean checkout.</text>
+  <rect x="54" y="650" width="972" height="630" rx="26" fill="#0b1713" stroke="#36554b" stroke-width="2"/>
+  <text x="104" y="755" fill="#dce9e4" font-family="Menlo" font-size="30">git clone …/agentive-finance-lab.git</text>
+  <text x="104" y="850" fill="#dce9e4" font-family="Menlo" font-size="30">cd agentive-finance-lab</text>
+  <text x="104" y="945" fill="#dce9e4" font-family="Menlo" font-size="30">python3 -m venv .venv</text>
+  <text x="104" y="1040" fill="#dce9e4" font-family="Menlo" font-size="30">source .venv/bin/activate</text>
+  <text x="104" y="1135" fill="#b7f034" font-family="Menlo" font-size="30">python -m pip install -e .</text>
+  <text x="72" y="1750" fill="#81968e" font-family="Arial" font-size="28">Python 3.11+ · no API key or model account required</text>
+</svg>

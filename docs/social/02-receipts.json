@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "release_id": "agentive-finance-lab-episode-02",
+  "episode": 2,
+  "timezone": "Asia/Taipei",
+  "release_status": "prepared",
+  "authorization_basis": "verified_live_canonical_substack_required",
+  "canonical": {
+    "status": "not_published",
+    "remote_id": null,
+    "remote_url": null,
+    "published_at": null
+  },
+  "receipts": [
+    {"destination_key":"substack_canonical","idempotency_key":"afl:e02:substack:agentive-finance-lab:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"medium","idempotency_key":"afl:e02:medium:agentive-futures:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"facebook_tw","idempotency_key":"afl:e02:facebook:zh-TW:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"weixin_cn","idempotency_key":"afl:e02:weixin:retis_ai:20260901","status":"not_attempted","delivery_mode":"browser_automation","account_name":"AI智域边界","public_account_id":"retis_ai","attempt_id":null,"remote_id":null,"remote_url":null,"broadcast_confirmed":false},
+    {"destination_key":"youtube_shorts","idempotency_key":"afl:e02:youtube:UCBUlIH03zTzZyhEnOls6Aqw:20260901","status":"not_attempted","account_name":"Agentive Finance Lab","handle":"@AgentiveFinanceLab","channel_id":"UCBUlIH03zTzZyhEnOls6Aqw","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"tiktok","idempotency_key":"afl:e02:tiktok:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"instagram_reels","idempotency_key":"afl:e02:instagram-reels:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"facebook_reels","idempotency_key":"afl:e02:facebook-reels:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"linkedin","idempotency_key":"afl:e02:linkedin:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"x","idempotency_key":"afl:e02:x:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null},
+    {"destination_key":"threads","idempotency_key":"afl:e02:threads:runtime-verified:20260901","status":"not_attempted","attempt_id":null,"remote_id":null,"remote_url":null}
+  ]
+}
